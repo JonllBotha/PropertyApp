@@ -11,12 +11,16 @@
         android:roundIcon="@drawable/b_logo_png"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ek">
-
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".splash_activity"
+            android:theme="@style/Theme.Design.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
