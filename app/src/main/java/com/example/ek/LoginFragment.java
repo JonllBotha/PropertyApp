@@ -16,7 +16,7 @@ import androidx.navigation.Navigation;
 public class LoginFragment extends Fragment {
 
     private DBHelper dbHelper;
-    private EditText etUsername, etPassword;
+    private EditText etEmail, etPassword;
     private Button btnLogin;
 
     public LoginFragment() {
@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment {
         // Initialize DBHelper and UI components
         dbHelper = new DBHelper(getActivity());
 
-        etUsername = view.findViewById(R.id.etUsername);
+        etEmail = view.findViewById(R.id.etEmail);
         etPassword = view.findViewById(R.id.etPassword);
         btnLogin = view.findViewById(R.id.btnLogin);
 
@@ -40,11 +40,11 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = etUsername.getText().toString();
+                String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
                 // Check if the username and password are correct
-                boolean isLoggedId = dbHelper.checkUser(username, password);
+                boolean isLoggedId = dbHelper.checkUser(email, password);
                 if (isLoggedId) {
                     // Navigate to another screen after successful login
                     // Example: navigating to a HomeFragment

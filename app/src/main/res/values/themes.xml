@@ -13,12 +13,4 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
-    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/main_logo_png</item>
-        <item name="windowSplashScreenAnimationDuration">2000</item>
-        <item name="postSplashScreenTheme">@style/Theme.Ek</item>
-    </style>
-
 </resources>

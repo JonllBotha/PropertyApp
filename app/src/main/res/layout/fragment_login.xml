@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/start_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/main_2_bg"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".LoginFragment">
@@ -11,43 +12,82 @@
     <ScrollView
         android:id="@+id/nsScroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="330dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical"
-            android:padding="70dp">
+            android:padding="50dp">
 
-            <EditText
-                android:id="@+id/etUsername"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Username"
-                android:textColor="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white" />
+                android:layout_marginBottom="60dp"
+                android:text="Log In"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
-            <EditText
-                android:id="@+id/etPassword"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Password"
-                android:textColor="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white" />
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="2dp">
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email Address"
+                    android:textColorHint="@color/grey"
+                    android:drawableStart="@drawable/icon_email"
+                    android:drawablePadding="14dp"
+                    android:drawableTint="@color/black"
+                    android:layout_marginBottom="20dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:textColorHint="@color/grey"
+                    android:drawableStart="@drawable/icon_password"
+                    android:drawablePadding="14dp"
+                    android:drawableTint="@color/black"
+                    android:layout_marginBottom="20dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="46dp"
-                android:backgroundTint="#FFFFFF"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/blue"
                 android:text="Login"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 

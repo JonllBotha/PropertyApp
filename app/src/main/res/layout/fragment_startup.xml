@@ -4,33 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:background="@drawable/startup_bg"
     android:orientation="vertical"
-    android:padding="50dp"
     tools:context=".StartupFragment">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="400dp"
-        android:layout_height="420dp"
-        app:srcCompat="@drawable/main_logo_png" />
-
-    <Button
-        android:id="@+id/btnGoToLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:backgroundTint="@color/blue"
-        android:text="Login"
-        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btnGoToRegister"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/blue"
-        android:text="Register"
-        android:textColor="@color/white" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="550dp"
+        android:background="@drawable/rounded_button"
+        android:text="REGISTER"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="258dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Already have an account?"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="21sp" />
+
+            <TextView
+                android:id="@+id/tvGoToLogin"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/log_in"
+                android:textAlignment="center"
+                android:textSize="21sp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
 
 </LinearLayout>

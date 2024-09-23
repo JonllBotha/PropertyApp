@@ -30,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ActionBar with the Navigation UI
         NavigationUI.setupActionBarWithNavController(this, navController);
 
+        // Set up BottomNavigationView with NavController
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
         // Add destination change listener to manage bottom nav visibility
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             // Show BottomNavigationView only on ClientHomeFragment or similar fragments
-            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
             if (destination.getId() == R.id.clientHomeFragment || destination.getId() == R.id.clientProfileFragment || destination.getId() == R.id.clientChatFragment) {
                 bottomNavigationView.setVisibility(View.VISIBLE);
             } else {
