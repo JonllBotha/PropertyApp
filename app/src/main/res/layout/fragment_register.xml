@@ -45,9 +45,10 @@
                     android:id="@+id/etFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:hint="Full Name"
-                    android:textColorHint="@color/black"
-                    android:layout_marginBottom="20dp"/>
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -65,9 +66,10 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:hint="Email Address"
-                    android:textColorHint="@color/black"
-                    android:layout_marginBottom="20dp"/>
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -87,9 +89,10 @@
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:hint="Password"
-                    android:textColorHint="@color/black"
-                    android:layout_marginBottom="20dp"/>
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,9 +112,10 @@
                     android:id="@+id/etCPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:hint="Confirm Password"
-                    android:textColorHint="@color/black"
-                    android:layout_marginBottom="20dp"/>
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
