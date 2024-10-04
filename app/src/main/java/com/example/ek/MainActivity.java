@@ -27,17 +27,16 @@ public class MainActivity extends AppCompatActivity {
             navController = navHostFragment.getNavController();
         }
 
-        // Set up the ActionBar with the Navigation UI
-        NavigationUI.setupActionBarWithNavController(this, navController);
-
-        // Set up BottomNavigationView with NavController
+        // Set up the BottomNavigationView with NavController
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        // Add destination change listener to manage bottom nav visibility
+        // Add destination change listener to manage visibility of BottomNavigationView
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            // Show BottomNavigationView only on ClientHomeFragment or similar fragments
-            if (destination.getId() == R.id.clientHomeFragment || destination.getId() == R.id.clientProfileFragment || destination.getId() == R.id.clientChatFragment) {
+            // Show BottomNavigationView only on specific fragments (Home, Profile, Chat)
+            if (destination.getId() == R.id.clientHomeFragment ||
+                    destination.getId() == R.id.clientProfileFragment ||
+                    destination.getId() == R.id.clientChatFragment) {
                 bottomNavigationView.setVisibility(View.VISIBLE);
             } else {
                 bottomNavigationView.setVisibility(View.GONE);
