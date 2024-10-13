@@ -1,6 +1,5 @@
 package com.example.ek;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -60,7 +58,15 @@ public class LoginFragment extends Fragment {
 
                     // Navigate to ClientHomeFragment, passing the bundle
                     NavController navController = Navigation.findNavController(view);
-                    navController.navigate(R.id.action_loginFragment_to_clientHomeFragment, bundle);
+                    // the if statement does work, only the navigation to the agentHomeFragment doesn't work
+                    //if (email.endsWith("@mandela.ac.za")) {
+                        // Navigate to AgentHomeFragment
+                        // I am struggling to get this to work
+                        //navController.navigate(R.id.action_loginFragment_to_agentHomeFragment, bundle);
+                    //} else {
+                        // Navigate to ClientHomeFragment
+                        navController.navigate(R.id.action_loginFragment_to_clientHomeFragment, bundle);
+                    //}
                 } else {
                     Toast.makeText(getActivity(), "Login Failed.", Toast.LENGTH_LONG).show();
                 }

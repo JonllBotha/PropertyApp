@@ -19,7 +19,8 @@
             android:background="@android:color/transparent"
             android:padding="10dp"
             android:src="@drawable/icon_back"
-            app:tint="?attr/colorOnBackground" />
+            app:tint="?attr/colorOnBackground"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/toolbarTitleTxtView"

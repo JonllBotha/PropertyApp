@@ -6,15 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-public class ClientHomeFragment extends Fragment {
+public class AgentHomeFragment extends Fragment {
 
-    public ClientHomeFragment() {
+    public AgentHomeFragment() {
         // Required empty public constructor
     }
     @Nullable
@@ -22,16 +21,16 @@ public class ClientHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_client_home, container, false);
-        //return inflater.inflate(R.layout.fragment_client_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_agent_home, container, false);
+        //return inflater.inflate(R.layout.fragment_agent_home, container, false);
 
-        Button btnContact = view.findViewById(R.id.btnContact);
+        Button btnAddListing = getView().findViewById(R.id.btnAddListing);
         NavController navController = Navigation.findNavController(getActivity(), R.id.navHostFragmentContainerView);
 
-        btnContact.setOnClickListener(new View.OnClickListener() {
+        btnAddListing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_clientHomeFragment_to_clientChatFragment);
+                navController.navigate(R.id.action_agentHomeFragment_to_publishAdActivity);
             }
         });
         return view;

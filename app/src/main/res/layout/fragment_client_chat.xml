@@ -71,4 +71,14 @@
         android:text="@string/btnTextSaveena"
         app:icon="@drawable/icon_chat" />
 
+    <Button
+        android:id="@+id/btnBackClientHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="35dp"
+        android:text="@string/btnBackClientHome" />
+
 </RelativeLayout>

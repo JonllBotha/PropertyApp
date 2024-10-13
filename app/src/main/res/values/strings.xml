@@ -7,10 +7,14 @@
     <string name="btnTextSune">WhatsApp Suné</string>
     <string name="btnDial">Phone Office</string>
     <string name="btnContact">Contact Details</string>
+    <string name="btnAddListing">Add Listing</string>
+    <string name="btnBackClientHome">Back</string>
 
     <string name="txtText">WhatsApp Agent</string>
     <string name="txtDial">Phone Agent</string>
     <string name="publish_a_new_property">Publish a new property</string>
     <string name="reach_thousands_of_buyers_or_renters_ninstantly">Reach thousands of buyers or renters \ninstantly</string>
     <string name="intent">Intent</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
