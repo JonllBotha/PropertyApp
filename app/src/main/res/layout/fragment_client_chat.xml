@@ -1,31 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/main_2_bg"
     tools:context=".ClientChatFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnDial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="260dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="287dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="32dp"
+        android:baselineAligned="false"
         android:text="@string/btnDial"
-        app:icon="@android:drawable/ic_menu_call" />
+        app:icon="@android:drawable/ic_menu_call"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btnText"
+        android:id="@+id/btnTextJonell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="340dp"
-        android:text="@string/btnText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="360dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="428dp"
+        android:text="@string/btnTextJonell"
+        app:icon="@drawable/icon_chat"
+        app:layout_constraintEnd_toEndOf="@id/btnTextJonell"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnTextSune"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="115dp"
+        android:layout_marginBottom="280dp"
+        android:text="@string/btnTextSune"
         app:icon="@drawable/icon_chat" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btnTextSaveena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="354dp"
+        android:text="@string/btnTextSaveena"
+        app:icon="@drawable/icon_chat" />
+
+</RelativeLayout>

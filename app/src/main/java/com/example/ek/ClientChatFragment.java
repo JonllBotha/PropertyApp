@@ -67,13 +67,33 @@ public class ClientChatFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_client_chat, container, false);
         //return inflater.inflate(R.layout.fragment_client_chat, container, false);
         Button btnDial = view.findViewById(R.id.btnDial);
-        Button btnText = view.findViewById(R.id.btnText);
+        Button btnTextJonell = view.findViewById(R.id.btnTextJonell);
+        Button btnTextSune = view.findViewById(R.id.btnTextSune);
+        Button btnTextSaveena = view.findViewById(R.id.btnTextSaveena);
 
-        btnText.setOnClickListener(new View.OnClickListener() {
+        btnTextJonell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://api.whatsapp.com/send?phone=+27747415876"));
+                intent.setData(Uri.parse("https://api.whatsapp.com/send?phone=+27843668560"));
+                startActivity(intent);
+            }
+        });
+
+        btnTextSaveena.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://api.whatsapp.com/send?phone=+27820723408"));
+                startActivity(intent);
+            }
+        });
+
+        btnTextSune.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://api.whatsapp.com/send?phone=+27737386173"));
                 startActivity(intent);
             }
         });
@@ -82,7 +102,7 @@ public class ClientChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:+27747415876"));
+                intent.setData(Uri.parse("tel:+27410000000"));
                 startActivity(intent);
             }
         });

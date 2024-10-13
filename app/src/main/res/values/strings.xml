@@ -2,8 +2,10 @@
     <string name="app_name">Horizon Home Finders</string>
     <string name="log_in"><u>Log In</u></string>
 
-    <string name="btnText">Open WhatsApp</string>
-    <string name="btnDial">Phone</string>
+    <string name="btnTextJonell">WhatsApp Jonéll</string>
+    <string name="btnTextSaveena">WhatsApp Saveena</string>
+    <string name="btnTextSune">WhatsApp Suné</string>
+    <string name="btnDial">Phone Office</string>
     <string name="btnContact">Contact Details</string>
 
     <string name="txtText">WhatsApp Agent</string>
