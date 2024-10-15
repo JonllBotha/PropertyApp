@@ -17,6 +17,7 @@ public class ClientHomeFragment extends Fragment {
     public ClientHomeFragment() {
         // Required empty public constructor
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,15 +26,8 @@ public class ClientHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_client_home, container, false);
         //return inflater.inflate(R.layout.fragment_client_home, container, false);
 
-        Button btnContact = view.findViewById(R.id.btnContact);
         NavController navController = Navigation.findNavController(getActivity(), R.id.navHostFragmentContainerView);
 
-        btnContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_clientHomeFragment_to_clientChatFragment);
-            }
-        });
         return view;
     }
 }

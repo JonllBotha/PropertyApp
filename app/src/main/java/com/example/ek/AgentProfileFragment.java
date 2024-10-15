@@ -17,7 +17,7 @@ import java.util.List;
 public class AgentProfileFragment extends Fragment {
 
     private RecyclerView rv_profile;
-    private ProfileAdapter adapter;
+    private ClientProfileAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class AgentProfileFragment extends Fragment {
         items.add(new ProfileItem(R.drawable.icon_privacy, "Privacy Policy", R.drawable.icon_arrow));
         items.add(new ProfileItem(R.drawable.icon_logout, "Log Out", R.drawable.icon_arrow));
 
-        adapter = new ProfileAdapter(getContext(), items);
+        adapter = new ClientProfileAdapter(getContext(), items);
         rv_profile.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_profile.setAdapter(adapter);
 

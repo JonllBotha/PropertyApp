@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     public static final String DBname = "RealEstate.db";
 
     public DBHelper(@Nullable Context context) {
@@ -18,22 +18,23 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase){
-        sqLiteDatabase.execSQL("create table users(email TEXT primary key, password TEXT, firstName TEXT, lastName TEXT)");
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL("CREATE TABLE users (email TEXT PRIMARY KEY, password TEXT, firstName TEXT, lastName TEXT, role TEXT)");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1){
-        sqLiteDatabase.execSQL("drop table if exists users");
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        //
     }
 
-    public boolean insertData(String email, String password, String firstName, String lastName){
+    public boolean insertData(String email, String password, String firstName, String lastName, String role){
         SQLiteDatabase myDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", email);
         contentValues.put("password", password);
         contentValues.put("firstName", firstName);
         contentValues.put("lastName", lastName);
+        contentValues.put("role", role);
         long result = myDB.insert("users", null, contentValues);
         if (result == -1) return false;
         else return true;

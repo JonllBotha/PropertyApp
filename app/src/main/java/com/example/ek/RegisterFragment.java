@@ -47,6 +47,7 @@ public class RegisterFragment extends Fragment {
                 String fullName = etFullName.getText().toString();
                 String firstName = "";
                 String lastName = "";
+                String role = email.endsWith("@horizonhomefinders.com") ? "Agent" : "Client";
 
                 if(fullName.split("\\w+").length>1){
 
@@ -66,7 +67,7 @@ public class RegisterFragment extends Fragment {
                             return;
                         }
                         // Proceed with registration
-                        boolean registerSuccess = dbHelper.insertData(email, password, firstName, lastName);
+                        boolean registerSuccess = dbHelper.insertData(email, password, firstName, lastName, role);
                         if (registerSuccess) {
                             Toast.makeText(getActivity(), "User registered successfully.", Toast.LENGTH_LONG).show();
                             NavController navController = Navigation.findNavController(view);

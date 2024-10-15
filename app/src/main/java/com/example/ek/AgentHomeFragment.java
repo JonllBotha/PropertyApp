@@ -16,15 +16,16 @@ public class AgentHomeFragment extends Fragment {
     public AgentHomeFragment() {
         // Required empty public constructor
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_agent_home, container, false);
-        //return inflater.inflate(R.layout.fragment_agent_home, container, false);
 
-        Button btnAddListing = getView().findViewById(R.id.btnAddListing);
+        // Use 'view' to find the Button, not 'getView()'
+        Button btnAddListing = view.findViewById(R.id.btnAddListing);
         NavController navController = Navigation.findNavController(getActivity(), R.id.navHostFragmentContainerView);
 
         btnAddListing.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +34,7 @@ public class AgentHomeFragment extends Fragment {
                 navController.navigate(R.id.action_agentHomeFragment_to_publishAdActivity);
             }
         });
-        return view;
+
+        return view; // Make sure to return the inflated view
     }
 }

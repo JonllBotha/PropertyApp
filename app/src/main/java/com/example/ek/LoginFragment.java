@@ -1,5 +1,7 @@
 package com.example.ek;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,7 +16,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
 
 public class LoginFragment extends Fragment {
 
@@ -47,8 +48,14 @@ public class LoginFragment extends Fragment {
                 String password = etPassword.getText().toString();
 
                 // Check if the username and password are correct
-                boolean isLoggedId = dbHelper.checkUser(email, password);
-                if (isLoggedId) {
+                boolean isLoggedIn = dbHelper.checkUser(email, password);
+                if (isLoggedIn) {
+                    // Get the user's role
+                    String role = getUserRole(email);
+
+                    // Save the role in SharedPreferences for later access
+                    saveUserRole(role);
+
                     // Get user's name
                     String fullName = getUserName(email);
 
@@ -56,17 +63,13 @@ public class LoginFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString("profile_name", fullName);
 
-                    // Navigate to ClientHomeFragment, passing the bundle
+                    // Navigate based on role
                     NavController navController = Navigation.findNavController(view);
-                    // the if statement does work, only the navigation to the agentHomeFragment doesn't work
-                    //if (email.endsWith("@mandela.ac.za")) {
-                        // Navigate to AgentHomeFragment
-                        // I am struggling to get this to work
-                        //navController.navigate(R.id.action_loginFragment_to_agentHomeFragment, bundle);
-                    //} else {
-                        // Navigate to ClientHomeFragment
+                    if ("Agent".equals(role)) {
+                        navController.navigate(R.id.action_loginFragment_to_agentHomeFragment, bundle);
+                    } else {
                         navController.navigate(R.id.action_loginFragment_to_clientHomeFragment, bundle);
-                    //}
+                    }
                 } else {
                     Toast.makeText(getActivity(), "Login Failed.", Toast.LENGTH_LONG).show();
                 }
@@ -75,6 +78,20 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
+    // Retrieve the user's role from the database
+    public String getUserRole(String email) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT role FROM users WHERE email = ?", new String[]{email});
+
+        String role = "Client"; // Default role
+        if (cursor.moveToFirst()) {
+            role = cursor.getString(cursor.getColumnIndexOrThrow("role"));
+        }
+        cursor.close();
+        return role;
+    }
+
+    // Retrieve the user's name from the database
     public String getUserName(String email) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT firstName, lastName FROM users WHERE email = ?", new String[]{email});
@@ -82,12 +99,8 @@ public class LoginFragment extends Fragment {
         String fullName = "";
         if (cursor.moveToFirst()) {
             try {
-                int firstNameIndex = cursor.getColumnIndexOrThrow("firstName");
-                int lastNameIndex = cursor.getColumnIndexOrThrow("lastName");
-
-                String firstName = cursor.getString(firstNameIndex);
-                String lastName = cursor.getString(lastNameIndex);
-
+                String firstName = cursor.getString(cursor.getColumnIndexOrThrow("firstName"));
+                String lastName = cursor.getString(cursor.getColumnIndexOrThrow("lastName"));
                 fullName = firstName + " " + lastName;
             } catch (IllegalArgumentException e) {
                 Log.e("Error", "Column not found: " + e.getMessage());
@@ -96,5 +109,13 @@ public class LoginFragment extends Fragment {
         }
         cursor.close();
         return fullName;
+    }
+
+    // Save the user's role in SharedPreferences
+    private void saveUserRole(String role) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_role", role);
+        editor.apply();
     }
 }

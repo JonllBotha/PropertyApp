@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
+public class ClientProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
     Context context;
     List<ProfileItem> items;
 
-    public ProfileAdapter(Context context, List<ProfileItem> items) {
+    public ClientProfileAdapter(Context context, List<ProfileItem> items) {
         this.context = context;
         this.items = items;
     }
