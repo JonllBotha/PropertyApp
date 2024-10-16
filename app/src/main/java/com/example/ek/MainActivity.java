@@ -35,15 +35,13 @@ public class MainActivity extends AppCompatActivity {
         String userRole = getUserRoleFromSharedPreferences();
 
         // Check user role and set the appropriate menu
-        // Check user role and set the appropriate menu
         if ("Agent".equals(userRole)) {
             bottomNavigationView.getMenu().clear(); // Clear any previous menu items
-            bottomNavigationView.inflateMenu(R.menu.menu_agent);  // Inflate agent-specific menu
+            bottomNavigationView.inflateMenu(R.menu.menu_agent);  // Agent menu
         } else {
             bottomNavigationView.getMenu().clear(); // Clear any previous menu items
-            bottomNavigationView.inflateMenu(R.menu.menu_client); // Inflate client-specific menu
+            bottomNavigationView.inflateMenu(R.menu.menu_client); // Client menu
         }
-
 
         // Link BottomNavigationView with NavController
         NavigationUI.setupWithNavController(bottomNavigationView, navController);

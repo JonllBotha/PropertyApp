@@ -10,6 +10,7 @@
         android:icon="@drawable/icon_chat"/>
     <item
         android:id="@+id/clientProfileFragment"
-        android:title="Profile"
-        android:icon="@drawable/icon_profile"/>
+        android:title="More"
+        android:icon="@drawable/icon_more"
+        android:iconTint="#232323"/>
 </menu>

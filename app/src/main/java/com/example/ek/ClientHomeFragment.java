@@ -1,6 +1,7 @@
 package com.example.ek;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,12 @@ public class ClientHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_client_home, container, false);
-        //return inflater.inflate(R.layout.fragment_client_home, container, false);
+
+        // Retrieve the email from the arguments
+        if (getArguments() != null) {
+            String fullName = getArguments().getString("fullName");
+            String email = getArguments().getString("email");
+        }
 
         NavController navController = Navigation.findNavController(getActivity(), R.id.navHostFragmentContainerView);
 

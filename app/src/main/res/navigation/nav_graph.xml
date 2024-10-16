@@ -58,6 +58,12 @@
         <action
             android:id="@+id/action_clientProfileFragment_to_clientHomeFragment"
             app:destination="@id/clientHomeFragment" />
+        <action
+            android:id="@+id/action_clientProfileFragment_to_clientEditProfileFragment"
+            app:destination="@id/clientEditProfileFragment" />
+        <action
+            android:id="@+id/action_clientProfileFragment_to_startupFragment"
+            app:destination="@id/startupFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientChatFragment"
@@ -93,5 +99,14 @@
         <action
             android:id="@+id/action_agentProfileFragment_to_agentHomeFragment"
             app:destination="@id/agentHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientEditProfileFragment"
+        android:name="com.example.ek.ClientEditProfileFragment"
+        android:label="fragment_client_edit_profile"
+        tools:layout="@layout/fragment_client_edit_profile" >
+        <action
+            android:id="@+id/action_clientEditProfileFragment_to_clientProfileFragment"
+            app:destination="@id/clientProfileFragment" />
     </fragment>
 </navigation>

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -22,14 +23,14 @@ public class LoginFragment extends Fragment {
     private DBHelper dbHelper;
     private EditText etEmail, etPassword;
     private Button btnLogin;
+    private SharedViewModel sharedViewModel;
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
@@ -47,6 +48,12 @@ public class LoginFragment extends Fragment {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
+                // Initialize SharedViewModel
+                sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+                // Pass the email to the SharedViewModel
+                sharedViewModel.setProfileEmail(email);
+
                 // Check if the username and password are correct
                 boolean isLoggedIn = dbHelper.checkUser(email, password);
                 if (isLoggedIn) {
@@ -59,16 +66,15 @@ public class LoginFragment extends Fragment {
                     // Get user's name
                     String fullName = getUserName(email);
 
-                    // Create a Bundle to pass the profile name
-                    Bundle bundle = new Bundle();
-                    bundle.putString("profile_name", fullName);
+                    // Set the full name in SharedViewModel
+                    sharedViewModel.setUserFullName(fullName);
 
                     // Navigate based on role
                     NavController navController = Navigation.findNavController(view);
                     if ("Agent".equals(role)) {
-                        navController.navigate(R.id.action_loginFragment_to_agentHomeFragment, bundle);
+                        navController.navigate(R.id.action_loginFragment_to_agentHomeFragment);
                     } else {
-                        navController.navigate(R.id.action_loginFragment_to_clientHomeFragment, bundle);
+                        navController.navigate(R.id.action_loginFragment_to_clientHomeFragment);
                     }
                 } else {
                     Toast.makeText(getActivity(), "Login Failed.", Toast.LENGTH_LONG).show();
@@ -97,17 +103,16 @@ public class LoginFragment extends Fragment {
         Cursor cursor = db.rawQuery("SELECT firstName, lastName FROM users WHERE email = ?", new String[]{email});
 
         String fullName = "";
-        if (cursor.moveToFirst()) {
-            try {
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
                 String firstName = cursor.getString(cursor.getColumnIndexOrThrow("firstName"));
                 String lastName = cursor.getString(cursor.getColumnIndexOrThrow("lastName"));
                 fullName = firstName + " " + lastName;
-            } catch (IllegalArgumentException e) {
-                Log.e("Error", "Column not found: " + e.getMessage());
-                // Handle the case where one or both columns are missing
             }
+            cursor.close();
+        } else {
+            Log.e("LoginFragment", "Cursor is null for email: " + email);
         }
-        cursor.close();
         return fullName;
     }
 
@@ -115,7 +120,7 @@ public class LoginFragment extends Fragment {
     private void saveUserRole(String role) {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("user_role", role);
+        editor.putString("user_role", role);  // Ensure correct role is passed here
         editor.apply();
     }
 }
