@@ -21,11 +21,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users (email TEXT PRIMARY KEY, password TEXT, firstName TEXT, lastName TEXT, role TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS clients (email TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, phoneNumber TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS agents (email TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, phoneNumber TEXT, about TEXT, province TEXT, city TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("CREATE TABLE agents (email TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, phoneNumber TEXT, about TEXT, province TEXT, city TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS messages (message_id INTEGER PRIMARY KEY AUTOINCREMENT, senderPhoneNumber TEXT, receiverPhoneNumber TEXT, message TEXT, status TEXT DEFAULT 'delivered', timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)");
     }
 
     public boolean insertData(String email, String password, String firstName, String lastName, String role){
@@ -96,8 +97,29 @@ public class DBHelper extends SQLiteOpenHelper {
         else return false;
     }
 
-    public Cursor getUserFullName(String email) {
-        SQLiteDatabase myDB = this.getReadableDatabase();
-        return myDB.rawQuery("SELECT firstName, lastName FROM users WHERE email = ?", new String[]{email});
+//    public Cursor getUserFullName(String email) {
+//        SQLiteDatabase myDB = this.getReadableDatabase();
+//        return myDB.rawQuery("SELECT firstName, lastName FROM users WHERE email = ?", new String[]{email});
+//    }
+
+    // Insert new message based on phone number
+    public boolean insertMessage(String senderPhoneNumber, String receiverPhoneNumber, String message) {
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("senderPhoneNumber", senderPhoneNumber);
+        contentValues.put("receiverPhoneNumber", receiverPhoneNumber);
+        contentValues.put("message", message);
+        contentValues.put("status", "delivered");  // Message status is "delivered" by default
+        long result = myDB.insert("messages", null, contentValues);
+        return result != -1;
+    }
+
+    // Retrieve messages between two phone numbers
+    public boolean updateMessageStatusToRead(int messageId) {
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("status", "read");
+        int rowsAffected = myDB.update("messages", contentValues, "message_id = ?", new String[]{String.valueOf(messageId)});
+        return rowsAffected > 0;
     }
 }
