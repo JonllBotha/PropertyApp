@@ -15,6 +15,152 @@
     <string name="publish_a_new_property">Publish a new property</string>
     <string name="reach_thousands_of_buyers_or_renters_ninstantly">Reach thousands of buyers or renters \ninstantly</string>
     <string name="intent">Intent</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Provinces -->
+    <string-array name="provinces">
+        <item>Province</item>
+        <item>Eastern Cape</item>
+        <item>Free State</item>
+        <item>Gauteng</item>
+        <item>KwaZulu-Natal</item>
+        <item>Limpopo</item>
+        <item>Mpumalanga</item>
+        <item>Northern Cape</item>
+        <item>North West</item>
+        <item>Western Cape</item>
+    </string-array>
+
+    <!-- Example Cities for Eastern Cape -->
+    <string-array name="eastern_cape_cities">
+        <item>City</item>
+        <item>Butterworth</item>
+        <item>Dikeni</item>
+        <item>East London</item>
+        <item>Gqeberha</item>
+        <item>Graaff-Reinet</item>
+        <item>Kariega</item>
+        <item>Komani</item>
+        <item>Makhanda</item>
+        <item>Mthatha</item>
+        <item>Qonce</item>
+        <item>Zwelitsha</item>
+    </string-array>
+
+    <!-- Example Cities for Free State -->
+    <string-array name="free_state_cities">
+        <item>City</item>
+        <item>Bethlehem</item>
+        <item>Bloemfontein</item>
+        <item>Jagersfontein</item>
+        <item>Kroonstad</item>
+        <item>Odendaalsrus</item>
+        <item>Parys</item>
+        <item>Phuthaditjhaba</item>
+        <item>Sasolburg</item>
+        <item>Virginia</item>
+        <item>Welkom</item>
+    </string-array>
+
+    <!-- Example Cities for Gauteng -->
+    <string-array name="gauteng_cities">
+        <item>City</item>
+        <item>Benoni</item>
+        <item>Boksburg</item>
+        <item>Brakpan</item>
+        <item>Carletonville</item>
+        <item>Germiston</item>
+        <item>Johannesburg</item>
+        <item>Krugersdorp</item>
+        <item>Pretoria</item>
+        <item>Randburg</item>
+        <item>Randfontein</item>
+        <item>Roodepoort</item>
+        <item>Soweto</item>
+        <item>Springs</item>
+        <item>Vanderbijlpark</item>
+        <item>Vereeniging</item>
+    </string-array>
+
+    <!-- Example Cities for KZN -->
+    <string-array name="kwazulu_natal_cities">
+        <item>City</item>
+        <item>Durban</item>
+        <item>Empangeni</item>
+        <item>Newcastle</item>
+        <item>Pietermaritzburg</item>
+        <item>Pinetown</item>
+        <item>Ulundi</item>
+        <item>Umlazi</item>
+        <item>uMnambithi</item>
+    </string-array>
+
+    <!-- Example Cities for Limpopo -->
+    <string-array name="limpopo_cities">
+        <item>City</item>
+        <item>Giyani</item>
+        <item>Lebowakgomo</item>
+        <item>Musina</item>
+        <item>Phalaborwa</item>
+        <item>Polokwane</item>
+        <item>Seshego</item>
+        <item>Sibasa</item>
+        <item>Thabazimbi</item>
+    </string-array>
+
+    <!-- Example Cities for Mpumalanga -->
+    <string-array name="mpumalanga_cities">
+        <item>City</item>
+        <item>Emalahleni</item>
+        <item>Mbombela</item>
+        <item>Secunda</item>
+    </string-array>
+
+    <!-- Example Cities for North West -->
+    <string-array name="north_west_cities">
+        <item>City</item>
+        <item>Klerksdorp</item>
+        <item>Mahikeng</item>
+        <item>Mmabatho</item>
+        <item>Potchefstroom</item>
+        <item>Rustenburg</item>
+    </string-array>
+
+    <!-- Example Cities for Northern Cape -->
+    <string-array name="northern_cape_cities">
+        <item>City</item>
+        <item>Kimberley</item>
+        <item>Kuruman</item>
+        <item>Port Nolloth</item>
+    </string-array>
+
+    <!-- Example Cities for Western Cape -->
+    <string-array name="western_cape_cities">
+        <item>City</item>
+        <item>Bellville</item>
+        <item>Cape Town</item>
+        <item>George</item>
+        <item>Hopefield</item>
+        <item>Oudtshoorn</item>
+        <item>Paarl</item>
+        <item>Simon’s Town</item>
+        <item>Stellenbosch</item>
+        <item>Swellendam</item>
+        <item>Worcester</item>
+    </string-array>
+
 </resources>

@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 
 import android.app.AlertDialog;
 import android.database.Cursor;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Button;

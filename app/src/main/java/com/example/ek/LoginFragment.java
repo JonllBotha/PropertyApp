@@ -57,17 +57,13 @@ public class LoginFragment extends Fragment {
                 // Check if the username and password are correct
                 boolean isLoggedIn = dbHelper.checkUser(email, password);
                 if (isLoggedIn) {
-                    // Get the user's role
+                    // Get the user's name and role
+                    String fullName = getUserName(email);
                     String role = getUserRole(email);
 
-                    // Save the role in SharedPreferences for later access
-                    saveUserRole(role);
-
-                    // Get user's name
-                    String fullName = getUserName(email);
-
-                    // Set the full name in SharedViewModel
+                    // Set the full name and role in SharedViewModel
                     sharedViewModel.setUserFullName(fullName);
+                    sharedViewModel.setUserRole(role);
 
                     // Navigate based on role
                     NavController navController = Navigation.findNavController(view);
@@ -114,13 +110,5 @@ public class LoginFragment extends Fragment {
             Log.e("LoginFragment", "Cursor is null for email: " + email);
         }
         return fullName;
-    }
-
-    // Save the user's role in SharedPreferences
-    private void saveUserRole(String role) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("user_role", role);  // Ensure correct role is passed here
-        editor.apply();
     }
 }

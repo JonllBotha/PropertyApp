@@ -12,13 +12,12 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class ClientProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
-
+public class AgentProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
     private final Fragment fragment;  // Store fragment instance
     private final List<ProfileItem> items;
     private final String email;
 
-    public ClientProfileAdapter(Fragment fragment, List<ProfileItem> items, String email) {
+    public AgentProfileAdapter(Fragment fragment, List<ProfileItem> items, String email) {
         this.fragment = fragment;
         this.items = items;
         this.email = email;
@@ -45,19 +44,13 @@ public class ClientProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder
                     // Create a Bundle to pass the email
                     Bundle bundle = new Bundle();
                     bundle.putString("email", email);  // Pass the email to the next fragment
-                    navController.navigate(R.id.action_clientProfileFragment_to_clientEditProfileFragment,bundle);
+                    navController.navigate(R.id.action_agentProfileFragment_to_agentEditProfileFragment,bundle);
                     break;
-                case 1: // "Bond Calculator"
-                    //navController.navigate(R.id.action_clientProfileFragment_to_bondCalculatorFragment);
-                    break;
-                case 2: // "Settings"
+                case 1: // "Settings"
                     //navController.navigate(R.id.action_clientProfileFragment_to_clientSettingsFragment);
                     break;
-                case 3: // "Privacy Policy"
-                    //navController.navigate(R.id.action_clientProfileFragment_to_privacyPolicyFragment);
-                    break;
-                case 4: // "Log Out"
-                    navController.navigate(R.id.action_clientProfileFragment_to_startupFragment);
+                case 2: // "Log Out"
+                    navController.navigate(R.id.action_agentProfileFragment_to_startupFragment);
                     break;
             }
         });

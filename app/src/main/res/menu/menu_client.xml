@@ -5,6 +5,10 @@
         android:title="Home"
         android:icon="@drawable/icon_home"/>
     <item
+        android:id="@+id/clientMapFragment"
+        android:title="Map"
+        android:icon="@drawable/icon_map"/>
+    <item
         android:id="@+id/clientChatFragment"
         android:title="Chat"
         android:icon="@drawable/icon_chat"/>
