@@ -12,28 +12,31 @@
         android:layout_height="160dp"
         android:background="@drawable/main_bg_vector">
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/toolbarBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="100dp"
+            android:clickable="true"
             android:src="@drawable/icon_back"
-            app:tint="?attr/colorOnBackground"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:backgroundTint="@color/white"
+            app:borderWidth="1dp"
+            app:fabSize="mini" />
 
         <TextView
             android:id="@+id/toolbarTitleTxtView"
             style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbarBackBtn"
-            android:layout_marginStart="15dp"
+            android:layout_end="@id/toolbarBackBtn"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="105dp"
+            android:layout_toEndOf="@+id/toolbarBackBtn"
             android:background="#2CFFFFFF"
             android:backgroundTint="#C3FFFFFF"
             android:text="@string/publish_a_new_property"
-            android:textColor="?attr/colorOnBackground"
-            android:textStyle="normal|bold" />
+            android:textColor="?attr/colorOnBackground" />
 
         <TextView
             android:id="@+id/toolbarSubtitleTxtView"
@@ -41,32 +44,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbarTitleTxtView"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="90dp"
             android:layout_marginTop="5dp"
-            android:layout_toStartOf="@id/toolbarVisualImgView"
             android:background="#A4FFFFFF"
             android:backgroundTint="#ADFFFFFF"
             android:text="@string/reach_thousands_of_buyers_or_renters_ninstantly"
             android:textColor="?attr/colorOnBackground" />
 
-        <ImageView
-            android:id="@+id/toolbarVisualImgView"
-            android:layout_width="110dp"
-            android:layout_height="120dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="17dp"
-            android:layout_marginBottom="22dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/house_icon_removebg" />
-
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="480dp"
         android:layout_below="@id/toolbarRelativeLayout"
-        android:paddingHorizontal="10dp">
+        android:paddingHorizontal="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -450,14 +441,25 @@
 
     </ScrollView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/submitBtn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:text="Post ad"
-        android:minHeight="@dimen/m_button_height"/>
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            android:background="@drawable/rounded_button"
+            android:text="Post ad"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
 
 
 </RelativeLayout>

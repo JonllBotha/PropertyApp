@@ -97,11 +97,6 @@ public class DBHelper extends SQLiteOpenHelper {
         else return false;
     }
 
-//    public Cursor getUserFullName(String email) {
-//        SQLiteDatabase myDB = this.getReadableDatabase();
-//        return myDB.rawQuery("SELECT firstName, lastName FROM users WHERE email = ?", new String[]{email});
-//    }
-
     // Insert new message based on phone number
     public boolean insertMessage(String senderPhoneNumber, String receiverPhoneNumber, String message) {
         SQLiteDatabase myDB = this.getWritableDatabase();
