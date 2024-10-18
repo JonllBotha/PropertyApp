@@ -22,7 +22,8 @@
             android:src="@drawable/icon_back"
             app:backgroundTint="@color/white"
             app:borderWidth="1dp"
-            app:fabSize="mini" />
+            app:fabSize="mini"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/toolbarTitleTxtView"
@@ -120,14 +121,14 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/plot_gray"
-                    android:text="Plots"/>
+                    android:icon="@drawable/flat_gray"
+                    android:text="Flats"/>
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/commercial_gray"
-                    android:text="Commercial"/>
+                    android:icon="@drawable/plot_gray"
+                    android:text="Plots"/>
 
             </com.google.android.material.tabs.TabLayout>
 
