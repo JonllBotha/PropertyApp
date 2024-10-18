@@ -41,10 +41,7 @@ public class AgentProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder>
 
             switch (position) {
                 case 0: // "Your Profile"
-                    // Create a Bundle to pass the email
-                    Bundle bundle = new Bundle();
-                    bundle.putString("email", email);  // Pass the email to the next fragment
-                    navController.navigate(R.id.action_agentProfileFragment_to_agentEditProfileFragment,bundle);
+                    navController.navigate(R.id.action_agentProfileFragment_to_agentEditProfileFragment);
                     break;
                 case 1: // "Settings"
                     //navController.navigate(R.id.action_clientProfileFragment_to_clientSettingsFragment);

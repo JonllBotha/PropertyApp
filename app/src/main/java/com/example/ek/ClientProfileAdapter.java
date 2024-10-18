@@ -42,13 +42,10 @@ public class ClientProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder
 
             switch (position) {
                 case 0: // "Your Profile"
-                    // Create a Bundle to pass the email
-                    Bundle bundle = new Bundle();
-                    bundle.putString("email", email);  // Pass the email to the next fragment
-                    navController.navigate(R.id.action_clientProfileFragment_to_clientEditProfileFragment,bundle);
+                    navController.navigate(R.id.action_clientProfileFragment_to_clientEditProfileFragment);
                     break;
                 case 1: // "Bond Calculator"
-                    //navController.navigate(R.id.action_clientProfileFragment_to_bondCalculatorFragment);
+                    navController.navigate(R.id.action_clientProfileFragment_to_clientCalculatorFragment);
                     break;
                 case 2: // "Settings"
                     //navController.navigate(R.id.action_clientProfileFragment_to_clientSettingsFragment);

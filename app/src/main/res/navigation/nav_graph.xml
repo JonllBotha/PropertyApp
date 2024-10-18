@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_clientProfileFragment_to_startupFragment"
             app:destination="@id/startupFragment" />
+        <action
+            android:id="@+id/action_clientProfileFragment_to_clientCalculatorFragment"
+            app:destination="@id/clientCalculatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientChatFragment"
@@ -136,5 +139,28 @@
             android:id="@+id/action_agentEditProfileFragment_to_agentProfileFragment"
             app:destination="@id/agentProfileFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/clientCalculationFragment"
+        android:name="com.example.ek.ClientCalculationFragment"
+        android:label="ClientCalculationFragment" >
+        <action
+            android:id="@+id/action_clientCalculationFragment_to_clientProfileFragment"
+            app:destination="@id/clientProfileFragment" />
+        <action
+            android:id="@+id/action_clientCalculationFragment_to_clientCalculatorFragment"
+            app:destination="@id/clientCalculatorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientCalculatorFragment"
+        android:name="com.example.ek.ClientCalculatorFragment"
+        android:label="fragment_client_calculation"
+        tools:layout="@layout/fragment_client_calculation" >
+        <action
+            android:id="@+id/action_clientCalculatorFragment_to_clientCalculationFragment"
+            app:destination="@id/clientCalculationFragment" />
+        <action
+            android:id="@+id/action_clientCalculatorFragment_to_clientProfileFragment"
+            app:destination="@id/clientProfileFragment" />
     </fragment>
 </navigation>

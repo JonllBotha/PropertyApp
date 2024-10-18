@@ -1,7 +1,5 @@
 package com.example.ek;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
