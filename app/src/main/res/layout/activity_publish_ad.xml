@@ -30,7 +30,6 @@
             style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_end="@id/toolbarBackBtn"
             android:layout_marginStart="20dp"
             android:layout_marginTop="105dp"
             android:layout_toEndOf="@+id/toolbarBackBtn"
@@ -298,7 +297,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="none"
                     android:paddingStart="50dp"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

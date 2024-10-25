@@ -165,4 +165,81 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- All Example Cities -->
+    <string-array name="cities">
+        <item>Bellville</item>
+        <item>Benoni</item>
+        <item>Bethlehem</item>
+        <item>Bloemfontein</item>
+        <item>Boksburg</item>
+        <item>Brakpan</item>
+        <item>Butterworth</item>
+        <item>Cape Town</item>
+        <item>Carletonville</item>
+        <item>Dikeni</item>
+        <item>Durban</item>
+        <item>East London</item>
+        <item>Emalahleni</item>
+        <item>Empangeni</item>
+        <item>George</item>
+        <item>Germiston</item>
+        <item>Giyani</item>
+        <item>Gqeberha</item>
+        <item>Graaff-Reinet</item>
+        <item>Hopefield</item>
+        <item>Jagersfontein</item>
+        <item>Johannesburg</item>
+        <item>Kariega</item>
+        <item>Kimberley</item>
+        <item>Klerksdorp</item>
+        <item>Komani</item>
+        <item>Kroonstad</item>
+        <item>Krugersdorp</item>
+        <item>Kuruman</item>
+        <item>Lebowakgomo</item>
+        <item>Mahikeng</item>
+        <item>Makhanda</item>
+        <item>Mbombela</item>
+        <item>Mmabatho</item>
+        <item>Mthatha</item>
+        <item>Musina</item>
+        <item>Newcastle</item>
+        <item>Odendaalsrus</item>
+        <item>Oudtshoorn</item>
+        <item>Paarl</item>
+        <item>Parys</item>
+        <item>Phalaborwa</item>
+        <item>Phuthaditjhaba</item>
+        <item>Pietermaritzburg</item>
+        <item>Pinetown</item>
+        <item>Polokwane</item>
+        <item>Port Nolloth</item>
+        <item>Potchefstroom</item>
+        <item>Pretoria</item>
+        <item>Qonce</item>
+        <item>Randburg</item>
+        <item>Randfontein</item>
+        <item>Roodepoort</item>
+        <item>Rustenburg</item>
+        <item>Sasolburg</item>
+        <item>Secunda</item>
+        <item>Seshego</item>
+        <item>Sibasa</item>
+        <item>Simon’s Town</item>
+        <item>Soweto</item>
+        <item>Springs</item>
+        <item>Stellenbosch</item>
+        <item>Swellendam</item>
+        <item>Thabazimbi</item>
+        <item>Ulundi</item>
+        <item>Umlazi</item>
+        <item>Vanderbijlpark</item>
+        <item>Vereeniging</item>
+        <item>Virginia</item>
+        <item>Welkom</item>
+        <item>Worcester</item>
+        <item>Zwelitsha</item>
+        <item>uMnambithi</item>
+    </string-array>
+
 </resources>

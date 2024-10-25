@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.AutoCompleteTextView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -33,7 +34,11 @@ public class PublishAdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        AutoCompleteTextView autoCompleteLocation = findViewById(R.id.locationACT);
+        String[] cities = getResources().getStringArray(R.array.cities);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, cities);
+        autoCompleteLocation.setAdapter(adapter);
 
         binding = ActivityPublishAdBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
