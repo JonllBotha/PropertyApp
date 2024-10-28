@@ -95,17 +95,17 @@
         android:label="fragment_agent_home"
         tools:layout="@layout/fragment_agent_home" >
         <action
-            android:id="@+id/action_agentHomeFragment_to_publishAdActivity"
-            app:destination="@id/publishAdActivity" />
+            android:id="@+id/action_agentHomeFragment_to_publishAdFragment"
+            app:destination="@id/publishAdFragment" />
         <action
             android:id="@+id/action_agentHomeFragment_to_agentProfileFragment"
             app:destination="@id/agentProfileFragment" />
     </fragment>
     <activity
-        android:id="@+id/publishAdActivity"
+        android:id="@+id/publishAdFragment"
         android:name="com.example.ek.PublishAdActivity"
-        android:label="activity_publish_ad"
-        tools:layout="@layout/activity_publish_ad" />
+        android:label="fragment_publish_ad"
+        tools:layout="@layout/fragment_publish_ad" />
     <fragment
         android:id="@+id/agentProfileFragment"
         android:name="com.example.ek.AgentProfileFragment"
