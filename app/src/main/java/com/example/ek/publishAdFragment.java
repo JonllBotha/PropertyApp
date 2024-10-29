@@ -1,5 +1,6 @@
 package com.example.ek;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ek.databinding.ActivityPublishAdBinding;
@@ -26,9 +28,10 @@ public class publishAdFragment extends Fragment {
 
     private RadioButton rbSell, rbRent;
     private TabItem tiHome, tiFlat, tiPlot;
-    private AutoCompleteTextView actvSubCategory, actvAreaSizeUnit, actvLocation;
+    private AutoCompleteTextView actvAreaSizeUnit;
     private EditText etBedrooms, etFloors, etBathrooms, etAreaSize, etPrice, etTitle, etDescription, etAgentEmail, etAgentContactNumber;
     private boolean isDataChanged = false;
+    private Spinner spProvince, spCity;
     private SharedViewModel sharedViewModel;
     private DBHelper dbHelper;
     private Button btnSubmit;
@@ -74,8 +77,9 @@ public class publishAdFragment extends Fragment {
         tiFlat = view.findViewById(R.id.flatPropertyCategory);
         tiPlot = view.findViewById(R.id.plotPropertyCategory);
 
-        actvSubCategory = view.findViewById(R.id.propertySubcategoryACT);
-        actvLocation = view.findViewById(R.id.locationACT);
+        spProvince = view.findViewById(R.id.spProvince);
+        spCity = view.findViewById(R.id.spCity);
+
         actvAreaSizeUnit = view.findViewById(R.id.areaSizeUnitACT);
 
         //--------------------
@@ -90,9 +94,8 @@ public class publishAdFragment extends Fragment {
      //   etBathrooms.addTextChangedListener(new publishAdFragment.SimpleTextWatcher(() -> isDataChanged = true));
      //   etAgentEmail.addTextChangedListener(new publishAdFragment.SimpleTextWatcher(() -> isDataChanged = true));
 
-       // actvSubCategory.addTextChangedListener(new publishAdFragment.SimpleTextWatcher(() -> isDataChanged = true));
-      //  actvLocation.addTextChangedListener(new publishAdFragment.SimpleTextWatcher(() -> isDataChanged = true));
-      //  actvAreaSizeUnit.addTextChangedListener(new publishAdFragment.SimpleTextWatcher(() -> isDataChanged = true));
+        //spProvince.addTextChangedListener(new publishAdFragment.SimpleTextWatcher(() -> isDataChanged = true));
+        //spCity.addTextChangedListener(new publishAdFragment.SimpleTextWatcher(() -> isDataChanged = true));
 
         // Observe the email from the SharedViewModel
        // sharedViewModel.getProfileEmail().observe(getViewLifecycleOwner(), newEmail -> {
@@ -118,14 +121,13 @@ public class publishAdFragment extends Fragment {
                 String areaSize = etAreaSize.getText().toString();
                 String contactNumber = etAgentContactNumber.getText().toString();
                 String price = etPrice.getText().toString();
-                String propertySubcategory = actvSubCategory.getText().toString();
-                String location = actvLocation.getText().toString();
+                String locationProvince = spProvince.toString();
+                String locationCity = spCity.toString();
                 String areaSizeUnit = actvAreaSizeUnit.getText().toString();
 
                 String intentRent = rbRent.getText().toString();
                 String intentSell = rbSell.getText().toString();
 
-                String propertylocation = actvLocation.getText().toString();
                 String propertyAreaSize = actvAreaSizeUnit.getText().toString();
 
                 String homePropertyType = tiHome.toString();
@@ -147,53 +149,50 @@ public class publishAdFragment extends Fragment {
 
         //--------------------
         //Still need to adapt below to this fragment's details:
-    //    @SuppressLint("Range")
+        //@SuppressLint("Range")
        // private void loadAgentData(String email) {
-       //     Cursor cursor = dbHelper.getAgentData(email);
-       //     if (cursor.moveToFirst()) {
-     //           // Populate the EditTexts with existing agent data
-       //         etFirstName.setText(cursor.getString(cursor.getColumnIndex("firstName")));
-       //         etLastName.setText(cursor.getString(cursor.getColumnIndex("lastName")));
-       //         etCell.setText(cursor.getString(cursor.getColumnIndex("phoneNumber")));
-       //         etAbout.setText(cursor.getString(cursor.getColumnIndex("about")));
-       //         etEmail.setText(email); // Email is already stored in the ViewModel
-//
-       //         // Load province and city from the database and set them in the spinners
-        //        String province = cursor.getString(cursor.getColumnIndex("province"));
-        //        String city = cursor.getString(cursor.getColumnIndex("city"));
-//
-         //       // Set the province and city in the spinners
-        //        setSpinnerSelection(spProvince, province);
-        //        setSpinnerSelection(spCity, city);
-        //    } else {
-       //         Toast.makeText(getContext(), "Agent data not found", Toast.LENGTH_SHORT).show();
-       //     }
-        //    cursor.close();
-    //    }
+           // Cursor cursor = dbHelper.getAgentData(email);
+           // if (cursor.moveToFirst()) {
+           //     // Populate the EditTexts with existing agent data
+            //    etAgentContactNumber.setText(cursor.getString(cursor.getColumnIndex("phoneNumber")));
+            //    etAgentEmail.setText(email); // Email is already stored in the ViewModel
+
+            //    // Load province and city from the database and set them in the spinners
+            //    String province = cursor.getString(cursor.getColumnIndex("province"));
+             //   String city = cursor.getString(cursor.getColumnIndex("city"));
+
+             //   // Set the province and city in the spinners
+              //  setSpinnerSelection(spProvince, province);
+             //   setSpinnerSelection(spCity, city);
+         //   } else {
+          //      Toast.makeText(getContext(), "Agent data not found", Toast.LENGTH_SHORT).show();
+          //  }
+       //     cursor.close();
+      //  }
         //----------------------------
 
 
         //---------------------
         //Copied code from Sav: + still need to adjust:
-   //   //  // Inner class SimpleTextWatcher
-        //public class SimpleTextWatcher implements TextWatcher {
-         //   private Runnable onChange;
-//
-      //      public SimpleTextWatcher(Runnable onChange) {
-      //          this.onChange = onChange;
-    //        }
-//
+        // Inner class SimpleTextWatcher
+      //  public class SimpleTextWatcher implements TextWatcher {
+          //  private Runnable onChange;
+
+         //   public SimpleTextWatcher(Runnable onChange) {
+          //      this.onChange = onChange;
+         //   }
+
+       //     @Override
+         //   public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+         //   @Override
+         //   public void onTextChanged(CharSequence s, int start, int before, int count) {
+         //       onChange.run();
+        //    }
+
         //    @Override
-       //     public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-//
-      //      @Override
-       //     public void onTextChanged(CharSequence s, int start, int before, int count) {
-       //         onChange.run();
-       //     }
-//
-     //       @Override
-      //      public void afterTextChanged(Editable s) {}
-      //  }
+       //     public void afterTextChanged(Editable s) {}
+       // }
         //-----------------------------
 
 

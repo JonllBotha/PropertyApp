@@ -134,29 +134,6 @@
 
             </com.google.android.material.tabs.TabLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/propertySubCategoryTIL"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Property subcategory"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
-                app:startIconDrawable="@drawable/category_gray">
-
-                <AutoCompleteTextView
-                    android:id="@+id/propertySubcategoryACT"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:dropDownHeight="wrap_content"
-                    android:inputType="none"
-                    android:paddingStart="60dp"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
             <TextView
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="match_parent"
@@ -282,27 +259,51 @@
 
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/locationTIL"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Location"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
-                app:startIconDrawable="@drawable/location_gray">
+                android:layout_height="50dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_spinner"
+                android:orientation="horizontal">
 
-                <AutoCompleteTextView
-                    android:id="@+id/locationACT"
+                <Spinner
+                    android:id="@+id/spProvince"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:paddingStart="50dp"
-                    tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:spinnerMode="dropdown" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_spinner"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:spinnerMode="dropdown" />
+
+            </RelativeLayout>
+
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/priceTIL"
