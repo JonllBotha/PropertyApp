@@ -22,11 +22,12 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users (email TEXT PRIMARY KEY, password TEXT, firstName TEXT, lastName TEXT, role TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS clients (email TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, phoneNumber TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS agents (email TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, phoneNumber TEXT, about TEXT, province TEXT, city TEXT)");
+        // sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS listings (listing_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, price TEXT, province TEXT, city TEXT, listing_intent TEXT, listing_type TEXT, bedrooms TEXT, bathrooms TEXT, floors TEXT, area_size TEXT, agent_email TEXT, agent_cell TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS messages (message_id INTEGER PRIMARY KEY AUTOINCREMENT, senderPhoneNumber TEXT, receiverPhoneNumber TEXT, message TEXT, status TEXT DEFAULT 'delivered', timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)");
+       // sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS listings (listing_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, price TEXT, province TEXT, city TEXT, listing_intent TEXT, listing_type TEXT, bedrooms TEXT, bathrooms TEXT, floors TEXT, area_size TEXT, agent_email TEXT, agent_cell TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)");
     }
 
     public boolean insertData(String email, String password, String firstName, String lastName, String role){
@@ -96,17 +97,33 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         else return false;
     }
-
+    // USE BELOW 2 code sets FOR LISTING DATABASE
     // Insert new message based on phone number
-    public boolean insertMessage(String senderPhoneNumber, String receiverPhoneNumber, String message) {
+    public boolean insertListingData(Integer listing_id, String title, String description, String price, String province, String city, String listing_intent, String listing_type, String bedrooms, String bathrooms, String floors, String area_size, String agent_email, String agent_cell) {
         SQLiteDatabase myDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("senderPhoneNumber", senderPhoneNumber);
-        contentValues.put("receiverPhoneNumber", receiverPhoneNumber);
-        contentValues.put("message", message);
-        contentValues.put("status", "delivered");  // Message status is "delivered" by default
-        long result = myDB.insert("messages", null, contentValues);
+        contentValues.put("listing_id", listing_id);
+        contentValues.put("title", title);
+        contentValues.put("description", description);
+        contentValues.put("price", price);
+        contentValues.put("province", province);
+        contentValues.put("city", city);
+        contentValues.put("listing_intent", listing_intent);
+        contentValues.put("listing_type", listing_type);
+        contentValues.put("bedrooms", bedrooms);
+        contentValues.put("bathrooms", bathrooms);
+        contentValues.put("floors", floors);
+        contentValues.put("area_size", area_size);
+        contentValues.put("agent_email", agent_email);
+        contentValues.put("agent_cell", agent_cell);
+        long result = myDB.insertWithOnConflict("listings", null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
         return result != -1;
+    }
+
+    // Retrieve listing information
+    public Cursor getListingData(String listing_id) {
+        SQLiteDatabase myDB = this.getReadableDatabase();
+        return myDB.rawQuery("SELECT * FROM listings WHERE listing_id = ?", new String[]{listing_id});
     }
 
     // Retrieve messages between two phone numbers
