@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 12;
     public static final String DBname = "RealEstate.db";
 
     public DBHelper(@Nullable Context context) {
@@ -22,12 +22,13 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users (email TEXT PRIMARY KEY, password TEXT, firstName TEXT, lastName TEXT, role TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS clients (email TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, phoneNumber TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS agents (email TEXT PRIMARY KEY, firstName TEXT, lastName TEXT, phoneNumber TEXT, about TEXT, province TEXT, city TEXT)");
-        // sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS listings (listing_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, price TEXT, province TEXT, city TEXT, listing_intent TEXT, listing_type TEXT, bedrooms TEXT, bathrooms TEXT, floors TEXT, area_size TEXT, agent_email TEXT, agent_cell TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS listings (listing_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, price TEXT, province TEXT, city TEXT, listing_intent TEXT, listing_type TEXT, bedrooms TEXT, bathrooms TEXT, floors TEXT, area_size TEXT, agent_email TEXT, agent_cell TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS listing_images (image_id INTEGER PRIMARY KEY AUTOINCREMENT, listing_id INTEGER, image_path TEXT, FOREIGN KEY (listing_id) REFERENCES listings(listing_id))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-       // sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS listings (listing_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, price TEXT, province TEXT, city TEXT, listing_intent TEXT, listing_type TEXT, bedrooms TEXT, bathrooms TEXT, floors TEXT, area_size TEXT, agent_email TEXT, agent_cell TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)");
+
     }
 
     public boolean insertData(String email, String password, String firstName, String lastName, String role){
@@ -43,7 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
         else return true;
     }
 
-    // Insert or update client information
+    // Insert client information
     public boolean insertClientData(String email, String firstName, String lastName, String phoneNumber) {
         SQLiteDatabase myDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -55,13 +56,26 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    // Update client information
+    public boolean updateClientData(String email, String firstName, String lastName, String phoneNumber) {
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("firstName", firstName);
+        contentValues.put("lastName", lastName);
+        contentValues.put("phoneNumber", phoneNumber);
+
+        // Update the row where email matches
+        int result = myDB.update("clients", contentValues, "email = ?", new String[]{email});
+        return result > 0; // Returns true if the update was successful
+    }
+
     // Retrieve client information
     public Cursor getClientData(String email) {
         SQLiteDatabase myDB = this.getReadableDatabase();
         return myDB.rawQuery("SELECT * FROM clients WHERE email = ?", new String[]{email});
     }
 
-    // Insert or update client information
+    // Insert agent information
     public boolean insertAgentData(String email, String firstName, String lastName, String phoneNumber, String about, String province, String city) {
         SQLiteDatabase myDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -76,7 +90,23 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    // Retrieve client information
+    // Update agent information
+    public boolean updateAgentData(String email, String firstName, String lastName, String phoneNumber, String about, String province, String city) {
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("firstName", firstName);
+        contentValues.put("lastName", lastName);
+        contentValues.put("phoneNumber", phoneNumber);
+        contentValues.put("about", about);
+        contentValues.put("province", province);
+        contentValues.put("city", city);
+
+        // Update the row where email matches
+        int result = myDB.update("agents", contentValues, "email = ?", new String[]{email});
+        return result > 0; // Returns true if the update was successful
+    }
+
+    // Retrieve agent information
     public Cursor getAgentData(String email) {
         SQLiteDatabase myDB = this.getReadableDatabase();
         return myDB.rawQuery("SELECT * FROM agents WHERE email = ?", new String[]{email});
@@ -97,12 +127,14 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         else return false;
     }
-    // USE BELOW 2 code sets FOR LISTING DATABASE
-    // Insert new message based on phone number
-    public boolean insertListingData(Integer listing_id, String title, String description, String price, String province, String city, String listing_intent, String listing_type, String bedrooms, String bathrooms, String floors, String area_size, String agent_email, String agent_cell) {
+
+    // Insert new listing
+    public boolean insertListingData(String title, String description, String price, String province,
+                                     String city, String listing_intent, String listing_type,
+                                     String bedrooms, String bathrooms, String floors, String area_size,
+                                     String agent_email, String agent_cell, byte[] image) {
         SQLiteDatabase myDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("listing_id", listing_id);
         contentValues.put("title", title);
         contentValues.put("description", description);
         contentValues.put("price", price);
@@ -116,6 +148,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("area_size", area_size);
         contentValues.put("agent_email", agent_email);
         contentValues.put("agent_cell", agent_cell);
+        contentValues.put("image", image);
         long result = myDB.insertWithOnConflict("listings", null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
         return result != -1;
     }
@@ -123,7 +156,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Retrieve listing information
     public Cursor getListingData(String listing_id) {
         SQLiteDatabase myDB = this.getReadableDatabase();
-        return myDB.rawQuery("SELECT * FROM listings WHERE listing_id = ?", new String[]{listing_id});
+        return myDB.rawQuery("SELECT * FROM listings WHERE agent_email = ?", new String[]{listing_id});
     }
 
     // Retrieve messages between two phone numbers

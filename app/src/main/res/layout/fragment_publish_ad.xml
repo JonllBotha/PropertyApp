@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PublishAdActivity">
+    android:background="@drawable/main_bg">
 
     <RelativeLayout
-        android:id="@+id/toolbarRelativeLayout"
+        android:id="@+id/toolbarRelativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="@drawable/main_bg_vector">
+        android:layout_height="170dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/toolbarBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="104dp"
             android:clickable="true"
             android:src="@drawable/icon_back"
             app:backgroundTint="@color/white"
@@ -31,108 +30,115 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="105dp"
+            android:layout_marginTop="110dp"
             android:layout_toEndOf="@+id/toolbarBackBtn"
             android:background="#2CFFFFFF"
             android:backgroundTint="#C3FFFFFF"
             android:text="@string/publish_a_new_property"
             android:textColor="?attr/colorOnBackground" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/toolbarRelativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="170dp"
+        android:paddingHorizontal="20dp">
 
         <TextView
-            android:id="@+id/toolbarSubtitleTxtView"
-            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:id="@+id/intentTxtView"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="Intent"
+            android:textSize="17sp"
+            android:textStyle="normal|bold" />
+
+        <RadioGroup
+            android:id="@+id/intentRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbarTitleTxtView"
-            android:layout_marginStart="90dp"
-            android:layout_marginTop="5dp"
-            android:background="#A4FFFFFF"
-            android:backgroundTint="#ADFFFFFF"
-            android:text="@string/reach_thousands_of_buyers_or_renters_ninstantly"
-            android:textColor="?attr/colorOnBackground" />
+            android:layout_marginStart="160dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/intentSellRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:checked="true"
+                android:text="Sell"/>
+
+            <RadioButton
+                android:id="@+id/intentRentRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rent"/>
+        </RadioGroup>
 
     </RelativeLayout>
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/toolbarLinearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:layout_below="@id/toolbarRelativeLayout"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="220dp"
+        android:paddingHorizontal="20dp">
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Type"
+            android:textSize="17sp"
+            android:textStyle="normal|bold" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/propertyCategoryTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/homePropertyCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/home_black"
+                android:text="Homes"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/flatPropertyCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/flat_gray"
+                android:text="Flats"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/plotPropertyCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/plot_gray"
+                android:text="Plots"/>
+
+        </com.google.android.material.tabs.TabLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollview1"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_below="@+id/toolbarLinearLayout1"
+        android:layout_marginTop="10dp"
         android:paddingHorizontal="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/intentTxtView"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/intent"
-                android:textSize="17sp"
-                android:textStyle="normal|bold" />
-
-            <RadioGroup
-                android:id="@+id/intentRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/intentSellRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:checked="true"
-                    android:text="Sell"/>
-
-                <RadioButton
-                    android:id="@+id/intentRentRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rent"/>
-            </RadioGroup>
-
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="10dp"
-                android:text="Type"
-                android:textSize="17sp"
-                android:textStyle="normal|bold" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/propertyCategoryTabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/homePropertyCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/home_black"
-                    android:text="Homes"/>
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/flatPropertyCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/flat_gray"
-                    android:text="Flats"/>
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/plotPropertyCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/plot_gray"
-                    android:text="Plots"/>
-
-            </com.google.android.material.tabs.TabLayout>
 
             <TextView
                 style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -160,7 +166,9 @@
                     android:id="@+id/bedroomsEditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:paddingStart="50dp"
+                    android:textColor="@color/black"
                     android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -181,7 +189,9 @@
                     android:id="@+id/floorsEditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:paddingStart="50dp"
+                    android:textColor="@color/black"
                     android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -202,7 +212,9 @@
                     android:id="@+id/bathroomsEditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:paddingStart="50dp"
+                    android:textColor="@color/black"
                     android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -228,7 +240,9 @@
                         android:id="@+id/areaSizeEditTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:paddingStart="50dp"
+                        android:textColor="@color/black"
                         android:inputType="numberDecimal"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -251,7 +265,9 @@
                         android:id="@+id/areaSizeUnitACT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:paddingStart="50dp"
+                        android:textColor="@color/black"
                         android:inputType="none"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -279,6 +295,14 @@
                     android:layout_marginStart="5dp"
                     android:spinnerMode="dropdown" />
 
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:clickable="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_alignEnd="@+id/spProvince"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_drop_down"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -301,10 +325,16 @@
                     android:layout_marginStart="5dp"
                     android:spinnerMode="dropdown" />
 
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:clickable="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_alignEnd="@+id/spCity"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_drop_down"/>
             </RelativeLayout>
-
-
-
+            
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/priceTIL"
                 android:layout_width="match_parent"
@@ -322,6 +352,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="50dp"
+                    android:textColor="@color/black"
                     android:inputType="numberDecimal"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -353,7 +384,9 @@
                     android:id="@+id/titleEditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:paddingStart="50dp"
+                    android:textColor="@color/black"
                     android:inputType="textPersonName"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -374,7 +407,9 @@
                     android:id="@+id/descriptionEditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:paddingStart="50dp"
+                    android:textColor="@color/black"
                     android:inputType="textCapSentences|textImeMultiLine"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -395,7 +430,9 @@
                     android:id="@+id/agentEmailEditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:paddingStart="50dp"
+                    android:textColor="@color/black"
                     android:inputType="textEmailAddress"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -416,7 +453,9 @@
                     android:id="@+id/agentContactNumberEditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:paddingStart="50dp"
+                    android:textColor="@color/black"
                     android:inputType="phone"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -425,11 +464,12 @@
                 style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/add_photo_green"
-                android:drawablePadding="8dp"
-                android:paddingVertical="8dp"
-                android:layout_marginTop="12dp"
                 android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/add_photo_green"
+                android:drawablePadding="10dp"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="12dp"
+                android:layout_marginTop="12dp"
                 android:gravity="center_vertical"
                 android:text="Select images"/>
 
@@ -437,33 +477,27 @@
                 android:id="@+id/imagesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:spanCount="4"
-                tools:listitem="@layout/row_images_selected"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"/>
-
+                android:layout_marginBottom="80dp"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
         </LinearLayout>
-
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:layout_marginBottom="30dp"
+        android:paddingHorizontal="20dp"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/submitBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="46dp"
             android:background="@drawable/rounded_button"
-            android:text="Post ad"
+            android:text="Publish ad"
             android:textColor="@color/white" />
     </LinearLayout>
-
-
 
 </RelativeLayout>

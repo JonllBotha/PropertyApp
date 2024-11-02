@@ -16,7 +16,7 @@
             android:id="@+id/cv_profile"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="130dp"
             android:layout_centerHorizontal="true"
             app:cardCornerRadius="40dp">
 

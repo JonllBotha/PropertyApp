@@ -41,6 +41,8 @@ public class AgentEditProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_agent_edit_profile, container, false);
 
         // Initialize DBHelper
@@ -103,21 +105,25 @@ public class AgentEditProfileFragment extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstName = etFirstName.getText().toString();
-                String lastName = etLastName.getText().toString();
-                String cell = etCell.getText().toString();
-                String email = etEmail.getText().toString();
-                String about = etAbout.getText().toString();
-                String province = spProvince.getSelectedItem().toString();
-                String city = spCity.getSelectedItem().toString();
+                String firstName = etFirstName.getText().toString().trim();
+                String lastName = etLastName.getText().toString().trim();
+                String cell = etCell.getText().toString().trim();
+                String email = etEmail.getText().toString().trim();
+                String about = etAbout.getText().toString().trim();
+                String province = spProvince.getSelectedItem().toString().trim();
+                String city = spCity.getSelectedItem().toString().trim();
 
-                boolean result = dbHelper.insertAgentData(email, firstName, lastName, cell, about, province, city);
-
-                if (result) {
-                    Toast.makeText(getContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
-                    isDataChanged = false;
+                if (isDataChanged) {
+                    // Update existing user data
+                    boolean result = dbHelper.updateAgentData(email, firstName, lastName, cell, about, province, city);
+                    if (result) {
+                        Toast.makeText(getContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                        isDataChanged = false;
+                    } else {
+                        Toast.makeText(getContext(), "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(getContext(), "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "No changes made.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -150,7 +156,6 @@ public class AgentEditProfileFragment extends Fragment {
     // Method to populate city spinner based on selected province
     private void populateCitySpinner(String province) {
         int citiesArrayId;
-
         switch (province) {
             case "Eastern Cape":
                 citiesArrayId = R.array.eastern_cape_cities;
@@ -182,8 +187,8 @@ public class AgentEditProfileFragment extends Fragment {
             default:
                 citiesArrayId = R.array.eastern_cape_cities;  // Default if nothing is selected
         }
-
-        cityAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,getResources().getStringArray(citiesArrayId));
+        String[] cityArray = getResources().getStringArray(citiesArrayId);
+        cityAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, cityArray);
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCity.setAdapter(cityAdapter);
     }
@@ -199,13 +204,14 @@ public class AgentEditProfileFragment extends Fragment {
             etAbout.setText(cursor.getString(cursor.getColumnIndex("about")));
             etEmail.setText(email); // Email is already stored in the ViewModel
 
-            // Load province and city from the database and set them in the spinners
+            // Load province and city from the database
             String province = cursor.getString(cursor.getColumnIndex("province"));
             String city = cursor.getString(cursor.getColumnIndex("city"));
 
-            // Set the province and city in the spinners
+            // Set the province first to populate the city spinner correctly
             setSpinnerSelection(spProvince, province);
-            setSpinnerSelection(spCity, city);
+            populateCitySpinner(province); // Ensure cities are populated based on the province
+            setSpinnerSelection(spCity, city); // Now set the city selection
         } else {
             Toast.makeText(getContext(), "Agent data not found", Toast.LENGTH_SHORT).show();
         }

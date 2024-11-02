@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
         // Initialize the SharedViewModel
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
 
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     destination.getId() == R.id.clientProfileFragment ||
                     destination.getId() == R.id.clientChatFragment ||
                     destination.getId() == R.id.agentHomeFragment ||
-                    destination.getId() == R.id.agentPublishAd ||
+                    destination.getId() == R.id.publishAdFragment ||
                     destination.getId() == R.id.agentProfileFragment) {
                 bottomNavigationView.setVisibility(View.VISIBLE);
             } else {

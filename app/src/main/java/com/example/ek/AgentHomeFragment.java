@@ -5,13 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 public class AgentHomeFragment extends Fragment {
+
+    private SharedViewModel sharedViewModel;
+    private TextView profileName;
 
     public AgentHomeFragment() {
         // Required empty public constructor
@@ -24,6 +29,17 @@ public class AgentHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_agent_home, container, false);
 
+        // Initialize SharedViewModel
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        profileName = view.findViewById(R.id.tv_name);
+
+        // Observe the full name from SharedViewModel
+        sharedViewModel.getUserFullName().observe(getViewLifecycleOwner(), fullName -> {
+            if (fullName != null) {
+                profileName.setText(fullName);
+            }
+        });
+
         // Use 'view' to find the Button, not 'getView()'
         Button btnAddListing = view.findViewById(R.id.btnAddListing);
         NavController navController = Navigation.findNavController(getActivity(), R.id.navHostFragmentContainerView);
@@ -31,7 +47,7 @@ public class AgentHomeFragment extends Fragment {
         btnAddListing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_agentHomeFragment_to_publishAdActivity);
+                navController.navigate(R.id.action_agentHomeFragment_to_publishAdFragment);
             }
         });
 

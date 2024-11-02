@@ -7,16 +7,50 @@
     android:background="@drawable/main_bg"
     tools:context=".AgentHomeFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Agent,"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="125dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="View Your Listings"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/no_notification"
+            android:layout_alignTop="@+id/tv_name"
+            android:layout_alignEnd="@+id/tv_name"/>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="300dp"
+            android:id="@+id/cv_search"
+            android:layout_width="380dp"
             android:layout_height="40dp"
+            android:layout_below="@+id/tv_header"
             android:layout_gravity="center"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="20dp"
             app:cardBackgroundColor="#D0F3EC"
             app:cardCornerRadius="20dp"
             app:cardElevation="2dp">
@@ -29,38 +63,59 @@
                 android:iconifiedByDefault="false"
                 android:queryHint="Search Property" />
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
+    </RelativeLayout>
 
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/linear2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:paddingHorizontal="20dp">
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="150dp">
-
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:text="Apartment">
-
-            </TextView>
-
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/btnAddListing"
-            android:layout_width="143dp"
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:text="@string/btnAddListing"
-            android:translationX="100dp"
-            android:translationY="-50dp" />
+            android:paddingVertical="10dp"
+            android:text="Recently Published"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingVertical="12dp"
+            android:text="View All"
+            android:clickable="true"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            android:textStyle="normal|bold" />
 
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear2"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="20dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_client_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"/>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnAddListing"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/rounded_button"
+        android:text="Add New Listing"
+        android:textColor="@color/white"/>
 </RelativeLayout>

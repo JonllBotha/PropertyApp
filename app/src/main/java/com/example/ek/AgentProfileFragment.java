@@ -33,7 +33,7 @@ public class AgentProfileFragment extends Fragment {
         // Observe the full name from SharedViewModel
         sharedViewModel.getUserFullName().observe(getViewLifecycleOwner(), fullName -> {
             if (fullName != null) {
-                profileName.setText(fullName);
+                profileName.setText(new StringBuilder().append(fullName).append(",").toString());
             }
         });
 

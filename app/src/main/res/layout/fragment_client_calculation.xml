@@ -10,14 +10,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp">
+        android:layout_height="210dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/backToProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="120dp"
             android:clickable="true"
             android:src="@drawable/icon_back"
             app:backgroundTint="@color/white"
@@ -28,7 +28,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="110dp"
             android:text="Bond Repayment Calculator"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -216,7 +216,6 @@
             android:id="@+id/btnRecalculate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:background="@drawable/rounded_button"
             android:text="Recalculate"
             android:textColor="@color/white" />

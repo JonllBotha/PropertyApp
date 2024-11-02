@@ -71,18 +71,22 @@ public class ClientEditProfileFragment extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstName = etFirstName.getText().toString();
-                String lastName = etLastName.getText().toString();
-                String cell = etCell.getText().toString();
-                String email = etEmail.getText().toString();
+                String firstName = etFirstName.getText().toString().trim();
+                String lastName = etLastName.getText().toString().trim();
+                String cell = etCell.getText().toString().trim();
+                String email = etEmail.getText().toString().trim();
 
-                boolean result = dbHelper.insertClientData(email, firstName, lastName, cell);
-
-                if (result) {
-                    Toast.makeText(getContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
-                    isDataChanged = false;
+                if (isDataChanged) {
+                    // Update existing user data
+                    boolean result = dbHelper.updateClientData(email, firstName, lastName, cell);
+                    if (result) {
+                        Toast.makeText(getContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                        isDataChanged = false;
+                    } else {
+                        Toast.makeText(getContext(), "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(getContext(), "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "No changes made.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
