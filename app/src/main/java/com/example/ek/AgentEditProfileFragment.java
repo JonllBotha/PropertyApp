@@ -113,6 +113,13 @@ public class AgentEditProfileFragment extends Fragment {
                 String province = spProvince.getSelectedItem().toString().trim();
                 String city = spCity.getSelectedItem().toString().trim();
 
+                // Validate inputs
+                if (firstName.isEmpty() || lastName.isEmpty() || cell.isEmpty() || email.isEmpty()
+                        || about.isEmpty() || province.isEmpty() || city.isEmpty()) {
+                    Toast.makeText(getContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (isDataChanged) {
                     // Update existing user data
                     boolean result = dbHelper.updateAgentData(email, firstName, lastName, cell, about, province, city);

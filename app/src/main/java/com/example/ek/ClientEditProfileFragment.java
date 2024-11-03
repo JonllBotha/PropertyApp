@@ -76,6 +76,12 @@ public class ClientEditProfileFragment extends Fragment {
                 String cell = etCell.getText().toString().trim();
                 String email = etEmail.getText().toString().trim();
 
+                // Validate inputs
+                if (firstName.isEmpty() || lastName.isEmpty() || cell.isEmpty() || email.isEmpty()) {
+                    Toast.makeText(getContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (isDataChanged) {
                     // Update existing user data
                     boolean result = dbHelper.updateClientData(email, firstName, lastName, cell);

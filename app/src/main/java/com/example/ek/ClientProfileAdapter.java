@@ -51,7 +51,7 @@ public class ClientProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder
                     //navController.navigate(R.id.action_clientProfileFragment_to_clientSettingsFragment);
                     break;
                 case 3: // "Privacy Policy"
-                    //navController.navigate(R.id.action_clientProfileFragment_to_privacyPolicyFragment);
+                    navController.navigate(R.id.action_clientProfileFragment_to_privacyPolicyFragment);
                     break;
                 case 4: // "Log Out"
                     navController.navigate(R.id.action_clientProfileFragment_to_startupFragment);

@@ -2,19 +2,29 @@ package com.example.ek;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
 
 import androidx.annotation.Nullable;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.UUID;
+import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 12;
     public static final String DBname = "RealEstate.db";
+    private Context context;
 
     public DBHelper(@Nullable Context context) {
         super(context, DBname, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -28,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
+        //
     }
 
     public boolean insertData(String email, String password, String firstName, String lastName, String role){
@@ -129,42 +139,67 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // Insert new listing
-    public boolean insertListingData(String title, String description, String price, String province,
-                                     String city, String listing_intent, String listing_type,
-                                     String bedrooms, String bathrooms, String floors, String area_size,
-                                     String agent_email, String agent_cell, byte[] image) {
-        SQLiteDatabase myDB = this.getWritableDatabase();
+    public boolean insertListingData(String title, String description, String price, String province, String city,
+                                     String listingIntent, String listingType, String bedrooms, String bathrooms,
+                                     String floors, String areaSize, String agentEmail, String agentCell, ArrayList<Bitmap> images) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", title);
         contentValues.put("description", description);
         contentValues.put("price", price);
         contentValues.put("province", province);
         contentValues.put("city", city);
-        contentValues.put("listing_intent", listing_intent);
-        contentValues.put("listing_type", listing_type);
+        contentValues.put("listing_intent", listingIntent);
+        contentValues.put("listing_type", listingType);
         contentValues.put("bedrooms", bedrooms);
         contentValues.put("bathrooms", bathrooms);
         contentValues.put("floors", floors);
-        contentValues.put("area_size", area_size);
-        contentValues.put("agent_email", agent_email);
-        contentValues.put("agent_cell", agent_cell);
-        contentValues.put("image", image);
-        long result = myDB.insertWithOnConflict("listings", null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
-        return result != -1;
+        contentValues.put("area_size", areaSize);
+        contentValues.put("agent_email", agentEmail);
+        contentValues.put("agent_cell", agentCell);
+
+        long listingId = db.insert("listings", null, contentValues);
+
+        if (listingId != -1) {
+            for (Bitmap image : images) {
+                String imagePath = saveImageToInternalStorage(image);
+                ContentValues imageValues = new ContentValues();
+                imageValues.put("listing_id", listingId);
+                imageValues.put("image_path", imagePath);
+                db.insert("listing_images", null, imageValues);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    // Retrieve listing information
-    public Cursor getListingData(String listing_id) {
+    private String saveImageToInternalStorage(Bitmap bitmap) {
+        ContextWrapper contextWrapper = new ContextWrapper(context);
+        File directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
+        String imageName = "img_" + UUID.randomUUID().toString() + ".jpg";
+        File imageFile = new File(directory, imageName);
+
+        try (FileOutputStream fos = new FileOutputStream(imageFile)) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return imageFile.getAbsolutePath();
+    }
+
+    // Retrieve listing information with the first image for each listing
+    public Cursor getListingData(String agent_email) {
         SQLiteDatabase myDB = this.getReadableDatabase();
-        return myDB.rawQuery("SELECT * FROM listings WHERE agent_email = ?", new String[]{listing_id});
+        return myDB.rawQuery(
+                "SELECT l.*, li.image_path " +
+                        "FROM listings l " +
+                        "LEFT JOIN listing_images li ON l.listing_id = li.listing_id " +
+                        "WHERE l.agent_email = ? " +
+                        "GROUP BY l.listing_id",
+                new String[]{agent_email}
+        );
     }
 
-    // Retrieve messages between two phone numbers
-    public boolean updateMessageStatusToRead(int messageId) {
-        SQLiteDatabase myDB = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("status", "read");
-        int rowsAffected = myDB.update("messages", contentValues, "message_id = ?", new String[]{String.valueOf(messageId)});
-        return rowsAffected > 0;
-    }
 }

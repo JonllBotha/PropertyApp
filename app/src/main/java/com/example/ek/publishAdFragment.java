@@ -27,13 +27,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.ClipData;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -42,7 +47,11 @@ public class publishAdFragment extends Fragment {
 
     private RadioButton rbSell, rbRent;
     private FloatingActionButton btnBackToProfile;
-    private TabItem tiHome, tiFlat, tiPlot;
+    private TabLayout tabLayout;
+    private TabLayout.Tab tiHome;
+    private TabLayout.Tab tiFlat;
+    private TabLayout.Tab tiPlot;
+    private TextView selectImages;
     private EditText etBedrooms, etFloors, etBathrooms, etAreaSize, etPrice, etTitle, etDescription, etAgentEmail, etAgentContactNumber;
     private boolean isDataChanged = false;
     private Spinner spProvince, spCity;
@@ -85,12 +94,15 @@ public class publishAdFragment extends Fragment {
         etPrice = view.findViewById(R.id.priceEditTxt);
         etTitle = view.findViewById(R.id.titleEditTxt);
 
+        selectImages = view.findViewById(R.id.selectImages);
+
         rbRent = view.findViewById(R.id.intentRentRadioBtn);
         rbSell = view.findViewById(R.id.intentSellRadioBtn);
 
-        tiHome = view.findViewById(R.id.homePropertyCategory);
-        tiFlat = view.findViewById(R.id.flatPropertyCategory);
-        tiPlot = view.findViewById(R.id.plotPropertyCategory);
+        tabLayout = view.findViewById(R.id.propertyCategoryTabLayout);
+        tiHome = tabLayout.getTabAt(0);
+        tiFlat = tabLayout.getTabAt(1);
+        tiPlot = tabLayout.getTabAt(2);
 
         spProvince = view.findViewById(R.id.spProvince);
         spCity = view.findViewById(R.id.spCity);
@@ -99,8 +111,16 @@ public class publishAdFragment extends Fragment {
         btnBackToProfile = view.findViewById(R.id.toolbarBackBtn);
 
         imagesRecyclerView = view.findViewById(R.id.imagesRecyclerView);
+        imagesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         imagesAdapter = new ImagesAdapter(getContext(), selectedImages);
         imagesRecyclerView.setAdapter(imagesAdapter);
+
+        selectImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImagePicker();
+            }
+        });
 
         // Populate province spinner
         provinceAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.provinces));
@@ -159,7 +179,10 @@ public class publishAdFragment extends Fragment {
                 String province = spProvince.getSelectedItem().toString();
                 String city = spCity.getSelectedItem().toString();
 
-                byte[] imageBytes = (selectedImageBitmap != null) ? getImageBytes(selectedImageBitmap) : null;
+                // Add bitmaps to the list
+                if (selectedImageBitmap != null) {
+                    selectedImages.add(selectedImageBitmap);
+                }
 
                 // Checking if the agent intends to rent or sell
                 String listing_intent = rbSell.getText().toString();
@@ -170,18 +193,18 @@ public class publishAdFragment extends Fragment {
                 }
 
                 // Checking what the listing type is
-                String listing_type = tiHome.toString();
-                if (tiHome.isActivated())
+                String listing_type = tiHome.getText().toString();
+                if (tiHome != null && tiHome.getText() != null)
                 {
-                    listing_type = tiHome.toString();
+                    listing_type = tiHome.getText().toString();
                 }
-                else if (tiFlat.isActivated())
+                else if (tiFlat != null && tiFlat.getText() != null)
                 {
-                    listing_type = tiFlat.toString();
+                    listing_type = tiFlat.getText().toString();
                 }
-                else if (tiPlot.isActivated())
+                else if (tiPlot != null && tiPlot.getText() != null)
                 {
-                    listing_type = tiPlot.toString();
+                    listing_type = tiPlot.getText().toString();
                 }
 
                 // Validate inputs
@@ -203,7 +226,7 @@ public class publishAdFragment extends Fragment {
                                     title, description, price, province, city,
                                     finalListing_intent, finalListing_type,
                                     bedrooms, bathrooms, floors, area_size,
-                                    email, contactNumber, imageBytes);
+                                    email, contactNumber, selectedImages);
 
                             if (result) {
                                 Toast.makeText(getContext(), "Listing submitted successfully", Toast.LENGTH_SHORT).show();
@@ -344,7 +367,7 @@ public class publishAdFragment extends Fragment {
 
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);  // Allow multiple images selection
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
@@ -355,25 +378,34 @@ public class publishAdFragment extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data.getClipData() != null) { // Multiple images selected
                 ClipData clipData = data.getClipData();
-                for (int i = 0; i < clipData.getItemCount(); i++) {
+                int count = clipData.getItemCount();
+                int currentSize = selectedImages.size();
+
+                for (int i = 0; i < count && currentSize < 8; i++) {
                     Uri imageUri = clipData.getItemAt(i).getUri();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                        selectedImages.add(bitmap); // Add to selected images list
+                        selectedImages.add(bitmap);
+                        currentSize++;
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             } else if (data.getData() != null) { // Single image selected
-                Uri imageUri = data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                    selectedImages.add(bitmap); // Add to selected images list
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (selectedImages.size() < 8) {
+                    Uri imageUri = data.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+                        selectedImages.add(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "You can only select up to 8 images", Toast.LENGTH_SHORT).show();
                 }
             }
             imagesAdapter.notifyDataSetChanged(); // Update RecyclerView
         }
     }
+
 }

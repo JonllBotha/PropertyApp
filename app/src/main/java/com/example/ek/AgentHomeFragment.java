@@ -1,22 +1,32 @@
 package com.example.ek;
 
+import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AgentHomeFragment extends Fragment {
 
     private SharedViewModel sharedViewModel;
     private TextView profileName;
+    private RecyclerView rvClientHome;
+    private AgentListingsAdapter agentListingsAdapter;
+    private List<ListingItem> listingItems;
+    private DBHelper dbHelper;
 
     public AgentHomeFragment() {
         // Required empty public constructor
@@ -31,7 +41,11 @@ public class AgentHomeFragment extends Fragment {
 
         // Initialize SharedViewModel
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        dbHelper = new DBHelper(getContext());
+
         profileName = view.findViewById(R.id.tv_name);
+        rvClientHome = view.findViewById(R.id.rv_client_home);
+        listingItems = new ArrayList<>();
 
         // Observe the full name from SharedViewModel
         sharedViewModel.getUserFullName().observe(getViewLifecycleOwner(), fullName -> {
@@ -40,17 +54,55 @@ public class AgentHomeFragment extends Fragment {
             }
         });
 
-        // Use 'view' to find the Button, not 'getView()'
-        Button btnAddListing = view.findViewById(R.id.btnAddListing);
-        NavController navController = Navigation.findNavController(getActivity(), R.id.navHostFragmentContainerView);
-
-        btnAddListing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_agentHomeFragment_to_publishAdFragment);
+        // Fetch listings for the logged-in agent
+        sharedViewModel.getProfileEmail().observe(getViewLifecycleOwner(), email -> {
+            if (email != null) {
+                loadListings(email); // Load listings based on the agent's email
             }
         });
 
+        // Set up RecyclerView
+        agentListingsAdapter = new AgentListingsAdapter(listingItems);
+        rvClientHome.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvClientHome.setAdapter(agentListingsAdapter);
+
         return view; // Make sure to return the inflated view
     }
+
+    @SuppressLint("Range")
+    private void loadListings(String agentEmail) {
+        Cursor cursor = dbHelper.getListingData(agentEmail); // Get listings from DB
+
+        if (cursor != null) {
+            // Log the column names for debugging
+            Log.d("ColumnNames", Arrays.toString(cursor.getColumnNames()));
+
+            if (cursor.moveToFirst()) {
+                do {
+                    // Make sure the column names below match your actual database schema
+                    String imagePath = cursor.getString(cursor.getColumnIndex("image_path"));
+                    String title = cursor.getString(cursor.getColumnIndex("title"));
+                    String city = cursor.getString(cursor.getColumnIndex("city"));
+                    String province = cursor.getString(cursor.getColumnIndex("province"));
+                    String location = city + ", " + province;
+                    String price = cursor.getString(cursor.getColumnIndex("price"));
+                    int bath = cursor.getInt(cursor.getColumnIndex("bathrooms"));
+                    int bed = cursor.getInt(cursor.getColumnIndex("bedrooms"));
+
+                    // Create a ListingItem object and add it to the list
+                    ListingItem listingItem = new ListingItem(imagePath, title, location, price, bath, bed);
+                    listingItems.add(listingItem);
+                } while (cursor.moveToNext());
+
+                cursor.close(); // Close the cursor when done
+            } else {
+                Log.d("LoadListings", "Cursor is empty");
+            }
+        } else {
+            Log.d("LoadListings", "Cursor is null");
+        }
+
+        agentListingsAdapter.notifyDataSetChanged(); // Notify the adapter of data changes
+    }
+
 }

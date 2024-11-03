@@ -44,9 +44,12 @@ public class AgentProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder>
                     navController.navigate(R.id.action_agentProfileFragment_to_agentEditProfileFragment);
                     break;
                 case 1: // "Settings"
-                    //navController.navigate(R.id.action_clientProfileFragment_to_clientSettingsFragment);
+                    //navController.navigate(R.id.action_clientProfileFragment_to_agentSettingsFragment);
                     break;
-                case 2: // "Log Out"
+                case 2: // "Privacy Policy"
+                    navController.navigate(R.id.action_agentProfileFragment_to_privacyPolicyFragment);
+                    break;
+                case 3: // "Log Out"
                     navController.navigate(R.id.action_agentProfileFragment_to_startupFragment);
                     break;
             }

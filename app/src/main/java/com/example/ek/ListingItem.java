@@ -1,8 +1,8 @@
 package com.example.ek;
 
 public class ListingItem {
-    public ListingItem(int image, String title, String location, String price, int bath, int bed) {
-        this.image = image;
+    public ListingItem(String imagePath, String title, String location, String price, int bath, int bed) {
+        this.imagePath = imagePath;
         this.title = title;
         this.location = location;
         this.price = price;
@@ -10,19 +10,19 @@ public class ListingItem {
         this.bed = bed;
     }
 
-    int image;
+    String imagePath;
     String title;
     String location;
     String price;
     int bath;
     int bed;
 
-    public int getImage() {
-        return image;
+    public String getImage() {
+        return imagePath;
     }
 
     public void setImage(int image) {
-        this.image = image;
+        this.imagePath = imagePath;
     }
 
     public String getTitle() {

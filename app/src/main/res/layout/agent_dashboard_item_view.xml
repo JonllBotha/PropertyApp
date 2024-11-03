@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/propertyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/propertyImage"
+                android:layout_width="280dp"
+                android:layout_height="190dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/house_1"/>
+
+            <TextView
+                android:id="@+id/propertyTitle"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyImage"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="18dp"
+                android:text="Modern House"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                android:textStyle="normal|bold" />
+
+            <ImageView
+                android:id="@+id/imgDelete"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="204dp"
+                android:layout_marginStart="240dp"
+                android:src="@drawable/trash" />
+
+            <TextView
+                android:id="@+id/propertyLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyTitle"
+                android:paddingHorizontal="14dp"
+                android:layout_marginTop="6dp"
+                android:text="Cape Town, Western Cape"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:drawablePadding="2dp"
+                app:drawableStartCompat="@drawable/location_gray" />
+
+            <RelativeLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyLocation">
+
+                <TextView
+                    android:id="@+id/R"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="18dp"
+                    android:text="R"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp"
+                    android:textStyle="normal|bold" />
+
+                <TextView
+                    android:id="@+id/propertyPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="8dp"
+                    android:layout_toRightOf="@+id/R"
+                    android:text="7250000"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp"
+                    android:textStyle="normal|bold" />
+
+                <ImageView
+                    android:id="@+id/imgBath"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="150dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/R"
+                    android:src="@drawable/bathtub_gray" />
+
+                <TextView
+                    android:id="@+id/propertyBaths"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imgBath"
+                    android:paddingHorizontal="6dp"
+                    android:text="2"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imgBed"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="200dp"
+                    android:layout_toEndOf="@id/R"
+                    android:src="@drawable/bed_gray" />
+
+                <TextView
+                    android:id="@+id/propertyBeds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imgBed"
+                    android:paddingHorizontal="6dp"
+                    android:text="2"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
