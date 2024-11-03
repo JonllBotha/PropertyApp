@@ -85,6 +85,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return myDB.rawQuery("SELECT * FROM clients WHERE email = ?", new String[]{email});
     }
 
+    public Cursor getClientLocation(String clientEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT city, province FROM clients WHERE email = ?";
+        return db.rawQuery(query, new String[]{clientEmail});
+    }
+
     // Insert agent information
     public boolean insertAgentData(String email, String firstName, String lastName, String phoneNumber, String about, String province, String city) {
         SQLiteDatabase myDB = this.getWritableDatabase();
@@ -201,5 +207,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{agent_email}
         );
     }
+
+    public Cursor getListingsByLocation(String city, String province) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM listings WHERE city = ? AND province = ?";
+        return db.rawQuery(query, new String[]{city, province});
+    }
+
+    public Cursor getAllListings() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM listings";
+        return db.rawQuery(query, null);
+    }
+
 
 }

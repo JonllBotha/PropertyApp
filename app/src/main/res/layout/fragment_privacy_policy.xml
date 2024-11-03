@@ -9,41 +9,37 @@
     <RelativeLayout
         android:id="@+id/toolbarRelativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:layout_height="200dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/toolbarBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="115dp"
             android:clickable="true"
             android:src="@drawable/icon_back"
             app:backgroundTint="@color/white"
             app:borderWidth="1dp"
-            app:fabSize="mini"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:fabSize="mini" />
 
         <TextView
             android:id="@+id/toolbarTitleTxtView"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="110dp"
-            android:layout_toEndOf="@+id/toolbarBackBtn"
-            android:background="#2CFFFFFF"
-            android:backgroundTint="#C3FFFFFF"
-            android:text="PRIVACY POLICY"
-            android:textColor="?attr/colorOnBackground" />
+            android:layout_marginTop="120dp"
+            android:text="Privacy Policy"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
         android:layout_below="@id/toolbarRelativeLayout1"
-        android:layout_margin="18dp">
+        android:layout_marginHorizontal="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +50,6 @@
                 android:id="@+id/privacypolicyTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="18dp"
                 android:text="@string/privacy_policy"/>
         </LinearLayout>
     </ScrollView>

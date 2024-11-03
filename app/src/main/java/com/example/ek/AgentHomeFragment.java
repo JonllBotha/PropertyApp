@@ -23,7 +23,7 @@ public class AgentHomeFragment extends Fragment {
 
     private SharedViewModel sharedViewModel;
     private TextView profileName;
-    private RecyclerView rvClientHome;
+    private RecyclerView rvAgentHome;
     private AgentListingsAdapter agentListingsAdapter;
     private List<ListingItem> listingItems;
     private DBHelper dbHelper;
@@ -44,7 +44,7 @@ public class AgentHomeFragment extends Fragment {
         dbHelper = new DBHelper(getContext());
 
         profileName = view.findViewById(R.id.tv_name);
-        rvClientHome = view.findViewById(R.id.rv_client_home);
+        rvAgentHome = view.findViewById(R.id.rv_agent_home);
         listingItems = new ArrayList<>();
 
         // Observe the full name from SharedViewModel
@@ -63,8 +63,8 @@ public class AgentHomeFragment extends Fragment {
 
         // Set up RecyclerView
         agentListingsAdapter = new AgentListingsAdapter(listingItems);
-        rvClientHome.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvClientHome.setAdapter(agentListingsAdapter);
+        rvAgentHome.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvAgentHome.setAdapter(agentListingsAdapter);
 
         return view; // Make sure to return the inflated view
     }

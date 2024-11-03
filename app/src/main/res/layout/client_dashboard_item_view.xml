@@ -42,8 +42,9 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="204dp"
                 android:layout_marginStart="90dp"
+                android:clickable="true"
                 android:layout_toEndOf="@id/propertyTitle"
-                android:src="@drawable/favourite" />
+                android:src="@drawable/unfavourite" />
 
             <TextView
                 android:id="@+id/propertyLocation"

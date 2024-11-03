@@ -92,7 +92,7 @@
         android:paddingHorizontal="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_client_home"
+            android:id="@+id/rv_agent_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"/>

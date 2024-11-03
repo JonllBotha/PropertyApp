@@ -155,11 +155,12 @@
         android:paddingHorizontal="20dp">
 
         <TextView
+            android:id="@+id/tv_Nearby"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="10dp"
-            android:text="Popular"
+            android:text="Properties Near Me"
             android:textSize="18sp"
             android:textStyle="normal|bold" />
 
