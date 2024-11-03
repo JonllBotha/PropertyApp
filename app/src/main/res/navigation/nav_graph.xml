@@ -79,6 +79,9 @@
         <action
             android:id="@+id/action_clientProfileFragment_to_clientCalculatorFragment"
             app:destination="@id/clientCalculatorFragment" />
+        <action
+            android:id="@+id/action_clientProfileFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientChatFragment"
@@ -115,6 +118,9 @@
         <action
             android:id="@+id/action_agentProfileFragment_to_startupFragment"
             app:destination="@id/startupFragment" />
+        <action
+            android:id="@+id/action_agentProfileFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientEditProfileFragment"
@@ -161,9 +167,22 @@
     <fragment
         android:id="@+id/publishAdFragment"
         android:name="com.example.ek.publishAdFragment"
-        android:label="publishAdFragment" >
+        android:label="publishAdFragment"
+        tools:layout="@layout/fragment_publish_ad" >
         <action
             android:id="@+id/action_publishAdFragment_to_agentHomeFragment"
             app:destination="@id/agentHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.example.ek.PrivacyPolicyFragment"
+        android:label="privacyPolicyFragment"
+        tools:layout="@layout/fragment_privacy_policy" >
+        <action
+            android:id="@+id/action_privacyPolicyFragment_to_clientProfileFragment"
+            app:destination="@id/clientProfileFragment" />
+        <action
+            android:id="@+id/action_privacyPolicyFragment_to_agentProfileFragment"
+            app:destination="@id/agentProfileFragment" />
     </fragment>
 </navigation>
