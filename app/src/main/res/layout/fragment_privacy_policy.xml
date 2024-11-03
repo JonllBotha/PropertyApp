@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PrivacyPolicyFragment">
+    android:background="@drawable/main_bg">
 
-    <WebView
-        android:id="@+id/privacypolicyWV"
+    <RelativeLayout
+        android:id="@+id/toolbarRelativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="18dp" />
+        android:layout_height="170dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/toolbarBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="104dp"
+            android:clickable="true"
+            android:src="@drawable/icon_back"
+            app:backgroundTint="@color/white"
+            app:borderWidth="1dp"
+            app:fabSize="mini"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/toolbarTitleTxtView"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="110dp"
+            android:layout_toEndOf="@+id/toolbarBackBtn"
+            android:background="#2CFFFFFF"
+            android:backgroundTint="#C3FFFFFF"
+            android:text="PRIVACY POLICY"
+            android:textColor="?attr/colorOnBackground" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:layout_below="@id/toolbarRelativeLayout1"
+        android:layout_margin="18dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/privacypolicyTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="18dp"
+                android:text="@string/privacy_policy"/>
+        </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>
