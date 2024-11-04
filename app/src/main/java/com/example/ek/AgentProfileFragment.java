@@ -1,5 +1,6 @@
 package com.example.ek;
 
+import com.example.ek.R;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;

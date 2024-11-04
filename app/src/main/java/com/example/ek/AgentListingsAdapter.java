@@ -1,33 +1,34 @@
 package com.example.ek;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
 
 import com.bumptech.glide.Glide;
 
-public class AgentListingsAdapter extends RecyclerView.Adapter<ListingViewHolder>{
+import java.util.List;
 
+public class AgentListingsAdapter extends RecyclerView.Adapter<AgentListingViewHolder>{
+
+    private final Fragment fragment;
     private final List<ListingItem> listingItems;
 
-    public AgentListingsAdapter(List<ListingItem> listingItems) {
+    public AgentListingsAdapter(Fragment fragment, List<ListingItem> listingItems) {
+        this.fragment = fragment;
         this.listingItems = listingItems;
     }
 
     @NonNull
     @Override
-    public ListingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.agent_dashboard_item_view, parent, false);
-        return new ListingViewHolder(view);
+    public AgentListingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new AgentListingViewHolder(LayoutInflater.from(fragment.getContext()).inflate(R.layout.agent_dashboard_item_view, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AgentListingViewHolder holder, int position) {
         ListingItem listingItem = listingItems.get(position);
 
         // Set the data to the views

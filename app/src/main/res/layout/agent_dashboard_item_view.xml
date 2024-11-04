@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/propertyView"
+        android:id="@+id/propertyViewA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardElevation="8dp"
@@ -13,22 +14,22 @@
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
-            android:id="@+id/relative_layout"
+            android:id="@+id/relative_layoutA"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/propertyImage"
+                android:id="@+id/propertyImageA"
                 android:layout_width="280dp"
                 android:layout_height="190dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/house_1"/>
 
             <TextView
-                android:id="@+id/propertyTitle"
+                android:id="@+id/propertyTitleA"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/propertyImage"
+                android:layout_below="@+id/propertyImageA"
                 android:layout_marginTop="10dp"
                 android:paddingHorizontal="18dp"
                 android:text="Modern House"
@@ -37,7 +38,7 @@
                 android:textStyle="normal|bold" />
 
             <ImageView
-                android:id="@+id/imgDelete"
+                android:id="@+id/imgDeleteA"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:clickable="true"
@@ -46,10 +47,10 @@
                 android:src="@drawable/trash" />
 
             <TextView
-                android:id="@+id/propertyLocation"
+                android:id="@+id/propertyLocationA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/propertyTitle"
+                android:layout_below="@+id/propertyTitleA"
                 android:paddingHorizontal="14dp"
                 android:layout_marginTop="6dp"
                 android:text="Cape Town, Western Cape"
@@ -61,10 +62,10 @@
             <RelativeLayout
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/propertyLocation">
+                android:layout_below="@+id/propertyLocationA">
 
                 <TextView
-                    android:id="@+id/R"
+                    android:id="@+id/RA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="10dp"
@@ -75,52 +76,52 @@
                     android:textStyle="normal|bold" />
 
                 <TextView
-                    android:id="@+id/propertyPrice"
+                    android:id="@+id/propertyPriceA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="10dp"
                     android:paddingStart="8dp"
-                    android:layout_toRightOf="@+id/R"
+                    android:layout_toRightOf="@+id/RA"
                     android:text="7250000"
                     android:textColor="@color/grey"
                     android:textSize="18sp"
                     android:textStyle="normal|bold" />
 
                 <ImageView
-                    android:id="@+id/imgBath"
+                    android:id="@+id/imgBathA"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginStart="150dp"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/R"
+                    android:layout_toEndOf="@id/RA"
                     android:src="@drawable/bathtub_gray" />
 
                 <TextView
-                    android:id="@+id/propertyBaths"
+                    android:id="@+id/propertyBathsA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imgBath"
+                    android:layout_toRightOf="@+id/imgBathA"
                     android:paddingHorizontal="6dp"
                     android:text="2"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/imgBed"
+                    android:id="@+id/imgBedA"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="200dp"
-                    android:layout_toEndOf="@id/R"
+                    android:layout_toEndOf="@id/RA"
                     android:src="@drawable/bed_gray" />
 
                 <TextView
-                    android:id="@+id/propertyBeds"
+                    android:id="@+id/propertyBedsA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imgBed"
+                    android:layout_toRightOf="@+id/imgBedA"
                     android:paddingHorizontal="6dp"
                     android:text="2"
                     android:textSize="14sp"

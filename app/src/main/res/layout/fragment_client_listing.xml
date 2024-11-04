@@ -8,7 +8,7 @@
     tools:context=".ClientListingFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
+        android:id="@+id/card_view1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="8dp"
@@ -16,7 +16,7 @@
         app:cardUseCompatPadding="true">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnFavourite"
+            android:id="@+id/btnFavourite1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -29,7 +29,7 @@
             app:maxImageSize="24dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/backToProfile"
+            android:id="@+id/backToProfile1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -41,7 +41,7 @@
             app:fabSize="mini" />
 
         <ImageView
-            android:id="@+id/propertyImage"
+            android:id="@+id/propertyImage1"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="centerCrop"
@@ -50,20 +50,20 @@
     </androidx.cardview.widget.CardView>
 
     <ScrollView
-        android:id="@+id/sv_listing"
+        android:id="@+id/sv_listing1"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:paddingHorizontal="20dp"
         android:scrollbars="vertical"
-        android:layout_below="@+id/card_view">
+        android:layout_below="@+id/card_view1">
 
     <RelativeLayout
-        android:id="@+id/relative_layout"
+        android:id="@+id/relative_layout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/propertyTitle"
+            android:id="@+id/propertyTitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -73,10 +73,10 @@
             android:textStyle="normal|bold" />
 
         <TextView
-            android:id="@+id/propertyLocation"
+            android:id="@+id/propertyLocation1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/propertyTitle"
+            android:layout_below="@+id/propertyTitle1"
             android:layout_marginTop="6dp"
             android:drawablePadding="6dp"
             android:drawableTint="#F46565"
@@ -86,10 +86,10 @@
             app:drawableStartCompat="@drawable/location_gray" />
 
         <TextView
-            android:id="@+id/propertyBeds"
+            android:id="@+id/propertyBeds1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/propertyLocation"
+            android:layout_below="@+id/propertyLocation1"
             android:layout_marginTop="20dp"
             android:text="3"
             android:textColor="@color/grey"
@@ -98,11 +98,11 @@
             app:drawableStartCompat="@drawable/bed_gray" />
 
         <TextView
-            android:id="@+id/bedrooms"
+            android:id="@+id/bedrooms1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/propertyLocation"
-            android:layout_toRightOf="@+id/propertyBeds"
+            android:layout_below="@+id/propertyLocation1"
+            android:layout_toRightOf="@+id/propertyBeds1"
             android:layout_marginTop="20dp"
             android:layout_marginStart="6dp"
             android:text="Bedroom"
@@ -110,11 +110,11 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/propertyBaths"
+            android:id="@+id/propertyBaths1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/propertyLocation"
-            android:layout_toRightOf="@+id/bedrooms"
+            android:layout_below="@+id/propertyLocation1"
+            android:layout_toRightOf="@+id/bedrooms1"
             android:layout_marginTop="20dp"
             android:layout_marginStart="25dp"
             android:text="2"
@@ -124,11 +124,11 @@
             app:drawableStartCompat="@drawable/bathtub_gray" />
 
         <TextView
-            android:id="@+id/bathrooms"
+            android:id="@+id/bathrooms1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/propertyLocation"
-            android:layout_toRightOf="@+id/propertyBaths"
+            android:layout_below="@+id/propertyLocation1"
+            android:layout_toRightOf="@+id/propertyBaths1"
             android:layout_marginTop="20dp"
             android:layout_marginStart="6dp"
             android:text="Bathroom"
@@ -136,11 +136,11 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/propertyFloors"
+            android:id="@+id/propertyFloors1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/propertyLocation"
-            android:layout_toRightOf="@+id/bathrooms"
+            android:layout_below="@+id/propertyLocation1"
+            android:layout_toRightOf="@+id/bathrooms1"
             android:layout_marginTop="20dp"
             android:layout_marginStart="25dp"
             android:text="1"
@@ -150,11 +150,11 @@
             app:drawableStartCompat="@drawable/building_gray" />
 
         <TextView
-            android:id="@+id/floors"
+            android:id="@+id/floors1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/propertyLocation"
-            android:layout_toRightOf="@+id/propertyFloors"
+            android:layout_below="@+id/propertyLocation1"
+            android:layout_toRightOf="@+id/propertyFloors1"
             android:layout_marginTop="20dp"
             android:layout_marginStart="6dp"
             android:text="Floor"
@@ -165,14 +165,14 @@
             android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bedrooms"
+            android:layout_below="@+id/bedrooms1"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/description1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/propertyTitle"
+                android:layout_below="@+id/propertyTitle1"
                 android:layout_marginTop="20dp"
                 android:text="Property Details"
                 android:textColor="@color/grey"
@@ -180,7 +180,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/propertyDescription"
+                android:id="@+id/propertyDescription1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -189,7 +189,7 @@
                 android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/details"
+                android:id="@+id/details1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -208,7 +208,7 @@
             android:backgroundTint="#F4F4F4">
 
             <TextView
-                android:id="@+id/agentName"
+                android:id="@+id/agentName1"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -218,11 +218,11 @@
                 android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/agentDescription"
+                android:id="@+id/agentDescription1"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:layout_below="@+id/agentName"
+                android:layout_below="@+id/agentName1"
                 android:paddingHorizontal="10dp"
                 android:layout_marginTop="6dp"
                 android:text="Description..."
@@ -230,7 +230,7 @@
                 android:textSize="16sp"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnContactAgent1"
+                android:id="@+id/btnMsgAgent1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -252,11 +252,11 @@
         android:gravity="center_vertical"
         android:layout_marginVertical="14dp"
         android:paddingHorizontal="20dp"
-        android:layout_below="@+id/sv_listing"
+        android:layout_below="@+id/sv_listing1"
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/R"
+            android:id="@+id/R1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R"
@@ -265,19 +265,19 @@
             android:textStyle="normal|bold" />
 
         <TextView
-            android:id="@+id/propertyPrice"
+            android:id="@+id/propertyPrice1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="5dp"
             android:paddingEnd="24dp"
-            android:layout_toRightOf="@+id/R"
+            android:layout_toRightOf="@+id/R1"
             android:text="7250000"
             android:textColor="@color/grey"
             android:textSize="24sp"
             android:textStyle="normal|bold" />
 
         <Button
-            android:id="@+id/btnContactAgent2"
+            android:id="@+id/btnContactAgent1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"

@@ -24,18 +24,12 @@ public class AgentHomeFragment extends Fragment {
     private SharedViewModel sharedViewModel;
     private TextView profileName;
     private RecyclerView rvAgentHome;
-    private AgentListingsAdapter agentListingsAdapter;
+    private ClientListingsAdapter clientListingsAdapter;
     private List<ListingItem> listingItems;
     private DBHelper dbHelper;
 
-    public AgentHomeFragment() {
-        // Required empty public constructor
-    }
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_agent_home, container, false);
 
@@ -62,11 +56,11 @@ public class AgentHomeFragment extends Fragment {
         });
 
         // Set up RecyclerView
-        agentListingsAdapter = new AgentListingsAdapter(listingItems);
+        clientListingsAdapter = new ClientListingsAdapter(this, listingItems);
         rvAgentHome.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvAgentHome.setAdapter(agentListingsAdapter);
+        rvAgentHome.setAdapter(clientListingsAdapter);
 
-        return view; // Make sure to return the inflated view
+        return view;
     }
 
     @SuppressLint("Range")
@@ -102,7 +96,7 @@ public class AgentHomeFragment extends Fragment {
             Log.d("LoadListings", "Cursor is null");
         }
 
-        agentListingsAdapter.notifyDataSetChanged(); // Notify the adapter of data changes
+        clientListingsAdapter.notifyDataSetChanged(); // Notify the adapter of data changes
     }
 
 }
