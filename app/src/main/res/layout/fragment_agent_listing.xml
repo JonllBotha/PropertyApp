@@ -1,9 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AgentListingFragment">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true">
 
-</FrameLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnDeleteListing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:foreground="@drawable/unfavourite_grey"
+            app:borderWidth="1dp"
+            app:fabSize="mini"
+            app:maxImageSize="24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/backToProfile2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:src="@drawable/icon_back"
+            app:backgroundTint="@color/white"
+            app:borderWidth="1dp"
+            app:fabSize="mini" />
+
+        <ImageView
+            android:id="@+id/propertyImage2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/house_1"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:id="@+id/sv_listing2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingHorizontal="20dp"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/card_view2">
+
+        <RelativeLayout
+            android:id="@+id/relative_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/propertyTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Modern House in Location"
+                android:textColor="@color/grey"
+                android:textSize="28sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/propertyLocation2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyTitle2"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="6dp"
+                android:drawableTint="#F46565"
+                android:text="Cape Town, Western Cape"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/location_gray" />
+
+            <TextView
+                android:id="@+id/propertyBeds2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyLocation2"
+                android:layout_marginTop="20dp"
+                android:text="3"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:drawablePadding="6dp"
+                app:drawableStartCompat="@drawable/bed_gray" />
+
+            <TextView
+                android:id="@+id/bedrooms2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyLocation2"
+                android:layout_toRightOf="@+id/propertyBeds2"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="6dp"
+                android:text="Bedroom"
+                android:textColor="@color/grey"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/propertyBaths2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyLocation2"
+                android:layout_toRightOf="@+id/bedrooms2"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="25dp"
+                android:text="2"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:drawablePadding="6dp"
+                app:drawableStartCompat="@drawable/bathtub_gray" />
+
+            <TextView
+                android:id="@+id/bathrooms2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyLocation2"
+                android:layout_toRightOf="@+id/propertyBaths2"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="6dp"
+                android:text="Bathroom"
+                android:textColor="@color/grey"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/propertyFloors2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyLocation2"
+                android:layout_toRightOf="@+id/bathrooms2"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="25dp"
+                android:text="1"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:drawablePadding="6dp"
+                app:drawableStartCompat="@drawable/building_gray" />
+
+            <TextView
+                android:id="@+id/floors2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/propertyLocation2"
+                android:layout_toRightOf="@+id/propertyFloors2"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="6dp"
+                android:text="Floor"
+                android:textColor="@color/grey"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bedrooms2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/description2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/propertyTitle2"
+                    android:layout_marginTop="20dp"
+                    android:text="Property Details"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/propertyDescription2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Description..."
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/details2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Real Estate Agent Details"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout2"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#F4F4F4">
+
+                <TextView
+                    android:id="@+id/agentName2"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="Name Surname"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/agentDescription2"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/agentName2"
+                    android:paddingHorizontal="10dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Description..."
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"/>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="300dp"
+                    android:clickable="true"
+                    android:src="@drawable/icon_chat"
+                    app:backgroundTint="@color/white"
+                    app:borderWidth="1dp"
+                    app:fabSize="mini" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginVertical="14dp"
+        android:paddingHorizontal="20dp"
+        android:layout_below="@+id/sv_listing2"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/R2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:textColor="@color/grey"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/propertyPrice2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:paddingEnd="24dp"
+            android:layout_toRightOf="@+id/R2"
+            android:text="7250000"
+            android:textColor="@color/grey"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
+
+        <Button
+            android:id="@+id/btnEditListing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:text="Edit Listing"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
