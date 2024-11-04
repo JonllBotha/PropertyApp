@@ -5,30 +5,47 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/main_bg"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".RegisterFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/backToStartup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="115dp"
+            android:clickable="true"
+            android:src="@drawable/icon_back"
+            app:backgroundTint="@color/white"
+            app:borderWidth="1dp"
+            app:fabSize="mini" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:text="Register"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/nsScroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="360dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="40dp"
             android:orientation="vertical"
-            android:padding="50dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="46dp"
-                android:text="Create Account"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
+            android:paddingHorizontal="50dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -119,15 +136,24 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btnRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="46dp"
-                android:background="@drawable/rounded_button"
-                android:text="Register"
-                android:textColor="@color/white" />
+
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/rounded_button"
+            android:text="Register"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
 </LinearLayout>

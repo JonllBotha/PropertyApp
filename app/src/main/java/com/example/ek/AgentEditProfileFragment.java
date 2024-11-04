@@ -120,20 +120,33 @@ public class AgentEditProfileFragment extends Fragment {
                     return;
                 }
 
-                if (isDataChanged) {
-                    // Update existing user data
+                // Check if data exists for the given email
+                Cursor cursor = dbHelper.getAgentData(email);
+                boolean recordExists = cursor != null && cursor.moveToFirst();
+                cursor.close();
+
+                if (recordExists) {
+                    // Update existing data
                     boolean result = dbHelper.updateAgentData(email, firstName, lastName, cell, about, province, city);
                     if (result) {
                         Toast.makeText(getContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
-                        isDataChanged = false;
                     } else {
                         Toast.makeText(getContext(), "Failed to update profile.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getContext(), "No changes made.", Toast.LENGTH_SHORT).show();
+                    // Insert new data
+                    boolean result = dbHelper.insertAgentData(email, firstName, lastName, cell, about, province, city);
+                    if (result) {
+                        Toast.makeText(getContext(), "Profile added successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to add profile.", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+                isDataChanged = false; // Reset change tracker
             }
         });
+
 
 
         // Back button click listener

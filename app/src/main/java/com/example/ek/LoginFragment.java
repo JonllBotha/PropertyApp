@@ -1,5 +1,6 @@
 package com.example.ek;
 
+import android.app.AlertDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,12 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class LoginFragment extends Fragment {
 
     private DBHelper dbHelper;
     private EditText etEmail, etPassword;
     private Button btnLogin;
+    private FloatingActionButton btnbackToStartup;
     private SharedViewModel sharedViewModel;
 
     public LoginFragment() {
@@ -38,6 +43,17 @@ public class LoginFragment extends Fragment {
         etEmail = view.findViewById(R.id.etEmail);
         etPassword = view.findViewById(R.id.etPassword);
         btnLogin = view.findViewById(R.id.btnLogin);
+        btnbackToStartup = view.findViewById(R.id.backToStartup);
+
+        // Back button click listener
+        btnbackToStartup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+
+                    NavHostFragment.findNavController(LoginFragment.this)
+                            .navigate(R.id.action_loginFragment_to_startupFragment);
+            }
+        });
 
         // Set login button click listener
         btnLogin.setOnClickListener(new View.OnClickListener() {

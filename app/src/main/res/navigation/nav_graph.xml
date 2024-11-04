@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_loginFragment_to_agentHomeFragment"
             app:destination="@id/agentHomeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_startupFragment"
+            app:destination="@id/startupFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -37,6 +40,9 @@
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_startupFragment"
+            app:destination="@id/startupFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientHomeFragment"

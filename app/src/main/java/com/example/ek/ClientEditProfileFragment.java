@@ -68,6 +68,7 @@ public class ClientEditProfileFragment extends Fragment {
         });
 
         // Update button click listener
+        // Update button click listener
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,19 +84,31 @@ public class ClientEditProfileFragment extends Fragment {
                 }
 
                 if (isDataChanged) {
-                    // Update existing user data
-                    boolean result = dbHelper.updateClientData(email, firstName, lastName, cell);
-                    if (result) {
-                        Toast.makeText(getContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
-                        isDataChanged = false;
+                    // Check if a record already exists for the email
+                    if (dbHelper.isClientRecordExists(email)) {
+                        // Update existing user data
+                        boolean result = dbHelper.updateClientData(email, firstName, lastName, cell);
+                        if (result) {
+                            Toast.makeText(getContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(getContext(), "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                        // Insert new user data
+                        boolean result = dbHelper.insertClientData(email, firstName, lastName, cell);
+                        if (result) {
+                            Toast.makeText(getContext(), "Profile inserted successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Failed to insert profile.", Toast.LENGTH_SHORT).show();
+                        }
                     }
+                    isDataChanged = false;
                 } else {
                     Toast.makeText(getContext(), "No changes made.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
         // Back button click listener
         btnBackToProfile.setOnClickListener(new View.OnClickListener() {

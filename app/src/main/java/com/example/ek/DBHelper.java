@@ -91,6 +91,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, new String[]{clientEmail});
     }
 
+    // Check if client record exists by email
+    public boolean isClientRecordExists(String email) {
+        SQLiteDatabase myDB = this.getReadableDatabase();
+        Cursor cursor = myDB.rawQuery("SELECT 1 FROM clients WHERE email = ?", new String[]{email});
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
+    }
+
+
     // Insert agent information
     public boolean insertAgentData(String email, String firstName, String lastName, String phoneNumber, String about, String province, String city) {
         SQLiteDatabase myDB = this.getWritableDatabase();
