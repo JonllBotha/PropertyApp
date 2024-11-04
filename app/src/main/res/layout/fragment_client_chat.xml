@@ -26,14 +26,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="236dp"
-        android:layout_marginEnd="111dp"
+        android:layout_marginTop="158dp"
+        android:layout_marginEnd="112dp"
         android:layout_marginBottom="32dp"
         android:baselineAligned="false"
         android:text="@string/btnDial"
         app:icon="@android:drawable/ic_menu_call"
         app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="RelativeOverlap" />
 
     <Button
         android:id="@+id/btnTextJonell"
@@ -42,8 +43,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="360dp"
-        android:layout_marginEnd="102dp"
-        android:layout_marginBottom="322dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="284dp"
         android:text="@string/btnTextJonell"
         app:icon="@drawable/icon_chat"
         app:layout_constraintEnd_toEndOf="@id/btnTextJonell"
@@ -55,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="114dp"
-        android:layout_marginBottom="195dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="152dp"
         android:text="@string/btnTextSune"
         app:icon="@drawable/icon_chat" />
 
@@ -66,8 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="94dp"
-        android:layout_marginBottom="263dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="218dp"
         android:text="@string/btnTextSaveena"
         app:icon="@drawable/icon_chat" />
 

@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +52,11 @@ public class ClientHomeFragment extends Fragment {
 
         rvClientHome = view.findViewById(R.id.rv_client_home);
         listingItems = new ArrayList<>();
+
+        AutoCompleteTextView autoCompleteLocation = view.findViewById(R.id.City);
+        String[] cities = getResources().getStringArray(R.array.cities);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, cities);
+        autoCompleteLocation.setAdapter(adapter);
 
 //        // Fetch listings for the logged-in client
 //        sharedViewModel.getProfileEmail().observe(getViewLifecycleOwner(), email -> {
