@@ -139,12 +139,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor getAgentDetailsByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT name, surname, about FROM agents WHERE email = ?", new String[]{email});
+        return db.rawQuery("SELECT firstName, lastName, about FROM agents WHERE email = ?", new String[]{email});
     }
 
     public Cursor getAgentDetails(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT name, surname, about, cell FROM agents WHERE email = ?", new String[]{email});
+        return db.rawQuery("SELECT firstName, lastName, about, phoneNumber FROM agents WHERE email = ?", new String[]{email});
     }
 
     // Retrieve agent information
