@@ -2,6 +2,7 @@ package com.example.ek;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -11,14 +12,21 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class AgentListingsAdapter extends RecyclerView.Adapter<AgentListingViewHolder>{
+public class AgentListingsAdapter extends RecyclerView.Adapter<AgentListingViewHolder> {
 
     private final Fragment fragment;
     private final List<ListingItem> listingItems;
+    private final OnItemClickListener listener;
 
-    public AgentListingsAdapter(Fragment fragment, List<ListingItem> listingItems) {
+    // Define an interface for item clicks
+    public interface OnItemClickListener {
+        void onItemClick(ListingItem item);
+    }
+
+    public AgentListingsAdapter(Fragment fragment, List<ListingItem> listingItems, OnItemClickListener listener) {
         this.fragment = fragment;
         this.listingItems = listingItems;
+        this.listener = listener;
     }
 
     @NonNull
@@ -42,6 +50,9 @@ public class AgentListingsAdapter extends RecyclerView.Adapter<AgentListingViewH
         Glide.with(holder.propertyImage.getContext())
                 .load(listingItem.getImage())
                 .into(holder.propertyImage);
+
+        // Set click listener for each item
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(listingItem));
     }
 
     @Override
@@ -49,3 +60,4 @@ public class AgentListingsAdapter extends RecyclerView.Adapter<AgentListingViewH
         return listingItems.size();
     }
 }
+

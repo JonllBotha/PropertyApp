@@ -56,8 +56,11 @@
             android:id="@+id/action_clientHomeFragment_to_clientMapFragment"
             app:destination="@id/clientMapFragment" />
         <action
-            android:id="@+id/action_clientHomeFragment_to_clientChatFragment"
-            app:destination="@id/clientChatFragment" />
+            android:id="@+id/action_clientHomeFragment_to_clientAllListingsFragment"
+            app:destination="@id/clientAllListingsFragment" />
+        <action
+            android:id="@+id/action_clientHomeFragment_to_clientListingFragment"
+            app:destination="@id/clientListingFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientMapFragment"
@@ -83,6 +86,9 @@
             android:id="@+id/action_clientProfileFragment_to_startupFragment"
             app:destination="@id/startupFragment" />
         <action
+            android:id="@+id/action_clientProfileFragment_to_clientContactFragment"
+            app:destination="@id/clientContactFragment" />
+        <action
             android:id="@+id/action_clientProfileFragment_to_clientCalculatorFragment"
             app:destination="@id/clientCalculatorFragment" />
         <action
@@ -90,13 +96,13 @@
             app:destination="@id/privacyPolicyFragment" />
     </fragment>
     <fragment
-        android:id="@+id/clientChatFragment"
-        android:name="com.example.ek.ClientChatFragment"
-        android:label="fragment_client_chat"
-        tools:layout="@layout/fragment_client_chat" >
+        android:id="@+id/clientContactFragment"
+        android:name="com.example.ek.ClientContactFragment"
+        android:label="fragment_client_contact"
+        tools:layout="@layout/fragment_client_contact" >
         <action
-            android:id="@+id/action_clientChatFragment_to_clientHomeFragment"
-            app:destination="@id/clientHomeFragment" />
+            android:id="@+id/action_clientContactFragment_to_clientProfileFragment"
+            app:destination="@id/clientProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/agentHomeFragment"
@@ -109,6 +115,9 @@
         <action
             android:id="@+id/action_agentHomeFragment_to_publishAdFragment"
             app:destination="@id/publishAdFragment" />
+        <action
+            android:id="@+id/action_agentHomeFragment_to_agentListingFragment"
+            app:destination="@id/agentListingFragment" />
     </fragment>
     <fragment
         android:id="@+id/agentProfileFragment"
@@ -190,5 +199,40 @@
         <action
             android:id="@+id/action_privacyPolicyFragment_to_agentProfileFragment"
             app:destination="@id/agentProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agentListingFragment"
+        android:name="com.example.ek.AgentListingFragment"
+        android:label="fragment_agent_listing"
+        tools:layout="@layout/fragment_agent_listing" >
+        <action
+            android:id="@+id/action_agentListingFragment_to_agentHomeFragment"
+            app:destination="@id/agentHomeFragment" />
+        <action
+            android:id="@+id/action_agentListingFragment_to_publishAdFragment"
+            app:destination="@id/publishAdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientListingFragment"
+        android:name="com.example.ek.ClientListingFragment"
+        android:label="fragment_client_listing"
+        tools:layout="@layout/fragment_client_listing" >
+        <action
+            android:id="@+id/action_clientListingFragment_to_clientAllListingsFragment"
+            app:destination="@id/clientAllListingsFragment" />
+        <action
+            android:id="@+id/action_clientListingFragment_to_clientContactFragment"
+            app:destination="@id/clientContactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientAllListingsFragment"
+        android:name="com.example.ek.ClientAllListingsFragment"
+        android:label="ClientAllListingsFragment" >
+        <action
+            android:id="@+id/action_clientAllListingsFragment_to_clientHomeFragment"
+            app:destination="@id/clientHomeFragment" />
+        <action
+            android:id="@+id/action_clientAllListingsFragment_to_clientListingFragment"
+            app:destination="@id/clientListingFragment" />
     </fragment>
 </navigation>

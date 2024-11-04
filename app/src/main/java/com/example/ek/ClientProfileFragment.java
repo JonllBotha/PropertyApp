@@ -44,7 +44,7 @@ public class ClientProfileFragment extends Fragment {
         List<ProfileItem> items = new ArrayList<>();
         items.add(new ProfileItem(R.drawable.icon_profile_outline, "Your Profile", R.drawable.icon_arrow));
         items.add(new ProfileItem(R.drawable.icon_calculator, "Bond Calculator", R.drawable.icon_arrow));
-        items.add(new ProfileItem(R.drawable.icon_settings, "Settings", R.drawable.icon_arrow));
+        items.add(new ProfileItem(R.drawable.icon_contact, "Contact Us", R.drawable.icon_arrow));
         items.add(new ProfileItem(R.drawable.icon_privacy, "Privacy Policy", R.drawable.icon_arrow));
         items.add(new ProfileItem(R.drawable.icon_logout, "Log Out", R.drawable.icon_arrow));
 

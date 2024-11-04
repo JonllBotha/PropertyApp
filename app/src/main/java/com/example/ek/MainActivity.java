@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             if (destination.getId() == R.id.clientHomeFragment ||
                     destination.getId() == R.id.clientMapFragment ||
                     destination.getId() == R.id.clientProfileFragment ||
-                    destination.getId() == R.id.clientChatFragment ||
                     destination.getId() == R.id.agentHomeFragment ||
                     destination.getId() == R.id.publishAdFragment ||
                     destination.getId() == R.id.agentProfileFragment) {

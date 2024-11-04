@@ -47,8 +47,8 @@ public class ClientProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder
                 case 1: // "Bond Calculator"
                     navController.navigate(R.id.action_clientProfileFragment_to_clientCalculatorFragment);
                     break;
-                case 2: // "Settings"
-                    //navController.navigate(R.id.action_clientProfileFragment_to_clientSettingsFragment);
+                case 2: // "Contact Us"
+                    navController.navigate(R.id.action_clientProfileFragment_to_clientContactFragment);
                     break;
                 case 3: // "Privacy Policy"
                     navController.navigate(R.id.action_clientProfileFragment_to_privacyPolicyFragment);

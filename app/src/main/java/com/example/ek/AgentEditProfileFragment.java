@@ -147,8 +147,6 @@ public class AgentEditProfileFragment extends Fragment {
             }
         });
 
-
-
         // Back button click listener
         btnBackToProfile.setOnClickListener(new View.OnClickListener() {
             @Override

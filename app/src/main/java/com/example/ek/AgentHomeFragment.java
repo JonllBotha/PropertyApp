@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,12 +22,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AgentHomeFragment extends Fragment {
+public class AgentHomeFragment extends Fragment implements AgentListingsAdapter.OnItemClickListener{
 
     private SharedViewModel sharedViewModel;
     private TextView profileName;
     private RecyclerView rvAgentHome;
-    private ClientListingsAdapter clientListingsAdapter;
+    private AgentListingsAdapter agentListingsAdapter;
     private List<ListingItem> listingItems;
     private DBHelper dbHelper;
 
@@ -44,7 +47,7 @@ public class AgentHomeFragment extends Fragment {
         // Observe the full name from SharedViewModel
         sharedViewModel.getUserFullName().observe(getViewLifecycleOwner(), fullName -> {
             if (fullName != null) {
-                profileName.setText(fullName);
+                profileName.setText(new StringBuilder().append(fullName).append(",").toString());
             }
         });
 
@@ -56,11 +59,20 @@ public class AgentHomeFragment extends Fragment {
         });
 
         // Set up RecyclerView
-        clientListingsAdapter = new ClientListingsAdapter(this, listingItems);
         rvAgentHome.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvAgentHome.setAdapter(clientListingsAdapter);
+        agentListingsAdapter = new AgentListingsAdapter(this, listingItems, this);
+        rvAgentHome.setAdapter(agentListingsAdapter);
 
         return view;
+    }
+
+    // Implement the OnItemClickListener method for RecyclerView
+    @Override
+    public void onItemClick(ListingItem item) {
+        sharedViewModel.setListingID(item.getListingID()); // Store the selected listing ID
+        // Navigate to AgentListingFragment
+        NavHostFragment.findNavController(AgentHomeFragment.this)
+                .navigate(R.id.action_agentHomeFragment_to_agentListingFragment);
     }
 
     @SuppressLint("Range")
@@ -68,12 +80,11 @@ public class AgentHomeFragment extends Fragment {
         Cursor cursor = dbHelper.getListingData(agentEmail); // Get listings from DB
 
         if (cursor != null) {
-            // Log the column names for debugging
             Log.d("ColumnNames", Arrays.toString(cursor.getColumnNames()));
 
             if (cursor.moveToFirst()) {
                 do {
-                    // Make sure the column names below match your actual database schema
+                    int listingID = cursor.getInt(cursor.getColumnIndex("listing_id"));
                     String imagePath = cursor.getString(cursor.getColumnIndex("image_path"));
                     String title = cursor.getString(cursor.getColumnIndex("title"));
                     String city = cursor.getString(cursor.getColumnIndex("city"));
@@ -84,10 +95,9 @@ public class AgentHomeFragment extends Fragment {
                     int bed = cursor.getInt(cursor.getColumnIndex("bedrooms"));
 
                     // Create a ListingItem object and add it to the list
-                    ListingItem listingItem = new ListingItem(imagePath, title, location, price, bath, bed);
+                    ListingItem listingItem = new ListingItem(listingID, imagePath, title, location, price, bath, bed);
                     listingItems.add(listingItem);
                 } while (cursor.moveToNext());
-
                 cursor.close(); // Close the cursor when done
             } else {
                 Log.d("LoadListings", "Cursor is empty");
@@ -96,7 +106,7 @@ public class AgentHomeFragment extends Fragment {
             Log.d("LoadListings", "Cursor is null");
         }
 
-        clientListingsAdapter.notifyDataSetChanged(); // Notify the adapter of data changes
+        agentListingsAdapter.notifyDataSetChanged(); // Notify the adapter of data changes
     }
 
 }

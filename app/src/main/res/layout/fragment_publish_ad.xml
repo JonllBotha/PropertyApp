@@ -80,57 +80,11 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/toolbarLinearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="220dp"
-        android:paddingHorizontal="20dp">
-
-        <TextView
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Type"
-            android:textSize="17sp"
-            android:textStyle="normal|bold" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/propertyCategoryTabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/homePropertyCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/home_black"
-                android:text="Homes"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/flatPropertyCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/flat_gray"
-                android:text="Flats"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/plotPropertyCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/plot_gray"
-                android:text="Plots"/>
-
-        </com.google.android.material.tabs.TabLayout>
-    </LinearLayout>
-
     <ScrollView
         android:id="@+id/scrollview1"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:layout_below="@+id/toolbarLinearLayout1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarRelativeLayout2"
         android:layout_marginTop="10dp"
         android:paddingHorizontal="20dp">
 
@@ -139,6 +93,43 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Type"
+                android:textSize="17sp"
+                android:textStyle="normal|bold" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/propertyCategoryTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/homePropertyCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/home_black"
+                    android:text="Homes"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/flatPropertyCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/flat_gray"
+                    android:text="Flats"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/plotPropertyCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/plot_gray"
+                    android:text="Plots"/>
+
+            </com.google.android.material.tabs.TabLayout>
 
             <TextView
                 style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -478,29 +469,23 @@
                 android:id="@+id/imagesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="80dp"
+                android:layout_marginBottom="20dp"
                 android:scrollbars="vertical"
                 app:spanCount="4"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+
+            <Button
+                android:id="@+id/submitBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/rounded_button"
+                android:text="Publish ad"
+                android:textColor="@color/white" />
         </LinearLayout>
+
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/white"
-        android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/submitBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
-            android:text="Publish ad"
-            android:textColor="@color/white" />
-    </LinearLayout>
 
 </RelativeLayout>

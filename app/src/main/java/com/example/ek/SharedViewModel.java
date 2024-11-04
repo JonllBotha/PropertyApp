@@ -9,6 +9,8 @@ public class SharedViewModel extends ViewModel {
     private final MutableLiveData<String> userEmail = new MutableLiveData<>();
     private final MutableLiveData<String> userFullName = new MutableLiveData<>();
     private final MutableLiveData<String> userRole = new MutableLiveData<>();
+    private final MutableLiveData<Integer> listingID = new MutableLiveData<>();
+    private final MutableLiveData<String> agentCell = new MutableLiveData<>();
 
     private final MutableLiveData<Double> purchasePrice = new MutableLiveData<>();
     private final MutableLiveData<Double> deposit = new MutableLiveData<>();
@@ -44,6 +46,16 @@ public class SharedViewModel extends ViewModel {
         return userRole;
     }
 
+    public LiveData<String> getAgentCell() {
+        return agentCell;
+    }
+
+    public void setAgentCell(String cell) {
+        agentCell.setValue(cell);
+    }
+
+    public void setListingID(int id) { listingID.setValue(id); }
+    public LiveData<Integer> getListingID() { return listingID; }
 
     public void setPurchasePrice(double price) { purchasePrice.setValue(price); }
     public LiveData<Double> getPurchasePrice() { return purchasePrice; }

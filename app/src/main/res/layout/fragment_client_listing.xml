@@ -26,7 +26,7 @@
             android:foreground="@drawable/unfavourite_grey"
             app:borderWidth="1dp"
             app:fabSize="mini"
-            app:maxImageSize="24dp" />
+            app:maxImageSize="20dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/backToProfile1"
@@ -69,7 +69,7 @@
             android:layout_marginTop="10dp"
             android:text="Modern House in Location"
             android:textColor="@color/grey"
-            android:textSize="28sp"
+            android:textSize="26sp"
             android:textStyle="normal|bold" />
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_below="@+id/propertyTitle1"
             android:layout_marginTop="6dp"
             android:drawablePadding="6dp"
-            android:drawableTint="#F46565"
+            android:drawableTint="@color/blue"
             android:text="Cape Town, Western Cape"
             android:textColor="@color/grey"
             android:textSize="16sp"
@@ -94,7 +94,7 @@
             android:text="3"
             android:textColor="@color/grey"
             android:textSize="16sp"
-            android:drawablePadding="6dp"
+            android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/bed_gray" />
 
         <TextView
@@ -105,7 +105,7 @@
             android:layout_toRightOf="@+id/propertyBeds1"
             android:layout_marginTop="20dp"
             android:layout_marginStart="6dp"
-            android:text="Bedroom"
+            android:text="Beds"
             android:textColor="@color/grey"
             android:textSize="16sp" />
 
@@ -116,11 +116,11 @@
             android:layout_below="@+id/propertyLocation1"
             android:layout_toRightOf="@+id/bedrooms1"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="35dp"
             android:text="2"
             android:textColor="@color/grey"
             android:textSize="16sp"
-            android:drawablePadding="6dp"
+            android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/bathtub_gray" />
 
         <TextView
@@ -131,7 +131,7 @@
             android:layout_toRightOf="@+id/propertyBaths1"
             android:layout_marginTop="20dp"
             android:layout_marginStart="6dp"
-            android:text="Bathroom"
+            android:text="Baths"
             android:textColor="@color/grey"
             android:textSize="16sp" />
 
@@ -142,11 +142,11 @@
             android:layout_below="@+id/propertyLocation1"
             android:layout_toRightOf="@+id/bathrooms1"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="35dp"
             android:text="1"
             android:textColor="@color/grey"
             android:textSize="16sp"
-            android:drawablePadding="6dp"
+            android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/building_gray" />
 
         <TextView
@@ -260,7 +260,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="normal|bold" />
 
@@ -272,7 +272,7 @@
             android:paddingEnd="24dp"
             android:layout_toRightOf="@+id/R1"
             android:text="7250000"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="normal|bold" />
 

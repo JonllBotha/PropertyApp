@@ -5,13 +5,13 @@
         android:title="Home"
         android:icon="@drawable/icon_home"/>
     <item
+        android:id="@+id/clientFavouritesFragment"
+        android:title="Favourites"
+        android:icon="@drawable/icon_home"/>
+    <item
         android:id="@+id/clientMapFragment"
         android:title="Map"
         android:icon="@drawable/icon_map"/>
-    <item
-        android:id="@+id/clientChatFragment"
-        android:title="Chat"
-        android:icon="@drawable/icon_chat"/>
     <item
         android:id="@+id/clientProfileFragment"
         android:title="More"

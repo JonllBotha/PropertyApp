@@ -23,13 +23,14 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:clickable="true"
-            android:foreground="@drawable/unfavourite_grey"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/trash"
             app:borderWidth="1dp"
             app:fabSize="mini"
-            app:maxImageSize="24dp" />
+            app:maxImageSize="22dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/backToProfile2"
+            android:id="@+id/backToHome2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -69,7 +70,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Modern House in Location"
                 android:textColor="@color/grey"
-                android:textSize="28sp"
+                android:textSize="26sp"
                 android:textStyle="normal|bold" />
 
             <TextView
@@ -79,7 +80,7 @@
                 android:layout_below="@+id/propertyTitle2"
                 android:layout_marginTop="6dp"
                 android:drawablePadding="6dp"
-                android:drawableTint="#F46565"
+                android:drawableTint="@color/blue"
                 android:text="Cape Town, Western Cape"
                 android:textColor="@color/grey"
                 android:textSize="16sp"
@@ -94,7 +95,7 @@
                 android:text="3"
                 android:textColor="@color/grey"
                 android:textSize="16sp"
-                android:drawablePadding="6dp"
+                android:drawablePadding="8dp"
                 app:drawableStartCompat="@drawable/bed_gray" />
 
             <TextView
@@ -105,7 +106,7 @@
                 android:layout_toRightOf="@+id/propertyBeds2"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="6dp"
-                android:text="Bedroom"
+                android:text="Beds"
                 android:textColor="@color/grey"
                 android:textSize="16sp" />
 
@@ -116,11 +117,11 @@
                 android:layout_below="@+id/propertyLocation2"
                 android:layout_toRightOf="@+id/bedrooms2"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="35dp"
                 android:text="2"
                 android:textColor="@color/grey"
                 android:textSize="16sp"
-                android:drawablePadding="6dp"
+                android:drawablePadding="8dp"
                 app:drawableStartCompat="@drawable/bathtub_gray" />
 
             <TextView
@@ -131,7 +132,7 @@
                 android:layout_toRightOf="@+id/propertyBaths2"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="6dp"
-                android:text="Bathroom"
+                android:text="Baths"
                 android:textColor="@color/grey"
                 android:textSize="16sp" />
 
@@ -142,11 +143,11 @@
                 android:layout_below="@+id/propertyLocation2"
                 android:layout_toRightOf="@+id/bathrooms2"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="35dp"
                 android:text="1"
                 android:textColor="@color/grey"
                 android:textSize="16sp"
-                android:drawablePadding="6dp"
+                android:drawablePadding="8dp"
                 app:drawableStartCompat="@drawable/building_gray" />
 
             <TextView
@@ -236,7 +237,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="300dp"
                     android:clickable="true"
-                    android:src="@drawable/icon_chat"
+                    android:src="@drawable/icon_profile"
                     app:backgroundTint="@color/white"
                     app:borderWidth="1dp"
                     app:fabSize="mini" />
@@ -260,7 +261,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="normal|bold" />
 
@@ -272,7 +273,7 @@
             android:paddingEnd="24dp"
             android:layout_toRightOf="@+id/R2"
             android:text="7250000"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="normal|bold" />
 

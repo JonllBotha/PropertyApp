@@ -20,7 +20,7 @@
 
             <ImageView
                 android:id="@+id/propertyImageA"
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="190dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/house_1"/>
@@ -34,7 +34,7 @@
                 android:paddingHorizontal="18dp"
                 android:text="Modern House"
                 android:textColor="@color/grey"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:textStyle="normal|bold" />
 
             <ImageView
@@ -43,7 +43,7 @@
                 android:layout_height="20dp"
                 android:clickable="true"
                 android:layout_marginTop="204dp"
-                android:layout_marginStart="240dp"
+                android:layout_marginStart="260dp"
                 android:src="@drawable/trash" />
 
             <TextView
@@ -91,7 +91,7 @@
                     android:id="@+id/imgBathA"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:layout_marginStart="150dp"
+                    android:layout_marginStart="160dp"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/RA"
                     android:src="@drawable/bathtub_gray" />
@@ -112,7 +112,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="200dp"
+                    android:layout_marginStart="210dp"
                     android:layout_toEndOf="@id/RA"
                     android:src="@drawable/bed_gray" />
 

@@ -37,12 +37,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="320dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginBottom="50dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp">
 
@@ -130,17 +131,85 @@
                     android:textColorHint="@color/grey" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btnUpdateProfile"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_button"
-                android:text="Update Profile"
-                android:textColor="@color/white" />
+                android:layout_height="50dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_spinner"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spProvince"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:clickable="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_alignEnd="@+id/spProvince"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_drop_down"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_spinner"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:clickable="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_alignEnd="@+id/spCity"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_drop_down"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/btnUpdateProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:text="Update Profile"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
 
 </LinearLayout>

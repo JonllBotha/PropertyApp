@@ -230,6 +230,17 @@ public class publishAdFragment extends Fragment {
 
                             if (result) {
                                 Toast.makeText(getContext(), "Listing submitted successfully", Toast.LENGTH_SHORT).show();
+                                etTitle.setText("");
+                                etDescription.setText("");
+                                etBedrooms.setText("");
+                                etBathrooms.setText("");
+                                etFloors.setText("");
+                                etAreaSize.setText("");
+                                etPrice.setText("");
+                                spProvince.setPrompt("Province");
+                                spCity.setPrompt("City");
+                                NavHostFragment.findNavController(publishAdFragment.this)
+                                        .navigate(R.id.action_publishAdFragment_to_agentHomeFragment);
                             } else {
                                 Toast.makeText(getContext(), "Submission failed. Please try again.", Toast.LENGTH_SHORT).show();
                             }

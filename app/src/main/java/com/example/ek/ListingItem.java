@@ -1,7 +1,8 @@
 package com.example.ek;
 
 public class ListingItem {
-    public ListingItem(String imagePath, String title, String location, String price, int bath, int bed) {
+    public ListingItem(int listingID, String imagePath, String title, String location, String price, int bath, int bed) {
+        this.listingID = listingID;
         this.imagePath = imagePath;
         this.title = title;
         this.location = location;
@@ -10,12 +11,21 @@ public class ListingItem {
         this.bed = bed;
     }
 
+    int listingID;
     String imagePath;
     String title;
     String location;
     String price;
     int bath;
     int bed;
+
+    public int getListingID() {
+        return listingID;
+    }
+
+    public void setListingID(int listingID) {
+        this.listingID = listingID;
+    }
 
     public String getImage() {
         return imagePath;
