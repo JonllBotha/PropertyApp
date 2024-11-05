@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment;
 import android.util.Log;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -24,8 +26,7 @@ public class ClientMapFragment extends Fragment implements OnMapReadyCallback {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_client_map, container, false);
         SupportMapFragment supportMapFragment = (SupportMapFragment)
@@ -33,15 +34,14 @@ public class ClientMapFragment extends Fragment implements OnMapReadyCallback {
         if (supportMapFragment != null) {
             Log.d("MapFragment", "Map Fragment Found");
             supportMapFragment.getMapAsync(this);
-        } else
-        {
+        } else {
             Log.d("MapFragment", "Map Fragment Not Found");
         }
         return view;
     }
+
     @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
+    public void onMapReady(GoogleMap googleMap) {
         // Add a marker and move the camera
         LatLng bellville = new LatLng(-33.9000, 18.6253);
         LatLng benoni = new LatLng(-26.1881, 28.3200);
@@ -190,5 +190,24 @@ public class ClientMapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.addMarker(new MarkerOptions().position(zwelitsha).title("Zwelitsha"));
         googleMap.addMarker(new MarkerOptions().position(umnambithi).title("Umnambithi"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(johannesburg, 5));
+
+        googleMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String cityName = marker.getTitle();
+                Bundle bundle = new Bundle();
+                bundle.putString("cityName", cityName);
+
+                ClientHomeFragment clientHomeFragment = new ClientHomeFragment();
+                clientHomeFragment.setArguments(bundle);
+
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.google_map, clientHomeFragment)
+                        .addToBackStack(null)
+                        .commit();
+
+                return true;
+            }
+        });
     }
 }
