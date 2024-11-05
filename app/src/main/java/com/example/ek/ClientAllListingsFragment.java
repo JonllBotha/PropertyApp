@@ -1,6 +1,7 @@
 package com.example.ek;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class ClientAllListingsFragment extends Fragment implements ClientListing
 
     private SharedViewModel sharedViewModel;
     private RecyclerView rvAllListings;
+    private FloatingActionButton backToHome;
     private ClientListingsAdapter clientListingsAdapter;
     private List<ListingItem> listingItems;
     private DBHelper dbHelper;
@@ -44,6 +48,7 @@ public class ClientAllListingsFragment extends Fragment implements ClientListing
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         dbHelper = new DBHelper(getContext());
 
+        backToHome = view.findViewById(R.id.backToHome);
         rvAllListings = view.findViewById(R.id.rv_all_listings);
         listingItems = new ArrayList<>();
         clientListingsAdapter = new ClientListingsAdapter(this, listingItems, this);
@@ -73,6 +78,15 @@ public class ClientAllListingsFragment extends Fragment implements ClientListing
                     loadFilteredListings(filteredListingsCursor);
                 });
             });
+        });
+
+        // Back button click listener
+        backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                NavHostFragment.findNavController(ClientAllListingsFragment.this)
+                        .navigate(R.id.action_clientAllListingsFragment_to_clientHomeFragment);
+            }
         });
 
         return view;
