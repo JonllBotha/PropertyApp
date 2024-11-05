@@ -214,6 +214,9 @@
         <action
             android:id="@+id/action_agentListingFragment_to_publishAdFragment"
             app:destination="@id/publishAdFragment" />
+        <action
+            android:id="@+id/action_agentListingFragment_to_agentEditProfileFragment"
+            app:destination="@id/agentEditProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientListingFragment"

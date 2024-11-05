@@ -24,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class AgentListingFragment extends Fragment {
 
     private SharedViewModel sharedViewModel;
-    private FloatingActionButton btnDeleteListing, backToHome2;
+    private FloatingActionButton btnDeleteListing, backToHome2, btnEditProfile;
     private Button btnEditListing;
     private ImageView propertyImage2;
     private TextView propertyTitle2, propertyLocation2, propertyPrice2, propertyFloors2,
@@ -41,30 +41,13 @@ public class AgentListingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_agent_listing, container, false);
 
-        initializeViews(view);
-        initializeViewModel();
-
-        // Back button click listener
-        backToHome2.setOnClickListener(v ->
-                NavHostFragment.findNavController(AgentListingFragment.this)
-                        .navigate(R.id.action_agentListingFragment_to_agentHomeFragment)
-        );
-
-        // Edit Listing button click listener
-        btnEditListing.setOnClickListener(v -> showEditConfirmationDialog());
-
-        // Delete button click listener
-        btnDeleteListing.setOnClickListener(v -> showDeleteConfirmationDialog());
-
-        return view;
-    }
-
-    private void initializeViews(View view) {
         agentName2 = view.findViewById(R.id.agentName2);
         agentDescription2 = view.findViewById(R.id.agentDescription2);
+
         backToHome2 = view.findViewById(R.id.backToHome2);
         btnDeleteListing = view.findViewById(R.id.btnDeleteListing);
         btnEditListing = view.findViewById(R.id.btnEditListing);
+        btnEditProfile = view.findViewById(R.id.btnEditProfile);
 
         // Initialize property views
         propertyImage2 = view.findViewById(R.id.propertyImage2);
@@ -75,18 +58,51 @@ public class AgentListingFragment extends Fragment {
         propertyBaths2 = view.findViewById(R.id.propertyBaths2);
         propertyBeds2 = view.findViewById(R.id.propertyBeds2);
         propertyDescription2 = view.findViewById(R.id.propertyDescription2);
-    }
 
-    private void initializeViewModel() {
+        // Initialize SharedViewModel
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         dbHelper = new DBHelper(getContext());
 
         // Observe listing ID and fetch details
-        sharedViewModel.getListingID().observe(getViewLifecycleOwner(), this::loadListingDetails);
+        sharedViewModel.getListingID().observe(getViewLifecycleOwner(), listingID -> {
+            if (listingID != null) {
+                loadListingDetails(listingID);
+            }
+        });
 
         // Fetch listings for the logged-in agent
-        sharedViewModel.getAgentEmail().observe(getViewLifecycleOwner(), this::loadAgentDetails);
+        sharedViewModel.getAgentEmail().observe(getViewLifecycleOwner(), email -> {
+            if (email != null) {
+                loadAgentDetails(email); // Load agent details based on the agent's email
+            }
+        });
+
+        // Back button click listener
+        backToHome2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(AgentListingFragment.this)
+                        .navigate(R.id.action_agentListingFragment_to_agentHomeFragment);
+            }
+        });
+
+        btnEditListing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(AgentListingFragment.this)
+                        .navigate(R.id.action_agentListingFragment_to_agentEditProfileFragment);
+            }
+        });
+
+        // Edit Listing button click listener
+        btnEditListing.setOnClickListener(v -> showEditConfirmationDialog());
+
+        // Delete button click listener
+        btnDeleteListing.setOnClickListener(v -> showDeleteConfirmationDialog());
+
+        return view;
     }
+
 
     private void showEditConfirmationDialog() {
         new AlertDialog.Builder(getContext())
@@ -159,7 +175,6 @@ public class AgentListingFragment extends Fragment {
 
             // Save listing details to SharedViewModel
             sharedViewModel.setAgentEmail(agentEmail);
-            sharedViewModel.setListingID(listingID);
 
             // Set the values to the UI components
             propertyTitle2.setText(title);

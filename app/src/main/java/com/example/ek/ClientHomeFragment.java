@@ -102,17 +102,13 @@ public class ClientHomeFragment extends Fragment implements ClientListingsAdapte
                 }
 
                 // Checking what the listing type is
-                String propertyIntent ;
-                if (tiBuy != null && tiBuy.getText() != null)
-                {
+                String propertyIntent = "Sell";
+                if (tiBuy != null && tiBuy.isSelected()) {
                     propertyIntent = "Sell";
-                }
-                else if (tiRent != null && tiRent.getText() != null)
-                {
+                } else if (tiRent != null && tiRent.isSelected()) {
                     propertyIntent = "Rent";
                 }
-                else {propertyIntent = "Sell";
-                }
+
 
                 String selectedCity = autoCompleteLocation.getText().toString();
 
@@ -126,17 +122,6 @@ public class ClientHomeFragment extends Fragment implements ClientListingsAdapte
         });
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Refresh the RecyclerView data when the fragment comes back to the foreground
-        sharedViewModel.getProfileEmail().observe(getViewLifecycleOwner(), email -> {
-            if (email != null) {
-                loadListings(email, tvNearby); // Reload listings based on the client's email
-            }
-        });
     }
 
     // Implement the OnItemClickListener method for RecyclerView

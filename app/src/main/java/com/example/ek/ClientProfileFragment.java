@@ -47,6 +47,7 @@ public class ClientProfileFragment extends Fragment {
         items.add(new ProfileItem(R.drawable.icon_contact, "Contact Us", R.drawable.icon_arrow));
         items.add(new ProfileItem(R.drawable.icon_privacy, "Privacy Policy", R.drawable.icon_arrow));
         items.add(new ProfileItem(R.drawable.icon_logout, "Log Out", R.drawable.icon_arrow));
+        items.add(new ProfileItem(R.drawable.icon_profile, "Delete Account", R.drawable.icon_arrow));
 
         // Pass the fragment itself (this) instead of the context to the adapter
         adapter = new ClientProfileAdapter(this, items, email);

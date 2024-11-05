@@ -159,8 +159,7 @@ public class ClientListingFragment extends Fragment {
             }
         });
 
-
-                        // Favourite button click listener
+        // Favourite button click listener
         btnFavouriteListing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,7 +219,6 @@ public class ClientListingFragment extends Fragment {
         Cursor cursor = dbHelper.getListingDetails(listingID); // Method to fetch listing details by ID
 
         if (cursor != null && cursor.moveToFirst()) {
-            // Assuming your database has corresponding fields
             String imagePath = cursor.getString(cursor.getColumnIndex("image_path"));
             String title = cursor.getString(cursor.getColumnIndex("title"));
             String city = cursor.getString(cursor.getColumnIndex("city"));

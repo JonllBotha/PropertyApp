@@ -12,6 +12,8 @@ activity = "1.9.1"
 constraintlayout = "2.1.4"
 navigationCompose = "2.8.0"
 navigationComposeVersion = "2.7.6"
+playServicesLocation = "18.0.0"
+playServicesMapsVersion = "18.0.0"
 preference = "1.2.0"
 playServicesMaps = "19.0.0"
 lifecycleViewmodelAndroid = "2.8.7"
@@ -36,8 +38,10 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleViewmodelAndroid" }
+play-services-maps-v1800 = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
