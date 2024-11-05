@@ -86,7 +86,7 @@ public class AgentListingFragment extends Fragment {
             }
         });
 
-        btnEditListing.setOnClickListener(new View.OnClickListener() {
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(AgentListingFragment.this)
@@ -102,7 +102,6 @@ public class AgentListingFragment extends Fragment {
 
         return view;
     }
-
 
     private void showEditConfirmationDialog() {
         new AlertDialog.Builder(getContext())

@@ -157,6 +157,12 @@ public class publishAdFragment extends Fragment {
           }
          });
 
+        sharedViewModel.getListingID().observe(getViewLifecycleOwner(), listingID -> {
+            if (listingID != null) {
+                fetchListingDetails(listingID);
+            }
+        });
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -260,34 +266,6 @@ public class publishAdFragment extends Fragment {
             }
         });
 
-        // Observe listing ID and fetch details
-        sharedViewModel.getListingID().observe(getViewLifecycleOwner(), listingID -> {
-            // Check if listingID is not null (indicating an edit operation)
-            if (listingID != null) {
-                Cursor cursor = dbHelper.getListingDetails(listingID);
-                if (cursor != null && cursor.moveToFirst()) {
-                    @SuppressLint("Range") String title = cursor.getString(cursor.getColumnIndex("title"));
-                    @SuppressLint("Range") String price = cursor.getString(cursor.getColumnIndex("price"));
-                    @SuppressLint("Range") String floors = cursor.getString(cursor.getColumnIndex("floors"));
-                    @SuppressLint("Range") String area = cursor.getString(cursor.getColumnIndex("area_size"));
-                    @SuppressLint("Range") int baths = cursor.getInt(cursor.getColumnIndex("bathrooms"));
-                    @SuppressLint("Range") int beds = cursor.getInt(cursor.getColumnIndex("bedrooms"));
-                    @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex("description"));
-
-                    etBathrooms.setText(String.valueOf(baths));
-                    etBedrooms.setText(String.valueOf(beds));
-                    etDescription.setText(description);
-                    etFloors.setText(floors);
-                    etAreaSize.setText(area);
-                    etPrice.setText(price);
-                    etTitle.setText(title);
-                }
-                if (cursor != null) {
-                    cursor.close(); // Close the cursor after usage
-                }
-            }
-        });
-
 
 
         return view;
@@ -333,6 +311,34 @@ public class publishAdFragment extends Fragment {
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCity.setAdapter(cityAdapter);
     }
+
+    @SuppressLint("Range")
+    private void fetchListingDetails(int listingID) {
+        Cursor cursor = dbHelper.getListingDetails(listingID);
+        if (cursor != null && cursor.moveToFirst()) {
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String description = cursor.getString(cursor.getColumnIndex("description"));
+            String price = cursor.getString(cursor.getColumnIndex("price"));
+            String floors = cursor.getString(cursor.getColumnIndex("floors"));
+            String area = cursor.getString(cursor.getColumnIndex("area_size"));
+            int baths = cursor.getInt(cursor.getColumnIndex("bathrooms"));
+            int beds = cursor.getInt(cursor.getColumnIndex("bedrooms"));
+
+
+            // Set the fetched values to the respective EditText fields
+            etBathrooms.setText(String.valueOf(baths));
+            etBedrooms.setText(String.valueOf(beds));
+            etDescription.setText(description);
+            etFloors.setText(floors);
+            etAreaSize.setText(area);
+            etPrice.setText(price);
+            etTitle.setText(title);
+        }
+        if (cursor != null) {
+            cursor.close(); // Always close the cursor to avoid memory leaks
+        }
+    }
+
 
     @SuppressLint("Range")
     private void loadAgentData(String email) {

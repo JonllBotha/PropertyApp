@@ -285,15 +285,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public Cursor getListingDetails(int listingID) {
-        SQLiteDatabase myDB = this.getReadableDatabase();
-        return myDB.rawQuery(
-                "SELECT l.title, l.description, l.price, l.bedrooms, l.bathrooms, l.floors, l.province, l.city, l.agent_email, li.image_path " +
-                        "FROM listings l " +
-                        "LEFT JOIN listing_images li ON l.listing_id = li.listing_id " +
-                        "WHERE l.listing_id = ?",
-                new String[]{String.valueOf(listingID)} // Convert listingID to String for parameter
-        );
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Define the SQL query to join listings with listing_images
+        String query = "SELECT listings.*, listing_images.image_path " +
+                "FROM listings " +
+                "LEFT JOIN listing_images ON listings.listing_id = listing_images.listing_id " +
+                "WHERE listings.listing_id = ?";
+
+        return db.rawQuery(query, new String[]{String.valueOf(listingID)});
     }
+
 
     public void deleteListing(int listingID) {
         SQLiteDatabase myDB = this.getWritableDatabase();
