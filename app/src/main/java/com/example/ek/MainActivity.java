@@ -61,8 +61,12 @@ public class MainActivity extends AppCompatActivity {
             // Show BottomNavigationView only on specific fragments
             if (destination.getId() == R.id.clientHomeFragment ||
                     destination.getId() == R.id.clientMapFragment ||
+                    destination.getId() == R.id.clientAllListingsFragment ||
+                    destination.getId() == R.id.clientFavouritesFragment ||
+                    destination.getId() == R.id.clientListingFragment ||
                     destination.getId() == R.id.clientProfileFragment ||
                     destination.getId() == R.id.agentHomeFragment ||
+                    destination.getId() == R.id.agentListingFragment ||
                     destination.getId() == R.id.publishAdFragment ||
                     destination.getId() == R.id.agentProfileFragment) {
                 bottomNavigationView.setVisibility(View.VISIBLE);
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 bottomNavigationView.setVisibility(View.GONE);
             }
         });
+
     }
 
     @Override

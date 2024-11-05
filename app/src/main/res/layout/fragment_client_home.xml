@@ -26,11 +26,10 @@
             android:textSize="28sp" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/no_notification"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/b_logo_png"
             android:layout_alignTop="@+id/tv_header"
             android:layout_alignEnd="@+id/tv_header"
             tools:ignore="ContentDescription" />
@@ -85,8 +84,9 @@
                     <AutoCompleteTextView
                         android:id="@+id/City"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="46dp"
                         android:layout_marginTop="10dp"
+                        android:paddingLeft="10dp"
                         android:background="@drawable/rounded_spinner"
                         android:drawableStart="@drawable/location_gray"
                         android:drawablePadding="10dp"
@@ -109,6 +109,7 @@
                             android:id="@+id/btnHomes"
                             android:layout_width="110dp"
                             android:layout_height="match_parent"
+                            android:layout_marginStart="14dp"
                             android:background="@drawable/btn1selector"
                             android:button="@null"
                             android:checked="true"
@@ -118,7 +119,7 @@
 
                         <RadioButton
                             android:id="@+id/btnFlats"
-                            android:layout_width="110dp"
+                            android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:background="@drawable/btn1selector"
                             android:button="@null"
@@ -130,6 +131,7 @@
                             android:id="@+id/btnPlots"
                             android:layout_width="110dp"
                             android:layout_height="match_parent"
+                            android:layout_marginEnd="14dp"
                             android:background="@drawable/btn1selector"
                             android:button="@null"
                             android:gravity="center"
@@ -138,7 +140,7 @@
                     </RadioGroup>
 
                     <Button
-                        android:id="@+id/btnUpdateProfile"
+                        android:id="@+id/btnFindAllListings"
                         android:layout_width="match_parent"
                         android:layout_height="46dp"
                         android:layout_marginTop="14dp"
@@ -155,7 +157,7 @@
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Properties Near Me"
                 android:textSize="18sp"
                 android:textStyle="normal|bold" />

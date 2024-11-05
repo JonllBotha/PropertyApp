@@ -41,11 +41,32 @@ public class AgentListingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_agent_listing, container, false);
 
+        initializeViews(view);
+        initializeViewModel();
+
+        // Back button click listener
+        backToHome2.setOnClickListener(v ->
+                NavHostFragment.findNavController(AgentListingFragment.this)
+                        .navigate(R.id.action_agentListingFragment_to_agentHomeFragment)
+        );
+
+        // Edit Listing button click listener
+        btnEditListing.setOnClickListener(v -> showEditConfirmationDialog());
+
+        // Delete button click listener
+        btnDeleteListing.setOnClickListener(v -> showDeleteConfirmationDialog());
+
+        return view;
+    }
+
+    private void initializeViews(View view) {
+        agentName2 = view.findViewById(R.id.agentName2);
+        agentDescription2 = view.findViewById(R.id.agentDescription2);
         backToHome2 = view.findViewById(R.id.backToHome2);
         btnDeleteListing = view.findViewById(R.id.btnDeleteListing);
         btnEditListing = view.findViewById(R.id.btnEditListing);
 
-        // Initialize views
+        // Initialize property views
         propertyImage2 = view.findViewById(R.id.propertyImage2);
         propertyTitle2 = view.findViewById(R.id.propertyTitle2);
         propertyLocation2 = view.findViewById(R.id.propertyLocation2);
@@ -54,102 +75,56 @@ public class AgentListingFragment extends Fragment {
         propertyBaths2 = view.findViewById(R.id.propertyBaths2);
         propertyBeds2 = view.findViewById(R.id.propertyBeds2);
         propertyDescription2 = view.findViewById(R.id.propertyDescription2);
+    }
 
-        // Initialize SharedViewModel
+    private void initializeViewModel() {
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         dbHelper = new DBHelper(getContext());
 
         // Observe listing ID and fetch details
-        sharedViewModel.getListingID().observe(getViewLifecycleOwner(), listingID -> {
-            if (listingID != null) {
-                loadListingDetails(listingID);
-            } else { Toast.makeText(getContext(), "Didn't work.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        sharedViewModel.getListingID().observe(getViewLifecycleOwner(), this::loadListingDetails);
 
         // Fetch listings for the logged-in agent
-        sharedViewModel.getProfileEmail().observe(getViewLifecycleOwner(), email -> {
-            if (email != null) {
-                loadAgentDetails(email); // Load agent details based on the agent's email
-            }
-        });
+        sharedViewModel.getAgentEmail().observe(getViewLifecycleOwner(), this::loadAgentDetails);
+    }
 
-        // Back button click listener
-        backToHome2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void showEditConfirmationDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Edit Listing")
+                .setMessage("Are you sure you want to edit this listing?")
+                .setPositiveButton("Yes", (dialog, which) ->
+                        NavHostFragment.findNavController(AgentListingFragment.this)
+                                .navigate(R.id.action_agentListingFragment_to_publishAdFragment)
+                )
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show(); // Display the dialog
+    }
+
+    private void showDeleteConfirmationDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Delete Listing")
+                .setMessage("Are you sure you want to delete this listing?")
+                .setPositiveButton("Yes", (dialog, which) -> deleteListing())
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show(); // Display the dialog
+    }
+
+    private void deleteListing() {
+        sharedViewModel.getListingID().observe(getViewLifecycleOwner(), listingID -> {
+            if (listingID != null) {
+                // Call the delete method
+                dbHelper.deleteListing(listingID);
+                Toast.makeText(getContext(), "Listing deleted", Toast.LENGTH_SHORT).show();
+                // Navigate back
                 NavHostFragment.findNavController(AgentListingFragment.this)
                         .navigate(R.id.action_agentListingFragment_to_agentHomeFragment);
             }
         });
-
-        // Edit Listing button click listener
-        btnEditListing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // Create an AlertDialog for confirmation
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Edit Listing")
-                        .setMessage("Are you sure you want to edit this listing?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                NavHostFragment.findNavController(AgentListingFragment.this)
-                                        .navigate(R.id.action_agentListingFragment_to_publishAdFragment);
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss(); // Dismiss the dialog
-                            }
-                        })
-                        .show(); // Display the dialog
-            }
-        });
-
-        // Delete button click listener
-        btnDeleteListing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create an AlertDialog for confirmation
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Delete Listing")
-                        .setMessage("Are you sure you want to delete this listing?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Get the listing ID from the SharedViewModel
-                                sharedViewModel.getListingID().observe(getViewLifecycleOwner(), listingID -> {
-                                    if (listingID != null) {
-                                        // Call the delete method
-                                        dbHelper.deleteListing(listingID);
-                                        // Optionally, provide feedback to the user (e.g., Toast)
-                                        Toast.makeText(getContext(), "Listing deleted", Toast.LENGTH_SHORT).show();
-                                        // Navigate back
-                                        NavHostFragment.findNavController(AgentListingFragment.this)
-                                                .navigate(R.id.action_agentListingFragment_to_agentHomeFragment);
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss(); // Dismiss the dialog
-                            }
-                        })
-                        .show(); // Display the dialog
-            }
-        });
-
-        return view;
     }
 
     @SuppressLint("Range")
     private void loadAgentDetails(String email) {
-        Cursor cursor = dbHelper.getAgentDetailsByEmail(email); // Method to fetch listing details by ID
+        Cursor cursor = dbHelper.getAgentDetailsByEmail(email);
 
         if (cursor != null && cursor.moveToFirst()) {
             String firstName = cursor.getString(cursor.getColumnIndex("firstName"));
@@ -162,15 +137,14 @@ public class AgentListingFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "Agent data not found", Toast.LENGTH_SHORT).show();
         }
-        cursor.close();
+        if (cursor != null) cursor.close();
     }
 
     @SuppressLint("Range")
     private void loadListingDetails(int listingID) {
-        Cursor cursor = dbHelper.getListingDetails(listingID); // Method to fetch listing details by ID
+        Cursor cursor = dbHelper.getListingDetails(listingID);
 
         if (cursor != null && cursor.moveToFirst()) {
-            // Assuming your database has corresponding fields
             String imagePath = cursor.getString(cursor.getColumnIndex("image_path"));
             String title = cursor.getString(cursor.getColumnIndex("title"));
             String city = cursor.getString(cursor.getColumnIndex("city"));
@@ -181,6 +155,11 @@ public class AgentListingFragment extends Fragment {
             int baths = cursor.getInt(cursor.getColumnIndex("bathrooms"));
             int beds = cursor.getInt(cursor.getColumnIndex("bedrooms"));
             String description = cursor.getString(cursor.getColumnIndex("description"));
+            String agentEmail = cursor.getString(cursor.getColumnIndex("agent_email"));
+
+            // Save listing details to SharedViewModel
+            sharedViewModel.setAgentEmail(agentEmail);
+            sharedViewModel.setListingID(listingID);
 
             // Set the values to the UI components
             propertyTitle2.setText(title);

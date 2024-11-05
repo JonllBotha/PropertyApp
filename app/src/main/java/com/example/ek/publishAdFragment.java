@@ -32,12 +32,10 @@ import android.widget.Toast;
 import android.content.ClipData;
 
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.ByteArrayOutputStream;
@@ -48,9 +46,7 @@ public class publishAdFragment extends Fragment {
     private RadioButton rbSell, rbRent;
     private FloatingActionButton btnBackToProfile;
     private TabLayout tabLayout;
-    private TabLayout.Tab tiHome;
-    private TabLayout.Tab tiFlat;
-    private TabLayout.Tab tiPlot;
+    private TabLayout.Tab tiHome, tiFlat, tiPlot;
     private TextView selectImages;
     private EditText etBedrooms, etFloors, etBathrooms, etAreaSize, etPrice, etTitle, etDescription, etAgentEmail, etAgentContactNumber;
     private boolean isDataChanged = false;
@@ -61,8 +57,6 @@ public class publishAdFragment extends Fragment {
     private DBHelper dbHelper;
     private Button btnSubmit;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private ImageView imageView;
-    private Bitmap selectedImageBitmap;
     private ArrayList<Bitmap> selectedImages = new ArrayList<>();
     private ImagesAdapter imagesAdapter;
     private RecyclerView imagesRecyclerView;
@@ -163,49 +157,20 @@ public class publishAdFragment extends Fragment {
           }
          });
 
-        // Submit button click listener
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = etTitle.getText().toString();
-                String description = etDescription.getText().toString();
-                String email = etAgentEmail.getText().toString();
-                String bedrooms = etBedrooms.getText().toString();
-                String bathrooms = etBathrooms.getText().toString();
-                String floors = etFloors.getText().toString();
-                String area_size = etAreaSize.getText().toString();
-                String contactNumber = etAgentContactNumber.getText().toString();
-                String price = etPrice.getText().toString();
+                String title = etTitle.getText().toString().trim();
+                String description = etDescription.getText().toString().trim();
+                String email = etAgentEmail.getText().toString().trim();
+                String bedrooms = etBedrooms.getText().toString().trim();
+                String bathrooms = etBathrooms.getText().toString().trim();
+                String floors = etFloors.getText().toString().trim();
+                String area_size = etAreaSize.getText().toString().trim();
+                String contactNumber = etAgentContactNumber.getText().toString().trim();
+                String price = etPrice.getText().toString().trim();
                 String province = spProvince.getSelectedItem().toString();
                 String city = spCity.getSelectedItem().toString();
-
-                // Add bitmaps to the list
-                if (selectedImageBitmap != null) {
-                    selectedImages.add(selectedImageBitmap);
-                }
-
-                // Checking if the agent intends to rent or sell
-                String listing_intent = rbSell.getText().toString();
-                if (rbRent.isChecked()) {
-                    listing_intent = rbRent.getText().toString();
-                } else if (rbSell.isChecked()) {
-                    listing_intent = rbSell.getText().toString();
-                }
-
-                // Checking what the listing type is
-                String listing_type = tiHome.getText().toString();
-                if (tiHome != null && tiHome.getText() != null)
-                {
-                    listing_type = tiHome.getText().toString();
-                }
-                else if (tiFlat != null && tiFlat.getText() != null)
-                {
-                    listing_type = tiFlat.getText().toString();
-                }
-                else if (tiPlot != null && tiPlot.getText() != null)
-                {
-                    listing_type = tiPlot.getText().toString();
-                }
 
                 // Validate inputs
                 if (title.isEmpty() || description.isEmpty() || email.isEmpty() || bedrooms.isEmpty() || bathrooms.isEmpty() || floors.isEmpty()
@@ -214,14 +179,36 @@ public class publishAdFragment extends Fragment {
                     return;
                 }
 
-                // Confirmation Dialog
+                // Checking if the agent intends to rent or sell
+                String listing_intent = "Sell";
+                if (rbRent.isChecked()) {
+                    listing_intent = "Rent";
+                } else if (rbSell.isChecked()) {
+                    listing_intent = "Sell";
+                }
+
+                // Checking what the listing type is
+                String listing_type = "Homes";
+                if (tiHome != null && tiHome.getText() != null)
+                {
+                    listing_type = "Homes";
+                }
+                else if (tiFlat != null && tiFlat.getText() != null)
+                {
+                    listing_type = "Flats";
+                }
+                else if (tiPlot != null && tiPlot.getText() != null)
+                {
+                    listing_type = "Plots";
+                }
+
                 String finalListing_intent = listing_intent;
                 String finalListing_type = listing_type;
+                // Confirmation Dialog and Insert Data
                 new AlertDialog.Builder(getContext())
                         .setTitle("Confirm Submission")
                         .setMessage("Are you sure you want to submit this listing?")
                         .setPositiveButton("Yes", (dialog, which) -> {
-                            // Call the method to insert data
                             boolean result = dbHelper.insertListingData(
                                     title, description, price, province, city,
                                     finalListing_intent, finalListing_type,
@@ -250,6 +237,7 @@ public class publishAdFragment extends Fragment {
             }
         });
 
+
         // Back button click listener
         btnBackToProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +259,37 @@ public class publishAdFragment extends Fragment {
                 }
             }
         });
+
+        // Observe listing ID and fetch details
+        sharedViewModel.getListingID().observe(getViewLifecycleOwner(), listingID -> {
+            // Check if listingID is not null (indicating an edit operation)
+            if (listingID != null) {
+                Cursor cursor = dbHelper.getListingDetails(listingID);
+                if (cursor != null && cursor.moveToFirst()) {
+                    @SuppressLint("Range") String title = cursor.getString(cursor.getColumnIndex("title"));
+                    @SuppressLint("Range") String price = cursor.getString(cursor.getColumnIndex("price"));
+                    @SuppressLint("Range") String floors = cursor.getString(cursor.getColumnIndex("floors"));
+                    @SuppressLint("Range") String area = cursor.getString(cursor.getColumnIndex("area_size"));
+                    @SuppressLint("Range") int baths = cursor.getInt(cursor.getColumnIndex("bathrooms"));
+                    @SuppressLint("Range") int beds = cursor.getInt(cursor.getColumnIndex("bedrooms"));
+                    @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex("description"));
+
+                    etBathrooms.setText(String.valueOf(baths));
+                    etBedrooms.setText(String.valueOf(beds));
+                    etDescription.setText(description);
+                    etFloors.setText(floors);
+                    etAreaSize.setText(area);
+                    etPrice.setText(price);
+                    etTitle.setText(title);
+                }
+                if (cursor != null) {
+                    cursor.close(); // Close the cursor after usage
+                }
+            }
+        });
+
+
+
         return view;
     }
 

@@ -11,6 +11,11 @@ public class SharedViewModel extends ViewModel {
     private final MutableLiveData<String> userRole = new MutableLiveData<>();
     private final MutableLiveData<Integer> listingID = new MutableLiveData<>();
     private final MutableLiveData<String> agentCell = new MutableLiveData<>();
+    private final MutableLiveData<String> agentEmail = new MutableLiveData<>();
+
+    private final MutableLiveData<String> selectedCity = new MutableLiveData<>();
+    private final MutableLiveData<String> selectedIntent = new MutableLiveData<>();
+    private final MutableLiveData<String> selectedType = new MutableLiveData<>();
 
     private final MutableLiveData<Double> purchasePrice = new MutableLiveData<>();
     private final MutableLiveData<Double> deposit = new MutableLiveData<>();
@@ -21,6 +26,36 @@ public class SharedViewModel extends ViewModel {
     private final MutableLiveData<Double> bondRegistrationCost = new MutableLiveData<>();
     private final MutableLiveData<Double> propertyTransferCost = new MutableLiveData<>();
     private final MutableLiveData<Double> grossMonthlyIncome = new MutableLiveData<>();
+
+    private final MutableLiveData<String> title = new MutableLiveData<>();
+    private final MutableLiveData<String> city = new MutableLiveData<>();
+    private final MutableLiveData<String> province = new MutableLiveData<>();
+    private final MutableLiveData<String> price = new MutableLiveData<>();
+
+    public void setSelectedCity(String city) {
+        selectedCity.setValue(city);
+    }
+
+    public LiveData<String> getSelectedCity() {
+        return selectedCity;
+    }
+
+    public void setSelectedIntent(String intent) {
+        selectedIntent.setValue(intent);
+    }
+
+    public LiveData<String> getSelectedIntent() {
+        return selectedIntent;
+    }
+
+    public void setSelectedType(String type) {
+        selectedType.setValue(type);
+    }
+
+    public LiveData<String> getSelectedType() {
+        return selectedType;
+    }
+
 
     public void setUserFullName(String fullName) {
         userFullName.setValue(fullName);
@@ -57,6 +92,14 @@ public class SharedViewModel extends ViewModel {
     public void setListingID(int id) { listingID.setValue(id); }
     public LiveData<Integer> getListingID() { return listingID; }
 
+    public void setAgentEmail(String email) {
+        agentEmail.setValue(email);
+    }
+
+    public LiveData<String> getAgentEmail() {
+        return agentEmail;
+    }
+
     public void setPurchasePrice(double price) { purchasePrice.setValue(price); }
     public LiveData<Double> getPurchasePrice() { return purchasePrice; }
 
@@ -83,4 +126,16 @@ public class SharedViewModel extends ViewModel {
 
     public void setGrossMonthlyIncome(double income) { grossMonthlyIncome.setValue(income); }
     public LiveData<Double> getGrossMonthlyIncome() { return grossMonthlyIncome; }
+
+    // Getters
+    public LiveData<String> getTitle() { return title; }
+    public LiveData<String> getCity() { return city; }
+    public LiveData<String> getProvince() { return province; }
+    public LiveData<String> getPrice() { return price; }
+
+    // Setters
+    public void setTitle(String title) { this.title.setValue(title); }
+    public void setCity(String city) { this.city.setValue(city); }
+    public void setProvince(String province) { this.province.setValue(province); }
+    public void setPrice(String price) { this.price.setValue(price); }
 }

@@ -9,8 +9,9 @@
         android:id="@+id/propertyViewC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardElevation="8dp"
+        android:layout_gravity="center_horizontal"
         app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
@@ -23,11 +24,11 @@
                 android:layout_width="300dp"
                 android:layout_height="190dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/house_1"/>
+                android:src="@drawable/house_1" />
 
             <TextView
                 android:id="@+id/propertyTitleC"
-                android:layout_width="220dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/propertyImageC"
                 android:layout_marginTop="10dp"
@@ -37,26 +38,17 @@
                 android:textSize="17sp"
                 android:textStyle="normal|bold" />
 
-            <ImageView
-                android:id="@+id/imgDeleteC"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:clickable="true"
-                android:layout_marginTop="204dp"
-                android:layout_marginStart="260dp"
-                android:src="@drawable/unfavourite" />
-
             <TextView
                 android:id="@+id/propertyLocationC"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/propertyTitleC"
-                android:paddingHorizontal="14dp"
                 android:layout_marginTop="6dp"
+                android:drawablePadding="2dp"
+                android:paddingHorizontal="14dp"
                 android:text="Cape Town, Western Cape"
                 android:textColor="@color/grey"
                 android:textSize="14sp"
-                android:drawablePadding="2dp"
                 app:drawableStartCompat="@drawable/location_gray" />
 
             <RelativeLayout
@@ -79,9 +71,9 @@
                     android:id="@+id/propertyPriceC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/RC"
                     android:paddingVertical="10dp"
                     android:paddingStart="8dp"
-                    android:layout_toRightOf="@+id/RC"
                     android:text="7250000"
                     android:textColor="@color/grey"
                     android:textSize="18sp"
@@ -91,8 +83,8 @@
                     android:id="@+id/imgBathC"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:layout_marginStart="160dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="160dp"
                     android:layout_toEndOf="@id/RC"
                     android:src="@drawable/bathtub_gray" />
 

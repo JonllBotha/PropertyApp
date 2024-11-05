@@ -31,6 +31,12 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
+    <string-array name="enquiry_subjects">
+        <item>General Enquiry</item>
+        <item>Property Details</item>
+        <item>Schedule Viewing</item>
+    </string-array>
+
     <!-- Provinces -->
     <string-array name="provinces">
         <item>Province</item>
@@ -391,5 +397,7 @@ South Africa
 13. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
 You have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing of your personal information. These rights may be limited in some circumstances by applicable law. To request to review, update, or delete your personal information, please fill out and submit a data subject access request."
 </string>
+    <string name="properties_for_sale">Properties For Sale</string>
+    <string name="properties_for_rent">Properties For Rent</string>
 
 </resources>

@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_clientHomeFragment_to_clientListingFragment"
             app:destination="@id/clientListingFragment" />
+        <action
+            android:id="@+id/action_clientHomeFragment_to_clientFavouritesFragment"
+            app:destination="@id/clientFavouritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientMapFragment"
@@ -221,6 +224,9 @@
             android:id="@+id/action_clientListingFragment_to_clientAllListingsFragment"
             app:destination="@id/clientAllListingsFragment" />
         <action
+            android:id="@+id/action_clientListingFragment_to_clientHomeFragment"
+            app:destination="@id/clientHomeFragment" />
+        <action
             android:id="@+id/action_clientListingFragment_to_clientContactFragment"
             app:destination="@id/clientContactFragment" />
     </fragment>
@@ -234,5 +240,14 @@
         <action
             android:id="@+id/action_clientAllListingsFragment_to_clientListingFragment"
             app:destination="@id/clientListingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientFavouritesFragment"
+        android:name="com.example.ek.ClientFavouritesFragment"
+        android:label="fragment_client_favourites"
+        tools:layout="@layout/fragment_client_favourites" >
+        <action
+            android:id="@+id/action_clientFavouritesFragment_to_clientHomeFragment"
+            app:destination="@id/clientHomeFragment" />
     </fragment>
 </navigation>

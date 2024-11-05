@@ -40,6 +40,7 @@ android {
 dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.play.services.maps)
+    implementation(libs.androidx.lifecycle.viewmodel.android)
     val nav_version = "2.8.0"
 
     // Views/Fragments integration

@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.AutoCompleteTextView;
 
@@ -18,6 +20,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +30,12 @@ public class ClientHomeFragment extends Fragment implements ClientListingsAdapte
 
     private SharedViewModel sharedViewModel;
     private RecyclerView rvClientHome;
+    private RadioButton rbHomes, rbFlats, rbPlots;
+    private Button btnFindAllListings;
+    private AutoCompleteTextView autoCompleteLocation;
+    private TabLayout tabLayout;
+    private TabLayout.Tab tiRent, tiBuy;
+    private TextView tvNearby;
     private ClientListingsAdapter clientListingsAdapter;
     private List<ListingItem> clientListingItems;
     private DBHelper dbHelper;
@@ -41,7 +51,8 @@ public class ClientHomeFragment extends Fragment implements ClientListingsAdapte
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_client_home, container, false);
 
-        TextView tvNearby = view.findViewById(R.id.tv_Nearby);
+        tvNearby = view.findViewById(R.id.tv_Nearby);
+        btnFindAllListings = view.findViewById(R.id.btnFindAllListings);
 
         // Initialize SharedViewModel
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
@@ -58,7 +69,15 @@ public class ClientHomeFragment extends Fragment implements ClientListingsAdapte
         rvClientHome = view.findViewById(R.id.rv_client_home);
         clientListingItems = new ArrayList<>();
 
-        AutoCompleteTextView autoCompleteLocation = view.findViewById(R.id.City);
+        rbHomes = view.findViewById(R.id.btnHomes);
+        rbFlats = view.findViewById(R.id.btnFlats);
+        rbPlots  = view.findViewById(R.id.btnPlots);
+
+        tabLayout = view.findViewById(R.id.propertyIntentTabLayout);
+        tiBuy = tabLayout.getTabAt(0);
+        tiRent = tabLayout.getTabAt(1);
+
+        autoCompleteLocation = view.findViewById(R.id.City);
         String[] cities = getResources().getStringArray(R.array.cities);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, cities);
         autoCompleteLocation.setAdapter(adapter);
@@ -68,7 +87,56 @@ public class ClientHomeFragment extends Fragment implements ClientListingsAdapte
         rvClientHome.setLayoutManager(new LinearLayoutManager(getContext()));
         rvClientHome.setAdapter(clientListingsAdapter);
 
+        // Find button click listener
+        btnFindAllListings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Checking if the agent intends to rent or sell
+                String propertyType = "Homes";
+                if (rbHomes.isChecked()) {
+                    propertyType = "Homes";
+                } else if (rbFlats.isChecked()) {
+                    propertyType = "Flats";
+                } else if (rbPlots.isChecked()) {
+                    propertyType = "Plots";
+                }
+
+                // Checking what the listing type is
+                String propertyIntent ;
+                if (tiBuy != null && tiBuy.getText() != null)
+                {
+                    propertyIntent = "Sell";
+                }
+                else if (tiRent != null && tiRent.getText() != null)
+                {
+                    propertyIntent = "Rent";
+                }
+                else {propertyIntent = "Sell";
+                }
+
+                String selectedCity = autoCompleteLocation.getText().toString();
+
+                sharedViewModel.setSelectedCity(selectedCity);
+                sharedViewModel.setSelectedIntent(propertyIntent);
+                sharedViewModel.setSelectedType(propertyType);
+
+                NavHostFragment.findNavController(ClientHomeFragment.this)
+                        .navigate(R.id.action_clientHomeFragment_to_clientAllListingsFragment);
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh the RecyclerView data when the fragment comes back to the foreground
+        sharedViewModel.getProfileEmail().observe(getViewLifecycleOwner(), email -> {
+            if (email != null) {
+                loadListings(email, tvNearby); // Reload listings based on the client's email
+            }
+        });
     }
 
     // Implement the OnItemClickListener method for RecyclerView
@@ -143,4 +211,6 @@ public class ClientHomeFragment extends Fragment implements ClientListingsAdapte
             clientListingsAdapter.notifyDataSetChanged();
         }
     }
+
+
 }

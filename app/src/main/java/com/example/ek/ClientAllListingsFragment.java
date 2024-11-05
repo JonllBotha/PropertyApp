@@ -3,7 +3,6 @@ package com.example.ek;
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class ClientAllListingsFragment extends Fragment {
+public class ClientAllListingsFragment extends Fragment implements ClientListingsAdapter.OnItemClickListener {
 
     private SharedViewModel sharedViewModel;
     private RecyclerView rvAllListings;
-    //private ClientListingsAdapter clientListingsAdapter;
+    private ClientListingsAdapter clientListingsAdapter;
     private List<ListingItem> listingItems;
     private DBHelper dbHelper;
-    private TextView tv_intent, tv_showing, tv_cancel;
+    private TextView tv_intent, tv_showing;
 
     public ClientAllListingsFragment() {
         // Required empty public constructor
@@ -34,97 +33,83 @@ public class ClientAllListingsFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_client_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_client_all_listings, container, false);
 
         tv_showing = view.findViewById(R.id.tv_showing);
         tv_intent = view.findViewById(R.id.tv_intent);
-        tv_cancel = view.findViewById(R.id.tv_cancel);
 
-
-        // Initialize SharedViewModel
+        // Initialize SharedViewModel and DBHelper
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         dbHelper = new DBHelper(getContext());
 
-        rvAllListings = view.findViewById(R.id.rv_client_home);
+        rvAllListings = view.findViewById(R.id.rv_all_listings);
         listingItems = new ArrayList<>();
-
-        // Fetch listings for the logged-in client
-        sharedViewModel.getProfileEmail().observe(getViewLifecycleOwner(), email -> {
-            if (email != null) {
-                //loadListings(email, tvNearby); // Load listings based on the client's email
-            }
-        });
+        clientListingsAdapter = new ClientListingsAdapter(this, listingItems, this);
 
         // Set up RecyclerView
-//        clientListingsAdapter = new ClientListingsAdapter(this, listingItems);
-//        rvAllListings.setLayoutManager(new LinearLayoutManager(getContext()));
-//        rvAllListings.setAdapter(clientListingsAdapter);
+        rvAllListings.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvAllListings.setAdapter(clientListingsAdapter);
+
+        // Observe the shared view model for filters
+        sharedViewModel.getSelectedCity().observe(getViewLifecycleOwner(), city -> {
+            sharedViewModel.getSelectedIntent().observe(getViewLifecycleOwner(), intent -> {
+                sharedViewModel.getSelectedType().observe(getViewLifecycleOwner(), type -> {
+                    // Set the tv_intent text based on the intent value
+                    if ("Sell".equalsIgnoreCase(intent)) {
+                        tv_intent.setText(R.string.properties_for_sale);
+                    } else if ("Rent".equalsIgnoreCase(intent)) {
+                        tv_intent.setText(R.string.properties_for_rent);
+                    }
+
+                    // Use city, intent, and type to filter the database query
+                    Cursor filteredListingsCursor = dbHelper.getFilteredListings(city, intent, type);
+                    if (filteredListingsCursor != null && filteredListingsCursor.moveToFirst()) {
+                        @SuppressLint("Range") String province = filteredListingsCursor.getString(filteredListingsCursor.getColumnIndex("province"));
+                        String showingText = String.format("Showing %s in %s, %s", type, city, province);
+                        tv_showing.setText(showingText);
+                    }
+                    loadFilteredListings(filteredListingsCursor);
+                });
+            });
+        });
 
         return view;
     }
 
-//    @SuppressLint("Range")
-//    private void loadListings(String clientEmail, TextView tvNearby) {
-//        Cursor clientCursor = dbHelper.getClientLocation(clientEmail); // Get location from DB
-//
-//        if (clientCursor != null && clientCursor.moveToFirst()) {
-//            // Retrieve the city and province for the client
-//            String city = clientCursor.getString(clientCursor.getColumnIndex("city"));
-//            String province = clientCursor.getString(clientCursor.getColumnIndex("province"));
-//            clientCursor.close(); // Close cursor after use
-//
-//            Cursor listingCursor = dbHelper.getListingsByLocation(city, province); // Get listings from DB
-//
-//            if (listingCursor != null) {
-//                Log.d("ColumnNames", Arrays.toString(listingCursor.getColumnNames()));
-//
-//                if (listingCursor.moveToFirst()) {
-//                    do {
-//                        String imagePath = listingCursor.getString(listingCursor.getColumnIndex("image_path"));
-//                        String title = listingCursor.getString(listingCursor.getColumnIndex("title"));
-//                        String listingCity = listingCursor.getString(listingCursor.getColumnIndex("city"));
-//                        String listingProvince = listingCursor.getString(listingCursor.getColumnIndex("province"));
-//                        String location = listingCity + ", " + listingProvince;
-//                        String price = listingCursor.getString(listingCursor.getColumnIndex("price"));
-//                        int bath = listingCursor.getInt(listingCursor.getColumnIndex("bathrooms"));
-//                        int bed = listingCursor.getInt(listingCursor.getColumnIndex("bedrooms"));
-//
-//                        ListingItem listingItem = new ListingItem(imagePath, title, location, price, bath, bed);
-//                        listingItems.add(listingItem);
-//                    } while (listingCursor.moveToNext());
-//                    listingCursor.close(); // Close the cursor when done
-//                } else {
-//                    Log.d("LoadListings", "No listings found for this location");
-//                    tvNearby.setText("Popular"); // Change TextView to "Popular"
-//
-//                    // Load all listings as a fallback
-//                    Cursor allListingsCursor = dbHelper.getAllListings();
-//                    if (allListingsCursor != null && allListingsCursor.moveToFirst()) {
-//                        do {
-//                            String imagePath = allListingsCursor.getString(allListingsCursor.getColumnIndex("image_path"));
-//                            String title = allListingsCursor.getString(allListingsCursor.getColumnIndex("title"));
-//                            String listingCity = allListingsCursor.getString(allListingsCursor.getColumnIndex("city"));
-//                            String listingProvince = allListingsCursor.getString(allListingsCursor.getColumnIndex("province"));
-//                            String location = listingCity + ", " + listingProvince;
-//                            String price = allListingsCursor.getString(allListingsCursor.getColumnIndex("price"));
-//                            int bath = allListingsCursor.getInt(allListingsCursor.getColumnIndex("bathrooms"));
-//                            int bed = allListingsCursor.getInt(allListingsCursor.getColumnIndex("bedrooms"));
-//
-//                            ListingItem listingItem = new ListingItem(imagePath, title, location, price, bath, bed);
-//                            listingItems.add(listingItem);
-//                        } while (allListingsCursor.moveToNext());
-//
-//                        allListingsCursor.close();
-//                    }
-//                }
-//            } else {
-//                Log.d("LoadListings", "Failed to retrieve client location");
-//            }
-//
-//            clientListingsAdapter.notifyDataSetChanged();
-//        }
-//    }
+    @SuppressLint("Range")
+    private void loadFilteredListings(Cursor cursor) {
+        listingItems.clear(); // Clear the current list
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int listingID = cursor.getInt(cursor.getColumnIndex("listing_id"));
+                String imagePath = cursor.getString(cursor.getColumnIndex("image_path"));
+                String title = cursor.getString(cursor.getColumnIndex("title"));
+                String listingCity = cursor.getString(cursor.getColumnIndex("city"));
+                String listingProvince = cursor.getString(cursor.getColumnIndex("province"));
+                String location = listingCity + ", " + listingProvince;
+                String price = cursor.getString(cursor.getColumnIndex("price"));
+                int bath = cursor.getInt(cursor.getColumnIndex("bathrooms"));
+                int bed = cursor.getInt(cursor.getColumnIndex("bedrooms"));
+
+                // Create a ListingItem object and add it to the list
+                ListingItem listingItem = new ListingItem(listingID, imagePath, title, location, price, bath, bed);
+                listingItems.add(listingItem);
+            } while (cursor.moveToNext());
+
+            cursor.close(); // Close the cursor after use
+        }
+
+        clientListingsAdapter.notifyDataSetChanged(); // Notify the adapter of data change
+    }
+
+    @Override
+    public void onItemClick(ListingItem item) {
+        // Handle item click and navigate
+        sharedViewModel.setListingID(item.getListingID());
+        NavHostFragment.findNavController(ClientAllListingsFragment.this)
+                .navigate(R.id.action_clientAllListingsFragment_to_clientListingFragment);
+    }
 }

@@ -86,24 +86,24 @@ public class RegisterFragment extends Fragment {
                 String lastName = "";
                 String role = email.endsWith("@horizonhomefinders.com") ? "Agent" : "Client";
 
-                if(fullName.split("\\w+").length>1){
-
-                    lastName = fullName.substring(fullName.lastIndexOf(" ")+1);
+                if(fullName.split("\\w+").length > 1) {
+                    lastName = fullName.substring(fullName.lastIndexOf(" ") + 1);
                     firstName = fullName.substring(0, fullName.lastIndexOf(' '));
-                }
-                else{
+                } else {
                     firstName = fullName;
                 }
 
                 if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || cPassword.isEmpty()) {
                     Toast.makeText(getActivity(), "Please ensure all fields are filled.", Toast.LENGTH_LONG).show();
+                } else if (!isPasswordStrong(password)) {
+                    // Notify user if the password is not strong
+                    Toast.makeText(getActivity(), "Password must be at least 8 characters long, and include uppercase, lowercase, number, and special character.", Toast.LENGTH_LONG).show();
+                } else if (!password.equals(cPassword)) {
+                    Toast.makeText(getActivity(), "Passwords do not match.", Toast.LENGTH_LONG).show();
                 } else {
-                    if (password.equals(cPassword)) {
-                        if (dbHelper.checkUsername(email)) {
-                            Toast.makeText(getActivity(), "User already exists.", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                        // Proceed with registration
+                    if (dbHelper.checkUsername(email)) {
+                        Toast.makeText(getActivity(), "User already exists.", Toast.LENGTH_LONG).show();
+                    } else {
                         boolean registerSuccess = dbHelper.insertData(email, password, firstName, lastName, role);
                         if (registerSuccess) {
                             Toast.makeText(getActivity(), "User registered successfully.", Toast.LENGTH_LONG).show();
@@ -112,15 +112,30 @@ public class RegisterFragment extends Fragment {
                         } else {
                             Toast.makeText(getActivity(), "User registration failed.", Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        Toast.makeText(getActivity(), "Passwords do not match.", Toast.LENGTH_LONG).show();
                     }
                 }
             }
         });
 
+
         return view;
     }
+
+    private boolean isPasswordStrong(String password) {
+        // Check if password length is at least 8 characters
+        if (password.length() < 8) {
+            return false;
+        }
+        // Use regular expressions to check for different character types
+        boolean hasUppercase = password.matches(".*[A-Z].*");
+        boolean hasLowercase = password.matches(".*[a-z].*");
+        boolean hasDigit = password.matches(".*[0-9].*");
+        boolean hasSpecialChar = password.matches(".*[!@#$%^&*()-+=].*");
+
+        // Password is strong if it meets all criteria
+        return hasUppercase && hasLowercase && hasDigit && hasSpecialChar;
+    }
+
 
     // Inner class SimpleTextWatcher
     public class SimpleTextWatcher implements TextWatcher {

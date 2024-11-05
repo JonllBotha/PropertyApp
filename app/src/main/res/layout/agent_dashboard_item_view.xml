@@ -9,6 +9,7 @@
         android:id="@+id/propertyViewA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         app:cardElevation="8dp"
         app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="true">
@@ -27,7 +28,7 @@
 
             <TextView
                 android:id="@+id/propertyTitleA"
-                android:layout_width="220dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/propertyImageA"
                 android:layout_marginTop="10dp"
@@ -37,18 +38,9 @@
                 android:textSize="17sp"
                 android:textStyle="normal|bold" />
 
-            <ImageView
-                android:id="@+id/imgDeleteA"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:clickable="true"
-                android:layout_marginTop="204dp"
-                android:layout_marginStart="260dp"
-                android:src="@drawable/trash" />
-
             <TextView
                 android:id="@+id/propertyLocationA"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/propertyTitleA"
                 android:paddingHorizontal="14dp"

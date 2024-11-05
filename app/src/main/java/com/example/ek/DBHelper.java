@@ -1,5 +1,6 @@
 package com.example.ek;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -37,6 +38,8 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS listing_images (image_id INTEGER PRIMARY KEY AUTOINCREMENT, listing_id INTEGER, image_path TEXT, FOREIGN KEY (listing_id) REFERENCES listings(listing_id))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS enquiries (enquiry_id INTEGER PRIMARY KEY AUTOINCREMENT, subject TEXT NOT NULL, message TEXT NOT NULL, full_name TEXT NOT NULL, phone_number TEXT NOT NULL, email TEXT NOT NULL, FOREIGN KEY (email) REFERENCES clients(email) ON DELETE CASCADE ON UPDATE CASCADE)");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS favourites (favourite_id INTEGER PRIMARY KEY AUTOINCREMENT, listing_id INTEGER, client_email TEXT, FOREIGN KEY (listing_id) REFERENCES listings(listing_id), FOREIGN KEY (client_email) REFERENCES clients(email))");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS provinces (province_id INTEGER PRIMARY KEY AUTOINCREMENT, province_name TEXT UNIQUE NOT NULL)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS cities (city_id INTEGER PRIMARY KEY AUTOINCREMENT, city_name TEXT NOT NULL, province_id INTEGER, FOREIGN KEY (province_id) REFERENCES provinces(province_id))");
 
     }
 
@@ -255,6 +258,17 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
     }
 
+    // Fetch all favorite listings for a specific client email
+    public Cursor getFavouriteListings(String clientEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT l.*, li.image_path " +
+                "FROM favourites f " +
+                "JOIN listings l ON f.listing_id = l.listing_id " +
+                "LEFT JOIN listing_images li ON l.listing_id = li.listing_id " +
+                "WHERE f.client_email = ? " +
+                "GROUP BY l.listing_id";
+        return db.rawQuery(query, new String[]{clientEmail});
+    }
 
     public boolean insertEnquiry(String subject, String message, String fullName, String phoneNumber, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -273,7 +287,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getListingDetails(int listingID) {
         SQLiteDatabase myDB = this.getReadableDatabase();
         return myDB.rawQuery(
-                "SELECT l.title, l.description, l.price, l.bedrooms, l.bathrooms, l.floors, l.province, l.city, li.image_path " +
+                "SELECT l.title, l.description, l.price, l.bedrooms, l.bathrooms, l.floors, l.province, l.city, l.agent_email, li.image_path " +
                         "FROM listings l " +
                         "LEFT JOIN listing_images li ON l.listing_id = li.listing_id " +
                         "WHERE l.listing_id = ?",
@@ -306,6 +320,49 @@ public class DBHelper extends SQLiteOpenHelper {
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
         return exists;
+    }
+
+    public Cursor getFilteredListings(String city, String intent, String type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query =
+                "SELECT l.*, li.image_path " +
+                        "FROM listings l " +
+                        "LEFT JOIN listing_images li ON l.listing_id = li.listing_id " +
+                        "WHERE l.city = ? AND l.listing_intent = ? AND l.listing_type = ? " +
+                        "GROUP BY l.listing_id";
+        return db.rawQuery(query, new String[]{city, intent, type});
+    }
+
+    public boolean deleteAccount(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Determine if the user is an agent or client
+        String role = getUserRole(email);
+
+        // Delete from users table
+        int userResult = db.delete("users", "email = ?", new String[]{email});
+
+        // Delete from agents or clients table based on role
+        int roleResult = 0;
+        if ("Agent".equals(role)) {
+            roleResult = db.delete("agents", "email = ?", new String[]{email});
+        } else if ("Client".equals(role)) {
+            roleResult = db.delete("clients", "email = ?", new String[]{email});
+        }
+
+        return userResult > 0 && roleResult > 0; // Return true if both deletions were successful
+    }
+
+    @SuppressLint("Range")
+    private String getUserRole(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String role = null;
+        Cursor cursor = db.rawQuery("SELECT role FROM users WHERE email = ?", new String[]{email});
+        if (cursor != null && cursor.moveToFirst()) {
+            role = cursor.getString(cursor.getColumnIndex("role"));
+            cursor.close();
+        }
+        return role;
     }
 
 

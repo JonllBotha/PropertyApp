@@ -1,12 +1,16 @@
 package com.example.ek;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,11 +21,13 @@ public class ClientProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder
     private final Fragment fragment;  // Store fragment instance
     private final List<ProfileItem> items;
     private final String email;
+    private final DBHelper dbHelper;
 
     public ClientProfileAdapter(Fragment fragment, List<ProfileItem> items, String email) {
         this.fragment = fragment;
         this.items = items;
         this.email = email;
+        this.dbHelper = new DBHelper(fragment.getContext());
     }
 
     @NonNull
@@ -56,8 +62,40 @@ public class ClientProfileAdapter extends RecyclerView.Adapter<ProfileViewHolder
                 case 4: // "Log Out"
                     navController.navigate(R.id.action_clientProfileFragment_to_startupFragment);
                     break;
+                case 5: // "Delete Account"
+                    confirmAndDeleteAccount();
+                    break;
             }
         });
+    }
+
+    private void confirmAndDeleteAccount() {
+        // Retrieve email from SharedViewModel
+        SharedViewModel sharedViewModel = new ViewModelProvider(fragment.requireActivity()).get(SharedViewModel.class);
+        String email = sharedViewModel.getProfileEmail().getValue();
+
+        if (email != null) {
+            // Confirm deletion
+            new AlertDialog.Builder(fragment.getContext())
+                    .setTitle("Delete Account")
+                    .setMessage("Are you sure you want to delete your account? This action cannot be undone.")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // Delete account from the database
+                        boolean isDeleted = dbHelper.deleteAccount(email);
+                        if (isDeleted) {
+                            Toast.makeText(fragment.getContext(), "Account deleted successfully.", Toast.LENGTH_SHORT).show();
+                            // Navigate to startup screen
+                            NavController navController = Navigation.findNavController(fragment.getActivity(), R.id.navHostFragmentContainerView);
+                            navController.navigate(R.id.action_clientProfileFragment_to_startupFragment);
+                        } else {
+                            Toast.makeText(fragment.getContext(), "Failed to delete account. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        } else {
+            Toast.makeText(fragment.getContext(), "Error: Unable to retrieve account information.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,16 @@ public class ClientContactFragment extends Fragment {
         etEmail = view.findViewById(R.id.etEmail);
         btnSubmit = view.findViewById(R.id.btnSubmit);
         btnCancel = view.findViewById(R.id.tv_cancel);
+
+        Spinner spSubject = view.findViewById(R.id.spSubject);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                getContext(), // or 'this' if in an activity
+                R.array.enquiry_subjects,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spSubject.setAdapter(adapter);
+
 
         // Observe the email from the SharedViewModel
         sharedViewModel.getProfileEmail().observe(getViewLifecycleOwner(), newEmail -> {
