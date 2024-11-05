@@ -319,11 +319,12 @@ public class publishAdFragment extends Fragment {
             String title = cursor.getString(cursor.getColumnIndex("title"));
             String description = cursor.getString(cursor.getColumnIndex("description"));
             String price = cursor.getString(cursor.getColumnIndex("price"));
+            String province = cursor.getString(cursor.getColumnIndex("province"));
+            String city = cursor.getString(cursor.getColumnIndex("city"));
             String floors = cursor.getString(cursor.getColumnIndex("floors"));
             String area = cursor.getString(cursor.getColumnIndex("area_size"));
             int baths = cursor.getInt(cursor.getColumnIndex("bathrooms"));
             int beds = cursor.getInt(cursor.getColumnIndex("bedrooms"));
-
 
             // Set the fetched values to the respective EditText fields
             etBathrooms.setText(String.valueOf(baths));
@@ -333,6 +334,13 @@ public class publishAdFragment extends Fragment {
             etAreaSize.setText(area);
             etPrice.setText(price);
             etTitle.setText(title);
+
+            // Set the province spinner selection
+            setSpinnerSelection(spProvince, province);
+
+            // Populate the city spinner based on the province and set the city selection
+            populateCitySpinner(province);
+            setSpinnerSelection(spCity, city);
         }
         if (cursor != null) {
             cursor.close(); // Always close the cursor to avoid memory leaks
